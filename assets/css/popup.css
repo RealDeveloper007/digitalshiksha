@@ -1,0 +1,28 @@
+      .popup_visible .my-popup {
+    transform: scale(1);
+  }
+
+  .my-popup h4 {
+    text-align: center;
+  }
+
+  .popup-form p {
+    font-size: 12px;
+  }
+
+  .popup-form .input {
+    border-radius: 0px;
+  }
+
+  .popup-bottom {
+    margin-top: 20px;
+  }
+
+
+  #registerForm input[name="user_email"] {
+    display: none;
+  }
+
+  .other_fields {
+    display: none;
+  }

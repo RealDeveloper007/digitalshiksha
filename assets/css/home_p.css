@@ -1,0 +1,77 @@
+    .achivement-area {
+    background: rgba(0, 0, 0, 0) url(../../../../assets/images/achivement-bg.jpg) no-repeat fixed center center / cover;
+    padding: 93px 0 68px;
+}
+.bg-with-black {
+    position: relative;
+    z-index: 2;
+}
+.achivement-area::before {
+    opacity: 0.8;
+}
+.bg-with-black::before {
+    background: #000 none repeat scroll 0 0;
+    content: "";
+    height: 100%;
+    left: 0;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+.section-title {
+    margin: 0 0 60px;
+}
+.section-title .title {
+    color: black;
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 50px;
+    padding: 0 0 16px;
+    position: relative;
+    text-transform: capitalize;
+}
+.section-title .title::before {
+    background: #969696 none repeat scroll 0 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 90%;
+    width: 165px;
+}
+.achivement-area .title .inner {
+    color: #F1B900;
+}
+.single-achivement {
+    overflow: hidden;
+    margin: 0 0 30px;
+}
+.single-achivement .icon {
+    background: #ffffff none repeat scroll 0 0;
+    border-radius: 100px;
+    float: left;
+    height: 96px;
+    line-height: 96px;
+    text-align: center;
+    width: 96px;
+}
+.single-achivement .icon img {
+    max-height: 54px;
+}
+.single-achivement .content .counter {
+    color: #ffffff;
+    font-size: 60px;
+    line-height: 60px;
+    margin: 0 0 10px;
+    font-weight: 400;
+}
+.single-achivement .content .name {
+    color: #F1B900;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 28px;
+}

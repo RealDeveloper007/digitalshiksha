@@ -1,0 +1,56 @@
+ div#pagination {
+      width: 100%;
+   }
+
+   .nav>li>a {
+      padding: 0px;
+   }
+
+   a.whatsapp.pull-right {
+      margin-top: -14px;
+   }
+
+   .widget ul {
+      display: none;
+   }
+
+   .fa-minus {
+      display: none;
+   }
+
+   .fa-plus {
+      display: block;
+   }
+
+   .change-box-s {
+      display: flex;
+   }
+
+   .box-header {
+      padding: 19px 17px;
+   }
+
+   .change-box-s form {
+      display: flex;
+   }
+
+   .change-box-s .form-group.rental_details {
+      padding-right: 55px !important;
+      display: flex;
+   }
+
+   .change-box-s .form-group.rental_details label {
+      text-align: left;
+      padding-right: 8px;
+   }
+
+   .pagination a {
+      margin: 10px;
+      background: #191a70;
+      padding: 9px;
+      color: white;
+   }
+
+   a.page.active {
+      background: #f1b900;
+   }

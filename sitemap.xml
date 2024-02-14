@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://digitalshikshadarpan.com/</loc>
+    <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+
+ <url>
+    <loc>https://digitalshikshadarpan.com/about-us</loc>
+     <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+
+ <url>
+    <loc>https://digitalshikshadarpan.com/login</loc>
+     <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+
+ <url>
+    <loc>https://digitalshikshadarpan.com/#contact</loc>
+    <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+
+<url>
+    <loc>https://digitalshikshadarpan.com/faq</loc>
+     <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+
+<url>
+    <loc>https://digitalshikshadarpan.com/disclaimer</loc>
+     <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+
+<url>
+    <loc>https://digitalshikshadarpan.com/privacy-policy</loc>
+     <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+<url>
+    <loc>https://digitalshikshadarpan.com/terms-and-condition</loc>
+     <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://digitalshikshadarpan.com/digital-shiksha-search-engine</loc>
+    <lastmod>2023-05-07T14:33:17+00:00</lastmod>
+        <changefreq>monthly</changefreq>
+  </url>
+</urlset>
