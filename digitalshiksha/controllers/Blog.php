@@ -36,7 +36,7 @@ class Blog extends MS_Controller
         $config['page_query_string'] = TRUE;
         $config['query_string_segment'] = 'page';
         // $config['reuse_query_string'] = true;
-        $config['per_page'] = 10;
+        $config['per_page'] = 30;
         // $config['num_links'] = count($this->db->count_all('blog'));
         $config['full_tag_open'] = '<ul class="pagination">';
         $config['full_tag_close'] = '</ul>';
