@@ -1692,7 +1692,7 @@ class Admin_control extends MS_Controller {
     public function get_subcategories_ajax($id)
     {
         $sub_cat = $this->admin_model->get_subcategories_by_cat_id($id);
-        $str = '<option>Select Sub Category</option>';
+        $str = '<option value="">Select Sub Category</option>';
         foreach ($sub_cat as $value) {
             $str.='<option value="'.$value->id.'">'.$value->sub_cat_name.'</option>';
         }
@@ -1703,7 +1703,7 @@ class Admin_control extends MS_Controller {
      public function get_sub_subcategories_ajax($id)
     {
         $sub_cat = $this->admin_model->get_sub_subcategories_by_cat_id($id);
-        $str = '<option>Select Sub Sub Category</option>';
+        $str = '<option value="">Select Sub Sub Category</option>';
         foreach ($sub_cat as $value) {
             $str.='<option value="'.$value->id.'">'.$value->name.'</option>';
         }
