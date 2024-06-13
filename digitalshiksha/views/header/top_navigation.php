@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="<?= ($this->uri->segment(1) == '') ? 'active' : ''; ?>"><a href="<?= base_url('/'); ?>">Home</a></li>
-                        <li class="<?= ($this->uri->segment(1) == 'about-us') ? 'active' : ''; ?>"><a href="<?= base_url('about-us'); ?>">About uss</a></li>
+                        <li class="<?= ($this->uri->segment(1) == 'about-us') ? 'active' : ''; ?>"><a href="<?= base_url('about-us'); ?>">About us</a></li>
                         <li class="<?= ($this->uri->segment(1) == 'mock-test') ? 'active' : ''; ?>"><a href="<?= base_url('mock-test'); ?>">Mock Test</a></li>
                         <li class="<?= ($this->uri->segment(1) == 'study-material') ? 'active' : ''; ?>"><a href="<?= base_url('study-material'); ?>">Study Material</a></li>
                         <li><a href="#contact">Contact us</a></li>
