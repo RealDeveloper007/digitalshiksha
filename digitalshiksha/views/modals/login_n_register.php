@@ -1,4 +1,6 @@
 <link href="<?php echo base_url('assets/css/popup.css') ?>" rel="stylesheet" media="screen">
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <!-- Popup Login-->
 <div id="login" class="well my-popup loginPopup widthPopup">
   <h4>Login</h4>
@@ -47,10 +49,13 @@
 
 
     <div class="other_fields">
-      <?php echo form_input('user_name', '', 'placeholder="Full Name " class="form-control" required="required"') ?>
+      <?php echo form_input('first_name', '', 'placeholder="First Name " class="form-control" required="required"') ?>
+      <?php echo form_input('last_name', '', 'placeholder="Last Name " class="form-control" required="required"') ?>
       <?php echo form_password('user_pass', '', 'placeholder="Password * (Minimum 6 character)" class="form-control" required="required"') ?>
 
       <?php echo form_password('user_passcf', '', 'placeholder="Confirm Password * (Minimum 6 character)" class="form-control" required="required"') ?>
+      <div class="g-recaptcha" data-sitekey="6LdKKvgpAAAAAPqPy67S-WjmLPk2v6q9GTArZfuO"></div>
+
     </div>
 
 

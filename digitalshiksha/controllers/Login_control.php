@@ -15,6 +15,7 @@ class Login_control extends MS_Controller
         $this->load->model('admin_model');
         $this->load->model('exam_model');
         $this->load->model('login_model');
+        // $this->load->config('recaptcha');
         $this->load->library('email');
     }
     
@@ -529,7 +530,8 @@ class Login_control extends MS_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('user_name', 'Name', 'trim|required|min_length[4]|max_length[12]');
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[12]');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[12]');
         $this->form_validation->set_rules('user_email', 'Email Address', 'required|valid_email|is_unique[users.user_email]');
         $this->form_validation->set_rules('user_phone', 'Phone No', 'required|min_length[10]|is_unique[users.user_phone]');
         $this->form_validation->set_rules('user_pass', 'Password', 'required|min_length[6]|matches[user_passcf]');
@@ -544,7 +546,7 @@ class Login_control extends MS_Controller
 
             date_default_timezone_set($this->session->userdata['time_zone']);
             $info = array();
-            $info['user_name'] = $this->input->post('user_name');
+            $info['user_name'] = $this->input->post('first_name').' '.$this->input->post('last_name');
             $info['user_email'] = $this->input->post('user_email');
             $info['user_phone'] = $this->input->post('user_phone');
             $info['user_role_id'] = ($this->input->post('user_role')) ? $this->input->post('user_role') : 5;
@@ -553,83 +555,117 @@ class Login_control extends MS_Controller
             $info['user_from'] = date('Y-m-d H:i:s');
             $info['active']    = 1;
 
-            if (isset($row[0])) {
-                $info['register_otp_id']    = $row[0]->id;
-            }
+            $recaptcha_response = $this->input->post('g-recaptcha-response');
+            $response = $this->verifyRecaptcha($recaptcha_response);
 
-            // Check athentication
-            if ($this->login_model->register($info)) {
+            if ($response['success']) {
+                
 
-                if ($this->login_model->login_check()) {
-                    $this->load->model('system_model');
-                    $this->system_model->set_system_info_to_session();
-
-                    $this->session->set_userdata('dashboard_message', 'डिजिटल शिक्षा में आपका स्वागत है, आप लॉगिन हो चुके हैं');
-
-                    $message = '<div class="alert alert-success alert-dismissable">'
-                        . '<button type="button" class="close" data-dismiss="alert" aria-hidden="TRUE">&times;</button>'
-                        . 'You loged in successfully!'
-                        . '</div>';
-
-
-                    echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been registered Successully! Now you will be able to login</div>', 'login_url' => 'dashboard/' . $this->session->userdata('user_id')));
-                    exit();
+                if (isset($row[0])) {
+                    $info['register_otp_id']    = $row[0]->id;
                 }
-                // $mysecret = 'galua.mugda';
-                // $key = sha1($mysecret . $info['user_email'] . $this->session->userdata['brand_name']);
 
-                // $from = $this->session->userdata['support_email'];
-                // $to = $info['user_email'];
-                // $suject = 'Thank you for register with ' . $this->session->userdata['brand_name'];
-                // $Data['name'] = $this->input->post('user_name');
-                // $Data['brand'] = $this->session->userdata['brand_name'];
-                // $Data['brand_phone'] = $this->session->userdata['support_phone'];
-                // $Data['brand_address'] = $this->session->userdata['address'];
-                // $Data['url'] = base_url('login_control/activate/') . '?user=' . $info['user_email'] . '&key=' . $key;
+                // Check athentication
+                if ($this->login_model->register($info)) {
 
-                // $config = array(
-                //     // 'protocol' => 'smtp',
-                //     // 'smtp_host'   => 'ssl://smtp.googlemail.com',
-                //     // 'smtp_port' => 465,
-                //     // 'smtp_user' => 'digitalshikshadarpan@gmail.com', 
-                //     // 'smtp_pass' => '9996441188', 
-                //     'mailtype'    => 'html',
-                //     'crlf'        => "\n",
-                //     'newline'     => "\r\n",
-                //     'charset'     => 'utf-8',
-                //     'wordwrap'    => TRUE
-                // );
+                    if ($this->login_model->login_check()) {
+                        $this->load->model('system_model');
+                        $this->system_model->set_system_info_to_session();
 
-                // $this->email->initialize($config);
-                // $this->load->library('email', $config);
-                // $this->email->set_newline("\r\n");
-                // $this->email->from($this->session->userdata['support_email']);
-                // $this->email->to($to);
-                // $this->email->subject($suject);
+                        $this->session->set_userdata('dashboard_message', 'डिजिटल शिक्षा में आपका स्वागत है, आप लॉगिन हो चुके हैं');
 
-                // $body = $this->load->view('emails/verify.php', $Data, TRUE);
-
-                // $this->email->message($body);
-                // if ($this->email->send()) {
-                //     $this->session->set_userdata('token', $this->input->post('token'));
-                //     $message = '<div class="alert alert-success alert-dismissable">'
-                //         . 'You Details has been saved! Verification link has been send to your mail id. Please click on the link for account activation OR Select "OTP on mobile" option for account activation.'
-                //         . '</div>';
+                        $message = '<div class="alert alert-success alert-dismissable">'
+                            . '<button type="button" class="close" data-dismiss="alert" aria-hidden="TRUE">&times;</button>'
+                            . 'You loged in successfully!'
+                            . '</div>';
 
 
-                //     echo json_encode(array('status' => true, 'type' => 'email_sent_success', 'message' => $message));
-                //     exit();
-                // } else {
+                        echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been registered Successully! Now you will be able to login</div>', 'login_url' => 'dashboard/' . $this->session->userdata('user_id')));
+                        exit();
+                    }
+                    // $mysecret = 'galua.mugda';
+                    // $key = sha1($mysecret . $info['user_email'] . $this->session->userdata['brand_name']);
 
-                //     $message = '<div class="alert alert-danger alert-dismissable">'
-                //         . 'You Details has been saved!  Mail has not been sent.Please select "OTP on mobile" option for account activation.</div>';
+                    // $from = $this->session->userdata['support_email'];
+                    // $to = $info['user_email'];
+                    // $suject = 'Thank you for register with ' . $this->session->userdata['brand_name'];
+                    // $Data['name'] = $this->input->post('user_name');
+                    // $Data['brand'] = $this->session->userdata['brand_name'];
+                    // $Data['brand_phone'] = $this->session->userdata['support_phone'];
+                    // $Data['brand_address'] = $this->session->userdata['address'];
+                    // $Data['url'] = base_url('login_control/activate/') . '?user=' . $info['user_email'] . '&key=' . $key;
+
+                    // $config = array(
+                    //     // 'protocol' => 'smtp',
+                    //     // 'smtp_host'   => 'ssl://smtp.googlemail.com',
+                    //     // 'smtp_port' => 465,
+                    //     // 'smtp_user' => 'digitalshikshadarpan@gmail.com', 
+                    //     // 'smtp_pass' => '9996441188', 
+                    //     'mailtype'    => 'html',
+                    //     'crlf'        => "\n",
+                    //     'newline'     => "\r\n",
+                    //     'charset'     => 'utf-8',
+                    //     'wordwrap'    => TRUE
+                    // );
+
+                    // $this->email->initialize($config);
+                    // $this->load->library('email', $config);
+                    // $this->email->set_newline("\r\n");
+                    // $this->email->from($this->session->userdata['support_email']);
+                    // $this->email->to($to);
+                    // $this->email->subject($suject);
+
+                    // $body = $this->load->view('emails/verify.php', $Data, TRUE);
+
+                    // $this->email->message($body);
+                    // if ($this->email->send()) {
+                    //     $this->session->set_userdata('token', $this->input->post('token'));
+                    //     $message = '<div class="alert alert-success alert-dismissable">'
+                    //         . 'You Details has been saved! Verification link has been send to your mail id. Please click on the link for account activation OR Select "OTP on mobile" option for account activation.'
+                    //         . '</div>';
 
 
-                //     echo json_encode(array('status' => false, 'type' => 'email_sent_failed', 'message' => $message));
-                //     exit();
-                // }                
+                    //     echo json_encode(array('status' => true, 'type' => 'email_sent_success', 'message' => $message));
+                    //     exit();
+                    // } else {
+
+                    //     $message = '<div class="alert alert-danger alert-dismissable">'
+                    //         . 'You Details has been saved!  Mail has not been sent.Please select "OTP on mobile" option for account activation.</div>';
+
+
+                    //     echo json_encode(array('status' => false, 'type' => 'email_sent_failed', 'message' => $message));
+                    //     exit();
+                    // }                
+                }
+
+            } else {
+
+                echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>', 'login_url' => $this->config->item('recaptcha_secret_key')));
+                exit();
+
             }
         }
+    }
+
+    private function verifyRecaptcha($recaptcha_response) 
+    {
+        $secret_key = '6LdKKvgpAAAAAD667SkWKSuRxnMcEnSQ1MgVew98';
+        $url = 'https://www.google.com/recaptcha/api/siteverify';
+        $data = array(
+            'secret' => $secret_key,
+            'response' => $recaptcha_response
+        );
+
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        return json_decode($result, true);
     }
 
 
