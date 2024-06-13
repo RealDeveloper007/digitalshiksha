@@ -1,5 +1,14 @@
 <link href="<?php echo base_url('assets/css/mock_list.css') ?>" rel="stylesheet" media="screen">
-
+<style>
+   .filBtn
+   {
+      margin-top: 24px !important;
+   }
+   .filBtn button.btn.btn-primary 
+   {
+    height: 49px;
+   }
+   </style>
 <section id="exams" class="secPad myBox useList">
    <div class="container">
       <div class="box">
@@ -20,7 +29,7 @@
                      <div class="form-group rental_details col-sm-3">
                         <label for="operator_id" class="control-label required">Main Category</label>
                         <div>
-                           <select name="main_category" class="form-control">
+                           <select name="main_category" class="form-control" required>
                               <?php if (isset($_GET['main_category'])) {
                                  echo MainCategory($_GET['main_category']);
                               } else {
@@ -62,8 +71,8 @@
                      </div>
                      <div class="col-sm-3 ">
                         <div class="filBtn">
-                           <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
-                           <a href="<?= base_url('mock-test') ?>"><button type="button" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button></a>
+                           <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                           <a href="<?= base_url('mock-test') ?>"><button type="button" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button></a>
                         </div>
                      </div>
                   </form>
