@@ -555,10 +555,11 @@ class Login_control extends MS_Controller
             $info['user_from'] = date('Y-m-d H:i:s');
             $info['active']    = 1;
 
-            $recaptcha_response = $this->input->post('g-recaptcha-response');
-            $response = $this->verifyRecaptcha($recaptcha_response);
+            // $recaptcha_response = $this->input->post('g-recaptcha-response');
+            // $response = $this->verifyRecaptcha($recaptcha_response);
 
-            if ($response['success']) {
+            // if ($response['success']) 
+            // {
                 
 
                 if (isset($row[0])) {
@@ -638,12 +639,12 @@ class Login_control extends MS_Controller
                     // }                
                 }
 
-            } else {
+            // } else {
 
-                echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>', 'login_url' => $this->config->item('recaptcha_secret_key')));
-                exit();
+            //     echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>', 'login_url' => $this->config->item('recaptcha_secret_key')));
+            //     exit();
 
-            }
+            // }
         }
     }
 
