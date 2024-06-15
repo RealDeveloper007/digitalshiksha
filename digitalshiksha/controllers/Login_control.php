@@ -530,12 +530,14 @@ class Login_control extends MS_Controller
     {
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[12]');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[12]');
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[12]|callback_valid_name');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[12]|callback_valid_name');
         $this->form_validation->set_rules('user_email', 'Email Address', 'required|valid_email|is_unique[users.user_email]');
         $this->form_validation->set_rules('user_phone', 'Phone No', 'required|min_length[10]|is_unique[users.user_phone]');
         $this->form_validation->set_rules('user_pass', 'Password', 'required|min_length[6]|matches[user_passcf]');
         $this->form_validation->set_rules('user_passcf', 'Confirm Password', 'required|min_length[6]');
+
+        $this->form_validation->set_message('valid_name', 'The {field} field must contain a valid name.');
 
         if ($this->form_validation->run() === FALSE) {
             echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">' . validation_errors() . '</div>'));
@@ -555,11 +557,11 @@ class Login_control extends MS_Controller
             $info['user_from'] = date('Y-m-d H:i:s');
             $info['active']    = 1;
 
-            // $recaptcha_response = $this->input->post('g-recaptcha-response');
-            // $response = $this->verifyRecaptcha($recaptcha_response);
+            $recaptcha_response = $this->input->post('g-recaptcha-response');
+            $response = $this->verifyRecaptcha($recaptcha_response);
 
-            // if ($response['success']) 
-            // {
+            if ($response['success']) 
+            {
                 
 
                 if (isset($row[0])) {
@@ -639,18 +641,22 @@ class Login_control extends MS_Controller
                     // }                
                 }
 
-            // } else {
+            } else {
 
-            //     echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>', 'login_url' => $this->config->item('recaptcha_secret_key')));
-            //     exit();
+                echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>', 'login_url' => $this->config->item('recaptcha_secret_key')));
+                exit();
 
-            // }
+            }
         }
+    }
+
+    public function valid_name($str) {
+        return (bool) preg_match('/^[a-zA-Z\s\-\'\.]+$/', $str);
     }
 
     private function verifyRecaptcha($recaptcha_response) 
     {
-        $secret_key = '6LdKKvgpAAAAAD667SkWKSuRxnMcEnSQ1MgVew98';
+        $secret_key = '6LfCe_kpAAAAADNg5JPw0N6bRQN1eu8SFynUECWt';
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = array(
             'secret' => $secret_key,
