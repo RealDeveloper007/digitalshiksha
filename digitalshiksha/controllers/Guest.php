@@ -50,6 +50,7 @@ class Guest extends MS_Controller
         // $data['total_teacher'] = $this->login_model->get_total_teacher();
         $data['total_exam'] = $this->login_model->get_total_exam();
         $data['total_student'] = $this->login_model->get_total_students();
+        $data['total_blogs'] = $this->login_model->get_total_blogs();
         $data['content'] = $this->load->view('content/home_page', $data, TRUE);
         $data['footer'] = $this->load->view('footer/footer', $data, TRUE);
       
@@ -87,6 +88,7 @@ class Guest extends MS_Controller
         // $data['total_teacher'] = $this->login_model->get_total_teacher();
         $data['total_exam'] = $this->login_model->get_total_exam();
         $data['total_student'] = $this->login_model->get_total_students();
+        $data['total_blogs'] = $this->login_model->get_total_blogs();
         $data['content'] = $this->load->view('content/home_page_new', $data, TRUE);
         $data['footer'] = $this->load->view('footer/footer', $data, TRUE);
       

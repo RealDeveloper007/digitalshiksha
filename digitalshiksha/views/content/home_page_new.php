@@ -60,17 +60,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div class="single-achivement">
-                    <div class="icon">
-                        <img src="<?= base_url('assets/images/teacher.png') ?>" alt="">                         
-                    </div>
-                    <div class="content">
-                        <h2 class="counter counter-up" data-counterup-time="1500" data-counterup-delay="30">51</h2>
-                        <p class="name">Teachers</p>
-                    </div>
-                </div>
-            </div>
+            
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div class="single-achivement">
                     <div class="icon">
@@ -90,6 +80,17 @@
                     <div class="content">
                         <h2 class="counter counter-up" data-counterup-time="1500" data-counterup-delay="30"><?= $total_exam ?></h2>
                         <p class="name">Exams</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                <div class="single-achivement">
+                    <div class="icon">
+                        <img src="<?= base_url('assets/images/blog.png') ?>" alt="">                         
+                    </div>
+                    <div class="content">
+                        <h2 class="counter counter-up" data-counterup-time="1500" data-counterup-delay="30"><?= $total_blogs ?></h2>
+                        <p class="name">Blogs</p>
                     </div>
                 </div>
             </div>

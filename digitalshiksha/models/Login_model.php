@@ -310,6 +310,14 @@ class Login_model extends CI_Model
         // echo $this->db->last_query(); die;
     }
 
+    public function get_total_blogs()
+    {
+        $this->db->from('blog');
+       return $this->db->count_all_results();
+        
+        // echo $this->db->last_query(); die;
+    }
+
     public function get_total_studnet()
     {
         $this->db->where('user_role_id', 5)
