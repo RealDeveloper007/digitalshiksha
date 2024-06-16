@@ -54,7 +54,7 @@
       <?php echo form_password('user_pass', '', 'placeholder="Password * (Minimum 6 character)" class="form-control" required="required"') ?>
 
       <?php echo form_password('user_passcf', '', 'placeholder="Confirm Password * (Minimum 6 character)" class="form-control" required="required"') ?>
-      <div class="g-recaptcha" data-sitekey="6LdEHvopAAAAAOjOKsZ9F8N7hVTal_s0ycNfsMg_"></div>
+      <div class="g-recaptcha" data-sitekey="6LfCe_kpAAAAAAWi9d1lL1sliIpN97oIVmJlCypc"></div>
 
     </div>
 
