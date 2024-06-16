@@ -656,7 +656,7 @@ class Login_control extends MS_Controller
 
     private function verifyRecaptcha($recaptcha_response) 
     {
-        $secret_key = '6LfCe_kpAAAAADNg5JPw0N6bRQN1eu8SFynUECWt';
+        $secret_key = '6LdEHvopAAAAAP8RG_UxCQi9lDcSBNQiVHTeneJX';
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = array(
             'secret' => $secret_key,
