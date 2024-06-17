@@ -89,8 +89,49 @@ class Blog extends MS_Controller
         $data['header'] = $this->load->view('header/admin_head', '', TRUE);
         $data['top_navi'] = $this->load->view('header/admin_top_navigation', $data, TRUE);
         $data['sidebar'] = $this->load->view('sidebar/admin_sidebar', $data, TRUE);
-        $data['blogs'] = $this->blog_model->get_all();
         $data['message'] = $message;
+
+        $config = array();
+
+        if($this->uri->segment(3))
+        {
+            $page = $this->uri->segment(3);
+        } else {
+           $page = 0; 
+        }
+
+        $countresult = count($this->blog_model->get_all());
+        
+        $config['per_page']         = 10;
+        $config["base_url"]         = base_url() . "blog/view_all";
+        $config["total_rows"]       = $countresult;
+        $config['anchor_class']     = 'class="page gradient"';
+        $config['cur_tag_open']     = '<a class="page active">';
+        $config['cur_tag_close']    = '</a>';
+        $config['full_tag_open']    = '<div class="pagination">';
+        $config['full_tag_close']   = '</div>';
+        $config['first_link']       = 'First';
+        $config['num_links']        = $countresult;
+
+        if (count($_GET) > 0) $config['suffix'] = '?' . http_build_query($_GET, '', "&");
+
+        
+        if(ceil($config['total_rows']/$config['per_page'])> 5)
+            $config['last_link']    =   '.... Last';
+        else
+            $config['last_link']    =   'Last';
+            
+        $this->pagination->initialize($config);
+        
+        $getPageNo = 1 + ($page / 10);
+         $data['count'] = ($getPageNo == 0 ? 1 : (($getPageNo - 1) * $config["per_page"] + 1));
+
+        $str_links = $this->pagination->create_links();
+
+        // print_r($str_links); die;
+        $data["links"] = explode('&nbsp;',$str_links );
+        $data['blogs'] = $this->blog_model->get_blogs($config["per_page"], $page);
+
         $data['content'] = $this->load->view('admin/view_all_blog', $data, TRUE);
         $data['footer'] = $this->load->view('footer/admin_footer', $data, TRUE);
         $this->load->view('dashboard', $data);

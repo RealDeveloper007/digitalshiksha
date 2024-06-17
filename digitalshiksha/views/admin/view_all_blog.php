@@ -5,11 +5,6 @@ iframe {
     height: 100px;
 }
 </style>
-<div id="note">
-    <?=validation_errors('<div class="alert alert-danger">', '</div>'); ?>
-    <?=($this->session->flashdata('message')) ? $this->session->flashdata('message') : '' ?>        
-    <?=(isset($message)) ? $message : ''; ?>
-</div>
 
 <div class="block">  
     <div class="navbar block-inner block-header">
@@ -28,6 +23,7 @@ iframe {
                     <table cellpadding="0" cellspacing="0" border="0" class="table table-hover table-bordered">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th class="col-xs-2">Post</th>
                                 <th class="col-xs-2">Media Type</th>
                                 <th class="col-xs-3">Attachment</th>
@@ -41,6 +37,7 @@ iframe {
                             foreach ($blogs as $blog) {
                                 ?>
                                 <tr class="<?= ($i & 1) ? 'even' : 'odd'; ?>">
+                                    <td><?= $count ?></td>
                                     <td class="col-xs-2"><?= $blog->blog_title; ?>
                                         <div class="collapse" id="collapse_<?= $blog->blog_id; ?>"><br/>
                                             <p class="notice-css"><span class="text-muted"><b>Short Description</b>: </span> 
@@ -76,10 +73,19 @@ iframe {
                                 </tr>
                                 <?php
                                 $i++;
+                                $count++;
                             }
                             ?>
                         </tbody>
                     </table>
+                    <div id="pagination">
+                     <ul class="tsc_pagination">
+                                <!-- Show pagination links -->
+                                <?php foreach ($links as $link) {
+                                    echo "<li>". $link."</li>";
+                                } ?>
+                    </ul>
+                    </div>
                     <?php
                 } else {
                     echo 'No blogs!';

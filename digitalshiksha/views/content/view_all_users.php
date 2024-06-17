@@ -49,6 +49,7 @@ $str .= "]";
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable" id="example">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Name</th>
                     <th class="hidden-xxs">Phone Number</th>
                     <th class="hidden-xxs">Email</th>
@@ -64,6 +65,7 @@ $str .= "]";
             foreach ($users as $user) { 
                if (($user->active == 1) && ($user->banned == 0) && ($user->user_role_id == 4)) { ?>
                 <tr class="<?=($i & 1) ? 'even' : 'odd'; ?>">
+                    <td><?= $i ?></td>
                     <td>
                         <?=$user->user_name; ?>
                     </td>
@@ -95,6 +97,7 @@ $str .= "]";
             }?>
             </tbody>
         </table>
+
         </div>
         <?php if ($this->session->userdata['user_role_id'] < 2) { ?>
         <div class="tab-pane fade" id="admin">
