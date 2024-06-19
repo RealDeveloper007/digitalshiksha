@@ -89,6 +89,10 @@ class User_model extends CI_Model
             return FALSE;
         }
     }
+    public function delete_in_active_users($record_ids) {
+        $this->db->where_in('user_id', $record_ids);
+        $this->db->delete('users');
+    }
     
     
     public function check_user_exist_by_phone($phone)

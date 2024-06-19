@@ -94,6 +94,20 @@ class User_control extends MS_Controller
         $this->load->view('dashboard', $data);
     }
 
+    public function delete_records() 
+    {
+        $record_ids = $this->input->post('record_ids');
+        // print_r($record_ids); die;
+        if (!empty($record_ids)) {
+            // $countRecords = count($record_ids);
+            $this->user_model->delete_in_active_users($record_ids); // Delete records from the database
+            $this->session->set_flashdata('success', 'Records deleted successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'No records selected.');
+        }
+        redirect('user_control/view_banned_users');
+    }
+
     // public function user_add_form($message = '')
     // {
     //     $data = array();
