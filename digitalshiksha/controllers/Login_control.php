@@ -455,7 +455,8 @@ class Login_control extends MS_Controller
                 // $info['active'] =1;
 
                 // Check athentication
-                if ($this->login_model->register($info)) {
+                if ($this->login_model->register($info)) 
+                {
                     $mysecret = 'galua.mugda';
                     $key = sha1($mysecret . $info['user_email'] . $this->session->userdata['brand_name']);
 
@@ -569,9 +570,35 @@ class Login_control extends MS_Controller
                 }
 
                 // Check athentication
-                if ($this->login_model->register($info)) {
+                if ($this->login_model->register($info)) 
+                {
 
-                    if ($this->login_model->login_check()) {
+                    if ($this->login_model->login_check()) 
+                    {
+
+                        $from = $this->session->userdata['support_email'];
+                        $to = $info['user_email'];
+                        $suject = 'You are added with ' . $this->session->userdata['brand_name'];
+                        // $message_body = 'Initial Login info:</br> User Name: ' . $info['user_email'] 
+                        //         . '</br>Password: ' . $this->input->post('user_pass') . '</br></br>'
+                        //         . 'Use this link to login: ' . base_url('login_control') . '</br></br>'
+                        //         . 'Note: Change you password after login.';
+
+                        $sendData = ['user_name'=>$info['user_name'],'email'=>$info['user_email'],'phone'=>$info['user_phone'],'password'=>$this->input->post('user_pass')];
+                        $message_body = $this->load->view('emails.welcome', $sendData);
+                        $config = Array(
+                            'mailtype' => 'html',
+                            'charset' => 'iso-8859-1',
+                            'wordwrap' => TRUE
+                        );
+                        $this->load->library('email', $config);
+                        $this->email->set_newline("\r\n");
+                        $this->email->from($from);
+                        $this->email->to($to);
+                        $this->email->subject($suject);
+                        $this->email->message($message_body);
+                        $this->email->send();
+
                         $this->load->model('system_model');
                         $this->system_model->set_system_info_to_session();
 

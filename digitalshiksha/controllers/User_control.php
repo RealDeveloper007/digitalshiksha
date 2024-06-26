@@ -156,14 +156,18 @@ class User_control extends MS_Controller
             if (!($info['user_role_id'] > $this->session->userdata('user_role_id'))) {
                 show_404();
             }
-            if ($this->login_model->register($info)) {
+            if ($this->login_model->register($info)) 
+            {
                 $from = $this->session->userdata['support_email'];
                 $to = $info['user_email'];
                 $suject = 'You are added with ' . $this->session->userdata['brand_name'];
-                $message_body = 'Initial Login info:</br> User Name: ' . $info['user_email'] 
-                        . '</br>Password: ' . $this->input->post('user_pass') . '</br></br>'
-                        . 'Use this link to login: ' . base_url('login_control') . '</br></br>'
-                        . 'Note: Change you password after login.';
+                // $message_body = 'Initial Login info:</br> User Name: ' . $info['user_email'] 
+                //         . '</br>Password: ' . $this->input->post('user_pass') . '</br></br>'
+                //         . 'Use this link to login: ' . base_url('login_control') . '</br></br>'
+                //         . 'Note: Change you password after login.';
+
+                $sendData = ['user_name'=>$info['user_name'],'email'=>$info['user_email'],'phone'=>$info['user_phone'],'password'=>$this->input->post('user_pass')];
+                $message_body = $this->load->view('emails.welcome', $sendData);
                 $config = Array(
                     'mailtype' => 'html',
                     'charset' => 'iso-8859-1',
