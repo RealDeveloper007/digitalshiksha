@@ -578,7 +578,7 @@ class Login_control extends MS_Controller
 
                         $from = $this->session->userdata['support_email'];
                         $to = $info['user_email'];
-                        $suject = 'You are added with ' . $this->session->userdata['brand_name'];
+                        $subject = 'You are added with ' . $this->session->userdata['brand_name'];
                         // $message_body = 'Initial Login info:</br> User Name: ' . $info['user_email'] 
                         //         . '</br>Password: ' . $this->input->post('user_pass') . '</br></br>'
                         //         . 'Use this link to login: ' . base_url('login_control') . '</br></br>'
@@ -596,7 +596,7 @@ class Login_control extends MS_Controller
                         $this->email->set_newline("\r\n");
                         $this->email->from($from);
                         $this->email->to($to);
-                        $this->email->subject($suject);
+                        $this->email->subject($subject);
                         $this->email->message($message_body);
                         $this->email->send();
 
