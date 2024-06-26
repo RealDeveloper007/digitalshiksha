@@ -21,7 +21,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .header {
-            background: #4CAF50;
+            background: #F1B900;
             color: #fff;
             padding: 10px 0;
             text-align: center;
@@ -30,13 +30,13 @@
             padding: 20px;
         }
         .footer {
-            background: #4CAF50;
+            background: #F1B900;
             color: #fff;
             padding: 10px 0;
             text-align: center;
         }
         a {
-            color: #4CAF50;
+            color: #F1B900;
             text-decoration: none;
         }
     </style>

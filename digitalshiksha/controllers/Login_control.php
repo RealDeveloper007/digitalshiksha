@@ -588,9 +588,10 @@ class Login_control extends MS_Controller
                         $message_body = $this->load->view('emails/welcome.php', $sendData);
                         $config = Array(
                             'mailtype' => 'html',
-                            'charset' => 'iso-8859-1',
+                            'charset' => 'utf-8',
                             'wordwrap' => TRUE
                         );
+
                         $this->load->library('email', $config);
                         $this->email->set_newline("\r\n");
                         $this->email->from($from);
