@@ -49,7 +49,7 @@
         <div class="content">
             <p>Dear <?= ucfirst($user_name) ?>,</p>
             <p> Welcome to the  Digital Shiksha Darpan. Thank you for becoming part of digital shiksha.It is an e-learning platform having many features for digital learning.</p>
-            <p>Your login id:-(<?= $email.' OR '.$phone ?>) - </p>
+            <p>Your login id:- (<?= $email.' OR '.$phone ?>) </p>
             <p>Your password:-  <?= $password ?></p>
             <p>For learning all features of digital shiksha darpan website/app you may click by below link. After this video you will be able to access all features of this web application/app.</p>
             <p><a href="https://youtu.be/r-fTnaZK9_w?si=bI55Zhb1x8WqCGPL" target="_blank">Click here to watch the video</a></p>
