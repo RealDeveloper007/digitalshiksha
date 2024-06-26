@@ -585,7 +585,7 @@ class Login_control extends MS_Controller
                         //         . 'Note: Change you password after login.';
 
                         $sendData = ['user_name'=>$info['user_name'],'email'=>$info['user_email'],'phone'=>$info['user_phone'],'password'=>$this->input->post('user_pass')];
-                        $message_body = $this->load->view('emails/welcome.php', $sendData);
+                        $message_body = $this->load->view('emails/welcome.php', $sendData,TRUE);
                         $config = Array(
                             'mailtype' => 'html',
                             'charset' => 'utf-8',
