@@ -167,7 +167,7 @@ class User_control extends MS_Controller
                 //         . 'Note: Change you password after login.';
 
                 $sendData = ['user_name'=>$info['user_name'],'email'=>$info['user_email'],'phone'=>$info['user_phone'],'password'=>$this->input->post('user_pass')];
-                $message_body = $this->load->view('emails/welcome.php', $sendData);
+                $message_body = $this->load->view('emails/welcome.php', $sendData,TRUE);
                 $config = Array(
                     'mailtype' => 'html',
                     'charset' => 'iso-8859-1',
@@ -185,7 +185,11 @@ class User_control extends MS_Controller
                         . '<button type="button" class="close" data-dismiss="alert" aria-hidden="TRUE">&times;</button>'
                         . 'User Added Successfully! User name and Password sent to the user\'s mail address.'
                         . '</div>';
-                $this->index($message);
+                
+                $this->session->set_flashdata('message', $message);
+
+                // $this->index($message);
+                redirect('user_control/add_user');
             } else {
                 $message = '<div class="alert alert-danger alert-dismissable">'
                         . '<button type="button" class="close" data-dismiss="alert" aria-hidden="TRUE">&times;</button>'

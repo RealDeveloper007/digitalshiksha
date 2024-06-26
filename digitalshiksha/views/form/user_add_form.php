@@ -9,11 +9,13 @@
         <div class="col-xs-12">
             <?php echo form_open(base_url() . 'user_control/add_user', 'role="form" class="form-horizontal"'); ?>
             <div class="row">
+            <?=validation_errors('<div class="alert alert-danger">', '</div>'); ?>
                 <?php
                 if (isset($message) && $message != '') {
                     echo $message;
                 }
                 ?>
+                <?=($this->session->flashdata('message')) ? $this->session->flashdata('message') : '' ?>        
                 <h4>Add new user</h4>
             </div>
             <hr/>
