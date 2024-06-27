@@ -738,7 +738,7 @@ class Admin_control extends MS_Controller {
     {
         $data = array();
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('cat_name', 'Category', 'required|max_length[20]');
+        $this->form_validation->set_rules('cat_name', 'Category', 'required|max_length[24]');
         if ($this->form_validation->run() == FALSE) {
             $this->category_form();
         } else {

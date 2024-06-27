@@ -30,8 +30,6 @@
             padding: 20px;
         }
         .footer {
-            background: #F1B900;
-            color: #fff;
             padding: 10px 0;
             text-align: center;
         }

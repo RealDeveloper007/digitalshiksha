@@ -239,7 +239,7 @@
                     $('#send_otp').text('Submit OTP');
                     if (Response.type === 'otp_checked') {
 
-                        $('.message_area').empty().append("<div class='alert alert-success'>OTP is matched. Please fill your details for registeration</div>");
+                        $('.message_area').show().empty().append("<div class='alert alert-success'>OTP is matched. Please fill your details for registeration</div>");
 
                         $('form#registerForm input[name="token_data"]').hide();
                         $('.otp_div').hide().empty();
@@ -261,7 +261,7 @@
 
                     } else {
 
-                        $('.message_area').empty().append("<div class='alert alert-success'>OTP has been sent.</div>");
+                        $('.message_area').show().empty().append("<div class='alert alert-success'>OTP has been sent.</div>");
 
                         $('form#registerForm input[name="token_data"]').val(Response.data);
                         $('.otp_div').empty().show().append('<input type="number" name="otp" class="form-control" placeholder="Enter OTP" required="required">');
@@ -271,14 +271,14 @@
                 } else {
 
                     if (Response.type == 'otp_not_checked') {
-                        $('.message_area').empty().append("<div class='alert alert-danger'>OTP is not matched! Please try again after some time.</div>");
+                        $('.message_area').show().empty().append("<div class='alert alert-danger'>OTP is not matched! Please try again after some time.</div>");
 
                     } else if (Response.type == 'otp_not_sent') {
 
-                        $('.message_area').empty().append("<div class='alert alert-danger'>OTP is not sent! Please try again after some time.</div>");
+                        $('.message_area').show().empty().append("<div class='alert alert-danger'>OTP is not sent! Please try again after some time.</div>");
                         $('.otp_div').hide().append('<input type="number" name="otp" class="form-control" placeholder="Enter OTP" required="required">');
                     } else if (Response.type == 'validation_error') {
-                        $('.message_area').empty().append("<div class='alert alert-danger'>" + Response.message + "</div>");
+                        $('.message_area').show().empty().append("<div class='alert alert-danger'>" + Response.message + "</div>");
                     }
 
                 }
