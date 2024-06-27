@@ -272,6 +272,21 @@ class Message_control extends MS_Controller
         }
     }
 
+
+    public function delete_messages() 
+    {
+        $record_ids = $this->input->post('record_ids');
+        // print_r($record_ids); die;
+        if (!empty($record_ids)) {
+            // $countRecords = count($record_ids);
+            $this->admin_model->delete_in_spam_messages($record_ids); // Delete records from the database
+            $this->session->set_flashdata('success', 'Messages deleted successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'No message selected.');
+        }
+        redirect('message_control');
+    }
+
     public function contact_form($message = '')
     {
         $data = array();

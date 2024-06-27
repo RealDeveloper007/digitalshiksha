@@ -816,8 +816,12 @@ public function create_subcategory($sub_cat_name)
             }
         }
     }
-    
-    
+
+    public function delete_in_spam_messages($record_ids) {
+        $this->db->where_in('message_id', $record_ids);
+        $this->db->delete('messages');
+    }
+       
     public function update_subcategory_name()
     {
         if ($this->session->userdata('user_role_id') > 3) {

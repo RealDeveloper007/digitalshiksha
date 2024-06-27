@@ -2,8 +2,16 @@
     <?=validation_errors('<div class="alert alert-danger">', '</div>'); ?>
     <?=($this->session->flashdata('message')) ? $this->session->flashdata('message') : '' ?>        
     <?=(isset($message)) ? $message : ''; ?>
-</div>
 
+
+<?php if ($this->session->flashdata('success')): ?>
+    <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
+<?php endif; ?>
+<?php if ($this->session->flashdata('error')): ?>
+    <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
+<?php endif; ?>
+
+</div>
 <div class="block">  
     <div class="navbar block-inner block-header">
         <div class="row">
@@ -31,10 +39,10 @@
         </ul>
         <div class="tab-content info-display">
             <div class="tab-pane table-responsive" id="tab_Trash">
+          
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-hover">
                    <thead>
                        <tr>
-                           <th><span><input type="checkbox"></span></th>
                            <th class="mobile">Sender</th>
                            <th class="">Subject</th>
                            <th class="invisible-on-sm">Directory</th>
@@ -50,7 +58,6 @@
                             $j = 1;
                    ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
-                       <td><span><input type="checkbox"></span></td>
                        <td class="mobile clickableRow"><?=$msg->message_sender.'('.$msg->sender_email.')'; ?></td>
                        <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
                        <td class=" invisible-on-sm clickableRow"><?=$msg->message_folder; ?></td>
@@ -78,15 +85,17 @@
                     ?>
                    </tbody>
                 </table>
-
-
+               
            </div>
 
             <div class="tab-pane table-responsive" id="tab_Spam">
+            <form id="messageForm" method="post" action="<?php echo site_url('message_control/delete_messages'); ?>">
+                <button type="button" class="btn btn-danger" id="deleteSelected" style="margin: 10px;pointer:cursor"><i class="glyphicon glyphicon-trash"></i> Delete Selected messages</button>
+                        <br>
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-hover">
                    <thead>
                        <tr>
-                           <th><span><input type="checkbox"></span></th>
+                           <th><span><input type="checkbox" id="selectAll"></span></th>
                            <th class="mobile">Sender</th>
                            <th class="">Subject</th>
                            <th class="invisible-on-sm">Directory</th>
@@ -102,7 +111,7 @@
                             $j = 1;
                    ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
-                       <td><span><input type="checkbox"></span></td>
+                       <td><span><input type="checkbox" class="recordCheckbox" name="record_ids[]" value="<?php echo $msg->message_id; ?>"></span></td>
                        <td class="mobile clickableRow"><?=$msg->message_sender; ?></td>
                        <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
                        <td class=" invisible-on-sm clickableRow"><?=$msg->message_folder; ?></td>
@@ -125,18 +134,18 @@
                         $i++;                       
                     }
                     if ($j == 0) {
-                        echo '<tr><td colspan="5"><h4>  No Spam.</h4> <td></tr>';
+                        echo '<tr><td colspan="5"><h4>  No Spam Messages.</h4> <td></tr>';
                     }
                     ?>
                    </tbody>
                 </table>
+                </form>
            </div>
             
             <div class="tab-pane table-responsive" id="tab_Drafts">
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-hover">
                    <thead>
                        <tr>
-                           <th><span><input type="checkbox"></span></th>
                            <th class="mobile">To</th>
                            <th class="col-sm-5">Subject</th>
                            <th class="mobile">Sender</th>
@@ -153,7 +162,6 @@
                             $j = 1;
                     ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
-                       <td><span><input type="checkbox"></span></td>
                        <td class="mobile clickableRow"><?=$msg->message_send_to; ?></td>
                        <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
                        <td class="mobile clickableRow"><?=$msg->message_sender; ?></td>
@@ -175,6 +183,7 @@
                    ?>
                    </tbody>
                 </table>
+                </form>
            </div>
 
             <div class="tab-pane table-responsive" id="tab_Send">
@@ -420,3 +429,32 @@
     width: 100%;
 }
 </style>
+<script>
+     $(document).ready(function () {
+            // Select or Deselect all checkboxes
+            $('#selectAll').click(function () {
+                $('.recordCheckbox').prop('checked', this.checked);
+            });
+
+            // Deselect "Select All" if one of the checkboxes is deselected
+            $('.recordCheckbox').change(function () {
+                if (!this.checked) {
+                    $('#selectAll').prop('checked', false);
+                }
+            });
+
+            // Confirm before deleting records
+            $('#deleteForm').submit(function (e) {
+                var confirmed = confirm('Are you sure you want to delete the selected messages?');
+                if (!confirmed) {
+                    e.preventDefault();
+                }
+            });
+
+            $('#deleteSelected').click(function() {
+                if (confirm('Are you sure you want to delete selected records?')) {
+                    $('#messageForm').submit();
+                }
+            });
+        });
+</script>
