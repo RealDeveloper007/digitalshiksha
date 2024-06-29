@@ -206,19 +206,19 @@ class Admin_model extends CI_Model
     {
          if($this->session->userdata['user_role_id']==5 ||  $this->session->userdata['user_role_id'] == 4)
         {
-            $this->db->select('messages.*, COUNT(messages_reply.message_reply_id) as numOfReply')
+            $this->db->select('messages.*')
                     ->from('messages')
                     ->order_by("messages.message_date", "desc")
-                    ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+///->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
                     ->where('messages.user_id',$this->session->userdata['user_id'])
                     ->group_by('message_id');
             $result = $this->db->get()->num_rows();
         } else {
 
-            $this->db->select('messages.*, COUNT(messages_reply.message_reply_id) as numOfReply')
+            $this->db->select('messages.*')
                     ->from('messages')
                     ->order_by("messages.message_date", "desc")
-                    ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+                 //   ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
                     ->group_by('message_id');
             $result = $this->db->get()->num_rows();
 
@@ -231,20 +231,20 @@ class Admin_model extends CI_Model
     {
         if($this->session->userdata['user_role_id']==5 ||  $this->session->userdata['user_role_id'] == 4)
         {
-             $this->db->select('messages.*, COUNT(messages_reply.message_reply_id) as numOfReply')
+             $this->db->select('messages.*')
                 ->from('messages')
                 ->order_by("messages.message_date", "desc")
-                ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+                // ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
                 ->where('messages.user_id',$this->session->userdata['user_id'])
                 ->group_by('message_id');
             $this->db->limit($limit, $start);
             $result = $this->db->get()->result();
 
         } else {
-        $this->db->select('messages.*, COUNT(messages_reply.message_reply_id) as numOfReply')
+        $this->db->select('messages.*')
                 ->from('messages')
                 ->order_by("messages.message_date", "desc")
-                ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+                // ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
                 ->group_by('message_id');
             $this->db->limit($limit, $start);
             $result = $this->db->get()->result();
@@ -252,6 +252,56 @@ class Admin_model extends CI_Model
 
         return $result;
     }
+
+
+    public function get_spam_messages()
+    {
+        if($this->session->userdata['user_role_id']==5 ||  $this->session->userdata['user_role_id'] == 4)
+        {
+             $this->db->select('messages.*')
+                ->from('messages')
+                ->order_by("messages.message_date", "desc")
+                // ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+                ->where('messages.user_id',$this->session->userdata['user_id'])
+                ->where('messages.spam',1);
+            $result = $this->db->get()->result();
+
+        } else {
+        $this->db->select('messages.*')
+                ->from('messages')
+                ->order_by("messages.message_date", "desc")
+                ->where('messages.spam',1);
+                // ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+            $result = $this->db->get()->result();
+        }
+
+        return $result;
+    }
+
+    public function get_trash_messages()
+    {
+        if($this->session->userdata['user_role_id']==5 ||  $this->session->userdata['user_role_id'] == 4)
+        {
+             $this->db->select('messages.*')
+                ->from('messages')
+                ->order_by("messages.message_date", "desc")
+                // ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+                ->where('messages.user_id',$this->session->userdata['user_id'])
+                ->where('messages.trash',1);
+            $result = $this->db->get()->result();
+
+        } else {
+        $this->db->select('messages.*')
+                ->from('messages')
+                ->order_by("messages.message_date", "desc")
+                ->where('messages.trash',1);
+                // ->join('messages_reply', 'messages.message_id = messages_reply.message_id_fk', 'left')
+            $result = $this->db->get()->result();
+        }
+
+        return $result;
+    }
+
 
     public function open_message($id)
     {

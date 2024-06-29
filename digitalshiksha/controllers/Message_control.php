@@ -72,6 +72,10 @@ class Message_control extends MS_Controller
 
         $data['messages'] = $this->admin_model->get_messages($config["per_page"], $page);
 
+        $data['spam_messages'] = $this->admin_model->get_spam_messages();
+        
+        $data['trash_messages'] = $this->admin_model->get_trash_messages();
+
         $data['modal'] = $this->load->view('modals/email_compose', '', TRUE);
         $data['content'] = $this->load->view('admin/view_messages', $data, TRUE);
         $data['footer'] = $this->load->view('footer/admin_footer', $data, TRUE);

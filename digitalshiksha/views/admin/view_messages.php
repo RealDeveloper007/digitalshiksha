@@ -53,14 +53,14 @@
                    <?php
                     $i = 1; 
                     $j = 0;
-                    foreach ($messages as $msg) {
-                        if ($msg->trash == 1) {
+                    foreach ($trash_messages as $msg) {
+                        // if ($msg->trash == 1) {
                             $j = 1;
                    ?>
-                   <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
-                       <td class="mobile clickableRow"><?=$msg->message_sender.'('.$msg->sender_email.')'; ?></td>
-                       <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
-                       <td class=" invisible-on-sm clickableRow"><?=$msg->message_folder; ?></td>
+                   <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>">
+                       <td class="mobile "><?=$msg->message_sender.'('.$msg->sender_email.')'; ?></td>
+                       <td class=""><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
+                       <td class=" invisible-on-sm "><?=$msg->message_folder; ?></td>
                        <td class="text-center">
                            <div class="btn-group">
                                <a href="<?php echo base_url('message_control/move_message/untrash/' . $msg->message_id); ?>" class="btn btn-sm btn-default"><i class="fa fa-reply"></i><span class="invisible-on-sm"> Inbox</span></a>
@@ -76,7 +76,7 @@
                        </td>
                    </tr>
                    <?php
-                        }
+                        
                         $i++;                       
                     }
                     if ($j == 0) {
@@ -106,15 +106,17 @@
                    <?php
                     $i = 1; 
                     $j = 0;
-                    foreach ($messages as $msg) {
-                        if (($msg->trash == 0) && ($msg->spam == 1)) {
+                    foreach ($spam_messages as $msg) {
+                        // if (($msg->spam == 1)) {
                             $j = 1;
+
+                            // echo $msg->message_id;
                    ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
                        <td><span><input type="checkbox" class="recordCheckbox" name="record_ids[]" value="<?php echo $msg->message_id; ?>"></span></td>
-                       <td class="mobile clickableRow"><?=$msg->message_sender; ?></td>
-                       <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
-                       <td class=" invisible-on-sm clickableRow"><?=$msg->message_folder; ?></td>
+                       <td class="mobile "><?=$msg->message_sender; ?></td>
+                       <td class=""><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
+                       <td class=" invisible-on-sm "><?=$msg->message_folder; ?></td>
                        <td class="text-center">
                            <div class="btn-group">
                                <a href="<?php echo base_url('message_control/move_message/unspam/' . $msg->message_id) ; ?>" class="btn btn-sm btn-default"><i class="fa fa-reply"></i><span class="invisible-on-sm"> Inbox</span></a>
@@ -130,7 +132,7 @@
                        </td>
                    </tr>
                    <?php
-                        }
+                        // }
                         $i++;                       
                     }
                     if ($j == 0) {
@@ -162,10 +164,10 @@
                             $j = 1;
                     ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
-                       <td class="mobile clickableRow"><?=$msg->message_send_to; ?></td>
-                       <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
-                       <td class="mobile clickableRow"><?=$msg->message_sender; ?></td>
-                       <td class="invisible-on-sm clickableRow"><?=date("D, d M g:i a", strtotime($msg->message_date)); ?></td>
+                       <td class="mobile "><?=$msg->message_send_to; ?></td>
+                       <td class=""><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
+                       <td class="mobile "><?=$msg->message_sender; ?></td>
+                       <td class="invisible-on-sm "><?=date("D, d M g:i a", strtotime($msg->message_date)); ?></td>
                        <td class="text-center">
                            <div class="btn-group">
                                <a href="<?php echo base_url('message_control/reply_message/' . $msg->message_id); ?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-edit"></i><span class="invisible-on-sm"> Edit</span></a>
@@ -208,10 +210,10 @@
                    ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>" href="<?=base_url('message_control/open_message/'.$msg->message_id); ?>">
                        <td><span><input type="checkbox"></span></td>
-                       <td class="mobile clickableRow"><?=$msg->message_send_to; ?></td>
-                       <td class="clickableRow"><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
-                       <td class="mobile clickableRow"><?=$msg->message_sender; ?></td>
-                       <td class="invisible-on-sm clickableRow"><?=date("D, d M g:i a", strtotime($msg->message_date)); ?></td>
+                       <td class="mobile "><?=$msg->message_send_to; ?></td>
+                       <td class=""><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
+                       <td class="mobile "><?=$msg->message_sender; ?></td>
+                       <td class="invisible-on-sm "><?=date("D, d M g:i a", strtotime($msg->message_date)); ?></td>
                        <td class="text-center">
                            <div class="btn-group">
                                <a href="<?php echo base_url('message_control/reply_message/' . $msg->message_id); ?>" class="btn btn-sm btn-default"><i class="fa fa-reply"></i><span class="invisible-on-sm"> Reply</span></a>
