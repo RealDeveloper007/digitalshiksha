@@ -12,6 +12,29 @@ class User_model extends CI_Model
         $this->db->select('*');
         $this->db->from('users');
         $this->db->join('user_role', 'users.user_role_id = user_role.user_role_id');
+
+        if($this->input->get('type')) {
+
+            if($this->input->get('type') == 'teacher')
+            {
+             $this->db->where(['user_role.user_role_id'=>4,'users.active'=>1,'users.banned'=>0]);
+            }
+        }
+
+        if($this->input->get('phone'))
+        {
+            $this->db->where(['users.user_phone'=>$this->input->get('phone')]);
+
+        } else if($this->input->get('email'))
+        {
+            $this->db->where('users.user_email',$this->input->get('email'));
+
+        } else if($this->input->get('name')) {
+
+            $this->db->like('users.user_name',$this->input->get('name'));
+
+        }
+
         $result = $this->db->get()->result();
         return $result;
     }

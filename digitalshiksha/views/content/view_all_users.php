@@ -25,16 +25,16 @@ $str .= "]";
 <div class="block">  
     <div class="navbar block-inner block-header">
         <div class="row">
-            <ul class="nav nav-pills">
+            <ul class="nav nav-pills" id="myTab" >
                 <li><p class="text-muted">User List </p></li>
                 <li class=" pull-right"><a href="#teacher" data-toggle="pill">Teacher</a></li>
-                                <li class="active pull-right"><a href="#student" data-toggle="pill">Student</a></li>
+                <li class="active pull-right"><a href="#student" data-toggle="pill">Student</a></li>
 
                 <?php if ($this->session->userdata['user_role_id'] < 3) { ?>
                     <li class=" pull-right"><a href="#moderator" data-toggle="pill">Moderator</a></li>
                 <?php }?>
                 <?php if ($this->session->userdata['user_role_id'] < 2) { ?>
-                    <li class=" pull-right"><a href="#admin" data-toggle="pill">Admin</a></li>
+                    <!-- <li class=" pull-right"><a href="#admin" data-toggle="pill">Admin</a></li> -->
                 <?php }?>
                 <!--<li class="active pull-right"><a href="#all" data-toggle="pill"> All </a></li>-->
             </ul>
@@ -43,9 +43,41 @@ $str .= "]";
     <div class="block-content">
     <div class="row">
     <div class="col-sm-12">
-        <div class="tab-content">
+        <div class="tab-content" id="myTabContent">
         <?php if (isset($users) != NULL) { ?>
         <div class="tab-pane fade" id="teacher">
+        <form method="get" action="<?= base_url('user_control') ?>">
+            <input type="hidden" name="type" value="teacher">
+                <div class="row">
+                    <div class="col-md-3">
+                        <?php if($this->input->get('phone')) { ?>
+                        <input type="text" class="form-control" name="phone" placeholder="Search by Phone no" value="<?= $this->input->get('phone') ?>">
+                    <?php } else { ?>
+                        <input type="text" class="form-control" name="phone" placeholder="Search by Phone no" >
+                    <?php } ?>
+                    </div>
+                    <div class="col-md-3">
+                        <?php if($this->input->get('name')) { ?>
+                        <input type="text" class="form-control" name="name" placeholder="Search by Name(e.g name OR any alphabet)" value="<?= $this->input->get('name') ?>">
+                    <?php } else { ?>
+                        <input type="text" class="form-control" name="name" placeholder="Search by Name(e.g name OR any alphabet)">
+                    <?php } ?>
+                    </div>
+                    <div class="col-md-3">
+                        <?php if($this->input->get('email')) { ?>
+                        <input type="text" class="form-control" name="email" placeholder="Search by Email" value="<?= $this->input->get('email') ?>">
+                    <?php } else { ?>
+                        <input type="text" class="form-control" name="email" placeholder="Search by Email">
+                    <?php } ?>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-success">Filter</button>
+                        <button type="button" class="btn btn-danger reset_filter">Reset</button>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <br>
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable" id="example">
             <thead>
                 <tr>
@@ -149,6 +181,7 @@ $str .= "]";
         <div class="tab-pane active fade in" id="student">
 
             <form method="get" action="<?= base_url('user_control') ?>">
+            <input type="hidden" name="type" value="student">
                 <div class="row">
                     <div class="col-md-3">
                         <?php if($this->input->get('phone')) { ?>
@@ -265,7 +298,6 @@ $str .= "]";
                     <th class="hidden-xxs">Phone Number</th>
                     <th class="hidden-xxs">Email</th>
                     <th class="hidden-xxs">Role</th>
-                    <th style="width: 30%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -286,13 +318,7 @@ $str .= "]";
                     <td class="hidden-xxs">
                         <?=$user->user_role_name; ?>
                     </td>
-                    <td style="width: 30%">
-                    <div class="btn-group">
-                        <a class="btn btn-default btn-sm" href = "#"><i class="glyphicon glyphicon-edit"></i><span class="invisible-on-md">  Modify</span></a>
-                        <a onclick="return ban_confirmation('<?=$user->user_name?>')"  class="btn btn-default btn-sm" href = "<?=base_url('user_control/ban_user_account/' . $user->user_id); ?>"><i class="glyphicon glyphicon-ban-circle"></i><span class="invisible-on-md">  Ban</span></a>
-                        <a onclick="return deactivate_confirmation('<?=$user->user_name?>')" href = "<?php echo base_url('user_control/deactivate_user_account/' . $user->user_id); ?>" class="btn btn-sm btn-default"><i class="glyphicon glyphicon-trash"></i><span class="invisible-on-md">  Deactivate</span></a>
-                    </div>
-                    </td>
+                   
                 </tr>
                 <?php 
                 $i++;
@@ -366,6 +392,27 @@ $str .= "]";
     {
         window.location.href = "<?= base_url('user_control')?>";
     })
-</script>
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the last selected tab from local storage
+    var activeTab = localStorage.getItem('activeTab');
+    
+    // If there's a saved tab, set it as active
+    if (activeTab) {
+        document.querySelector('.nav-pills li a[href="' + activeTab + '"]').click();
+    }
+
+    // Add click event listeners to all tab links
+    var tabLinks = document.querySelectorAll('.nav-pills li a');
+    tabLinks.forEach(function(tabLink) {
+        tabLink.addEventListener('click', function(event) {
+            // Save the clicked tab in local storage
+            var activeTab = event.target.getAttribute('href');
+            localStorage.setItem('activeTab', activeTab);
+        });
+    });
+});
+
+  </script>
 
  
