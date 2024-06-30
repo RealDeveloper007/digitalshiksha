@@ -9,6 +9,7 @@
 , Technology in education, Skill development, Digital empowerment, Digital classroom, Online education, mock test, mock test for 10th, mock test for 12th, sample paper for 10th, sample paper for 12th">
   <!--<meta name="author" content="Real Developer">-->
   <title><?= ($brand_name) ? $brand_name . ' - ' . $brand_tagline : 'digitalshiksha' ?></title>
+  <link rel="icon" type="image/x-icon" href="<?php echo base_url('favicon.png') ?>">
   <link href="<?php echo base_url('assets/css/head.css') ?>" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
