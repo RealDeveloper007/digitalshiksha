@@ -46,7 +46,7 @@
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-hover">
                    <thead>
                        <tr>
-                            <th><span><input type="checkbox" id="selectAll"></span></th>
+                            <th><span><input type="checkbox" id="selectTrashAll"></span></th>
                            <th class="mobile">Sender</th>
                            <th class="">Subject</th>
                            <th class="invisible-on-sm">Directory</th>
@@ -62,7 +62,7 @@
                             $j = 1;
                    ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>">
-                        <td><span><input type="checkbox" class="recordCheckbox" name="record_ids[]" value="<?php echo $msg->message_id; ?>"></span></td>
+                        <td><span><input type="checkbox" class="recordTrashCheckbox" name="record_ids[]" value="<?php echo $msg->message_id; ?>"></span></td>
                        <td class="mobile "><?=$msg->message_sender.'('.$msg->sender_email.')'; ?></td>
                        <td class=""><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
                        <td class=" invisible-on-sm "><?=$msg->message_folder; ?></td>
