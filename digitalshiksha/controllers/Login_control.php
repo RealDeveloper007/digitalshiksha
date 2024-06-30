@@ -530,7 +530,7 @@ class Login_control extends MS_Controller
     public function register_ajax()
     {
         $this->load->library('form_validation');
-
+        $this->form_validation->set_rules('user_type', 'User Type', 'trim|required|callback_validate_user_type');
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[3]|max_length[12]|callback_valid_name');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[3]|max_length[12]|callback_valid_name');
         $this->form_validation->set_rules('user_email', 'Email Address', 'required|valid_email|is_unique[users.user_email]');
@@ -547,24 +547,43 @@ class Login_control extends MS_Controller
 
             $row = $this->db->where(['MD5(id)' => $this->input->post('token_data')])->get('register_otp')->result();
 
+            if($this->input->post('user_type') == 'student')
+            {
+                $userType = 5;
+                $status = 1;
+
+            } else if($this->input->post('user_type') == 'teacher') {
+
+                $userType = 4;
+                $status = 0;
+
+            }
+
+            if(!isset($userType))  
+            {
+                echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable"> User Type error found. Please try again.</div>'));
+                exit();
+            }
+
+
             date_default_timezone_set($this->session->userdata['time_zone']);
             $info = array();
             $info['user_name'] = $this->input->post('first_name').' '.$this->input->post('last_name');
             $info['user_email'] = $this->input->post('user_email');
             $info['user_phone'] = $this->input->post('user_phone');
-            $info['user_role_id'] = ($this->input->post('user_role')) ? $this->input->post('user_role') : 5;
+            $info['user_role_id'] = $userType;
             $info['user_pass'] = md5($this->input->post('user_pass'));
             //$info['confirm_password'] = $this->input->post('user_pass');
             $info['user_from'] = date('Y-m-d H:i:s');
-            $info['active']    = 1;
+            $info['active']    = $status;
 
             $recaptcha_response = $this->input->post('g-recaptcha-response');
             $response = $this->verifyRecaptcha($recaptcha_response);
+            // $response['success'] = true;
 
             if ($response['success']) 
             {
                 
-
                 if (isset($row[0])) {
                     $info['register_otp_id']    = $row[0]->id;
                 }
@@ -610,9 +629,22 @@ class Login_control extends MS_Controller
                             . 'You loged in successfully!'
                             . '</div>';
 
+                        if($userType == 5)
+                        {
+                            echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been registered Successully! Now you will be able to login</div>', 'login_url' => 'dashboard/' . $this->session->userdata('user_id')));
+                            exit();
 
-                        echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been registered Successully! Now you will be able to login</div>', 'login_url' => 'dashboard/' . $this->session->userdata('user_id')));
+                        } else {
+
+                            echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been saved & your account will be approved by admin</div>','login_url' =>false));
+                            exit();
+
+                        }
+                    } else {
+
+                        echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been saved & your account will be approved by admin</div>','login_url' =>false));
                         exit();
+
                     }
                     // $mysecret = 'galua.mugda';
                     // $key = sha1($mysecret . $info['user_email'] . $this->session->userdata['brand_name']);
@@ -671,13 +703,23 @@ class Login_control extends MS_Controller
 
             } else {
 
-                echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>', 'login_url' => $this->config->item('recaptcha_secret_key')));
+                echo json_encode(array('status' => false, 'message' => '<div class="alert alert-danger alert-dismissable">reCAPTCHA verification failed. Please try again.</div>'));
                 exit();
 
             }
         }
     }
 
+    public function validate_user_type($value) {
+        $valid_types = array('student', 'teacher');
+        if (in_array($value, $valid_types)) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('validate_user_type', 'The {field} field must be either "Student" or "Teacher".');
+            return FALSE;
+        }
+    }
+    
     public function valid_name($str) {
         return (bool) preg_match('/^[a-zA-Z\s\-\'\.]+$/', $str);
     }

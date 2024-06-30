@@ -1,28 +1,85 @@
       .popup_visible .my-popup {
-    transform: scale(1);
-  }
+        transform: scale(1);
+      }
 
-  .my-popup h4 {
-    text-align: center;
-  }
+      .my-popup h4 {
+        text-align: center;
+      }
 
-  .popup-form p {
-    font-size: 12px;
-  }
+      .popup-form p {
+        font-size: 12px;
+      }
 
-  .popup-form .input {
-    border-radius: 0px;
-  }
+      .popup-form .input {
+        border-radius: 0px;
+      }
 
-  .popup-bottom {
-    margin-top: 20px;
-  }
+      .popup-bottom {
+        margin-top: 20px;
+      }
 
 
-  #registerForm input[name="user_email"] {
-    display: none;
-  }
+      #registerForm input[name="user_email"] {
+        display: none;
+      }
 
-  .other_fields {
-    display: none;
-  }
+      .other_fields {
+        display: none;
+      }
+
+
+      .radio-label {
+        display: inline-block;
+        margin-right: 15px;
+        font-weight: bold;
+      }
+
+      .radio-group {
+        margin-top: 15px;
+      }
+
+      .order-container {
+        max-width: 80%;
+        margin: 0px auto 20px auto;
+        padding: 20px;
+        /* border: 2px solid #fa80192b; */
+        border-radius: 15px;
+        background-color: #fff;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .order-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .option {
+        flex: 1 1 62px;
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        border: 2px solid #F1B900;
+        border-radius: 10px;
+        background-color: #fff;
+        transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        cursor: pointer;
+        box-sizing: border-box;
+        max-width: 250px;
+    }
+    
+    .option:hover {
+        background-color: #F1B900;
+        color: #fff;
+        transform: scale(1.05);
+    }
+    
+    .option input {
+        margin-right: 10px;
+        transform: scale(1.5);
+    }
+    
+    

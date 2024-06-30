@@ -227,6 +227,7 @@
             data: {
                 'type': type,
                 'type_value': type_value,
+                'user_type':$('form#registerForm input[name="user_type"]').val(),
                 'otp': $('form#registerForm input[name="otp"]').val(),
                 'token': $('form#registerForm input[name="token_data"]').val()
             },
@@ -312,8 +313,21 @@
                 success: function(response) {
                     var Response = JSON.parse(response);
                     $('.message_area').append(Response.message);
-                    if (Response.status) {
-                        window.location.href = '<?php echo base_url() ?>' + Response.login_url
+                    if (Response.status) 
+                    {
+                        if(Response.login_url)
+                        {
+                            window.location.href = '<?php echo base_url() ?>' + Response.login_url;
+
+                        } else {
+
+                            $('form#registerForm input,button').attr('disabled',true);
+
+                            setTimeout( function(){ 
+                                // Do something after 1 second 
+                                window.location.href = '<?php echo base_url() ?>';
+                            }  , 3000 );
+                        }
                     }
                     $.LoadingOverlay('hide');
 

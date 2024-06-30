@@ -30,6 +30,19 @@
   <?= form_hidden('token', time()); ?>
   <?= form_hidden('type'); ?>
   <div class="popup-form">
+
+              <div class="order-container">
+                  <div class="order-options">
+                      <div class="option signinform" data-loader="" data-radio="student">
+                      <?= form_radio('user_type', 'student', null, 'required="required" class="login-item signinform" checked') ?>
+                        <b>Student</b>
+                        </div>
+                      <div class="option signinform" data-loader="" data-radio="take_away">
+                          <?= form_radio('user_type', 'teacher', null, 'class="login-item signinform" required="required"') ?>
+                          <b>Teacher</b>
+                      </div>
+                  </div>
+              </div>
     <div class="col-xs-12 nopadding">
       <label>OTP on mobile.</label>
       <?= form_radio('sending_type', 'mobile', null, 'placeholder="OTP on mobile" required="required" checked') ?>
