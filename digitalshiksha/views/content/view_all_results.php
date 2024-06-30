@@ -52,13 +52,13 @@
                                                         
                                                     } else {
                                                         
-                                                        echo '<span class="label label-primary">PASS</span>';
+                                                        echo '<span class="label label-primary">Qualified</span>';
                                                         
                                                     }
                                                     
                                                 } else { 
                                                     
-                                                   echo  '<span class="label label-warning">FAIL</span>';
+                                                   echo  '<span class="label label-warning">Not Qualified</span>';
                                                     
                                                 }
                                             ?>
@@ -136,13 +136,13 @@
                                                         
                                                     } else {
                                                         
-                                                        echo '<span class="label label-primary">PASS</span>';
+                                                        echo '<span class="label label-primary">Qualified</span>';
                                                         
                                                     }
                                                     
                                                 } else { 
                                                     
-                                                   echo  '<span class="label label-warning">FAIL</span>';
+                                                   echo  '<span class="label label-warning">Not Qualified</span>';
                                                     
                                                 }
                                             ?>
@@ -207,13 +207,13 @@
                                                         
                                                     } else {
                                                         
-                                                        echo '<span class="label label-primary">PASS</span>';
+                                                        echo '<span class="label label-primary">Qualified</span>';
                                                         
                                                     }
                                                     
                                                 } else { 
                                                     
-                                                   echo  '<span class="label label-warning">FAIL</span>';
+                                                   echo  '<span class="label label-warning">Not Qualified</span>';
                                                     
                                                 }
                                             ?>

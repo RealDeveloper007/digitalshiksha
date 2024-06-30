@@ -142,7 +142,7 @@ tr td.ans {
                                         <td><?= count($GetRightAnswers) ?></td>
                                         <td><?= $result->result_percent; ?>%</td>
                                         <td><?= $ScoreCount?></td>
-                                        <td class="hidden-xxs"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">PASS</span>' : '<span class="label label-warning">FAIL</span>' ?></td>
+                                        <td class="hidden-xxs"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">Qualified</span>' : '<span class="label label-warning">Not Qualified</span>' ?></td>
                                         <td></td>
                                         
                                     </tr>
@@ -167,9 +167,9 @@ tr td.ans {
                 ?>
             </div>
             <div class="col-md-12 result_calculation">
-                <div class="col-md-2">Total % Pass Students <br> <span><?= number_format((float)$PassPercentage, 2, '.', '');?></span></div>
-                <div class="col-md-2">Pass Students <br> <span><?= $Passed ?></span></div>
-                <div class="col-md-2">Fail Students <br> <span><?= $Failed; ?></span></div>
+                <div class="col-md-2">Total % Qualified Students <br> <span><?= number_format((float)$PassPercentage, 2, '.', '');?></span></div>
+                <div class="col-md-2">Qualified Students <br> <span><?= $Passed ?></span></div>
+                <div class="col-md-2">Not Qualified Students <br> <span><?= $Failed; ?></span></div>
                 <div class="col-md-3">Sign of Class Teacher</div>
                 <div class="col-md-3">Sign of Principal</div>
 
