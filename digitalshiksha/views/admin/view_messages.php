@@ -26,7 +26,7 @@
     <?php if (isset($messages) != NULL) { ?>
         
     <!--BEGIN TABS-->
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#tab_Inbox" data-toggle="tab">Inbox</a></li>
             <!-- <li><a href="#tab_Send" data-toggle="tab">Send</a></li> -->
             <!-- <li><a href="#tab_Drafts" data-toggle="tab">Drafts</a></li> -->
@@ -37,12 +37,16 @@
             <li><a href="#tab_Trash" data-toggle="tab">Trash</a></li>
         <?php } ?>
         </ul>
-        <div class="tab-content info-display">
+        <div class="tab-content info-display" id="myTabContent">
             <div class="tab-pane table-responsive" id="tab_Trash">
-          
+            <form id="messageDeleteForm" method="post" action="<?php echo site_url('message_control/delete_messages'); ?>">
+            <button type="button" class="btn btn-danger" id="deleteTrashSelected" style="margin: 10px;pointer:cursor"><i class="glyphicon glyphicon-trash"></i> Delete Selected messages</button>
+                        <br>
+
                 <table cellpadding="0" cellspacing="0" border="0" class="table table-hover">
                    <thead>
                        <tr>
+                            <th><span><input type="checkbox" id="selectAll"></span></th>
                            <th class="mobile">Sender</th>
                            <th class="">Subject</th>
                            <th class="invisible-on-sm">Directory</th>
@@ -58,6 +62,7 @@
                             $j = 1;
                    ?>
                    <tr class="<?=($i & 1) ? 'even' : 'odd'; echo($msg->message_read == 0) ? ' bold-text ' : ' '; ?>">
+                        <td><span><input type="checkbox" class="recordCheckbox" name="record_ids[]" value="<?php echo $msg->message_id; ?>"></span></td>
                        <td class="mobile "><?=$msg->message_sender.'('.$msg->sender_email.')'; ?></td>
                        <td class=""><?=$msg->message_subject; echo($msg->numOfReply != 0) ? ' ('.++$msg->numOfReply.')' : ''; ?></td>
                        <td class=" invisible-on-sm "><?=$msg->message_folder; ?></td>
@@ -85,7 +90,7 @@
                     ?>
                    </tbody>
                 </table>
-               
+                </form>
            </div>
 
             <div class="tab-pane table-responsive" id="tab_Spam">
@@ -458,5 +463,55 @@
                     $('#messageForm').submit();
                 }
             });
+
+            //////////////////////////////////////////////////////////////////////
+
+             // Select or Deselect all checkboxes
+             $('#selectTrashAll').click(function () {
+                $('.recordTrashCheckbox').prop('checked', this.checked);
+            });
+
+            // Deselect "Select All" if one of the checkboxes is deselected
+            $('.recordTrashCheckbox').change(function () {
+                if (!this.checked) {
+                    $('#selectTrashAll').prop('checked', false);
+                }
+            });
+
+            // // Confirm before deleting records
+            // $('#deleteTrashSelected').submit(function (e) {
+            //     var confirmed = confirm('Are you sure you want to delete the selected messages?');
+            //     if (!confirmed) {
+            //         e.preventDefault();
+            //     }
+            // });
+
+            $('#deleteTrashSelected').click(function() {
+                if (confirm('Are you sure you want to delete selected records?')) {
+                    $('#messageDeleteForm').submit();
+                }
+            });
+
         });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the last selected tab from local storage
+    var activeTab = localStorage.getItem('activeMessageTab');
+    
+    // If there's a saved tab, set it as active
+    if (activeTab) {
+        document.querySelector('.nav-tabs li a[href="' + activeTab + '"]').click();
+    }
+
+    // Add click event listeners to all tab links
+    var tabLinks = document.querySelectorAll('.nav-tabs li a');
+    tabLinks.forEach(function(tabLink) {
+        tabLink.addEventListener('click', function(event) {
+            // Save the clicked tab in local storage
+            var activeTab = event.target.getAttribute('href');
+            localStorage.setItem('activeMessageTab', activeTab);
+        });
+    });
+});
 </script>
