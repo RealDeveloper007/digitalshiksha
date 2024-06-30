@@ -21,32 +21,6 @@ class Guest extends MS_Controller
 
     public function index($message = '')
     {
-
-
-        $from = $this->session->userdata['support_email'];
-        $to = 'diwakarsharma603@gmail.com';
-        $subject = 'Welcome mail by ' . $this->session->userdata['brand_name'];
-        // $message_body = 'Initial Login info:</br> User Name: ' . $info['user_email'] 
-        //         . '</br>Password: ' . $this->input->post('user_pass') . '</br></br>'
-        //         . 'Use this link to login: ' . base_url('login_control') . '</br></br>'
-        //         . 'Note: Change you password after login.';
-
-        $sendData = ['user_name'=>'Diwakar','email'=>'diwakarsharma603@gmail.com','phone'=>'9871888177','password'=>123456];
-        $message_body = $this->load->view('emails/welcome.php', $sendData,TRUE);
-        $config = Array(
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-            'wordwrap' => TRUE
-        );
-
-        $this->load->library('email', $config);
-        $this->email->set_newline("\r\n");
-        $this->email->from($from);
-        $this->email->to($to);
-        $this->email->subject($subject);
-        $this->email->message($message_body);
-        $this->email->send();
-
         $this->system_model->set_system_info_to_session();
         $data = array();
 
