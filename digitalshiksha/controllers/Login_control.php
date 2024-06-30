@@ -591,8 +591,16 @@ class Login_control extends MS_Controller
                 // Check athentication
                 if ($this->login_model->register($info)) 
                 {
+                    if($userType == 5)
+                    {
+                        $checkLogin = $this->login_model->login_check();
 
-                    if ($this->login_model->login_check()) 
+                    } else {
+
+                        $checkLogin = false;
+                    }
+
+                    if($checkLogin) 
                     {
 
                         $from = $this->session->userdata['support_email'];
@@ -642,7 +650,7 @@ class Login_control extends MS_Controller
                         }
                     } else {
 
-                        echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been saved & your account will be approved by admin</div>','login_url' =>false));
+                        echo json_encode(array('status' => true, 'message' => 'Your details has been saved & your account will be approved by admin','login_url' =>false));
                         exit();
 
                     }

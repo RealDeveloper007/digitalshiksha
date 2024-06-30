@@ -312,14 +312,17 @@
                 method: 'post',
                 success: function(response) {
                     var Response = JSON.parse(response);
-                    $('.message_area').append(Response.message);
                     if (Response.status) 
                     {
                         if(Response.login_url)
                         {
+                            $('.message_area').append(Response.message);
+
                             window.location.href = '<?php echo base_url() ?>' + Response.login_url;
 
                         } else {
+
+                            alert(Response.message);
 
                             $('form#registerForm input,button').attr('disabled',true);
 
