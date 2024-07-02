@@ -125,6 +125,7 @@ class Guest extends MS_Controller
             $data['user_role'] = $this->admin_model->get_user_role();
             $data['modal'] = $this->load->view('modals/login_n_register', $data, TRUE);
         }
+        $data['no_contact_form'] = TRUE;
         $data['content'] = $this->load->view('content/about_page', $data, TRUE);
         $data['footer'] = $this->load->view('footer/footer', $data, TRUE);
         $this->load->view('home', $data);
@@ -202,6 +203,7 @@ class Guest extends MS_Controller
             $data['user_role'] = $this->admin_model->get_user_role();
             $data['modal'] = $this->load->view('modals/login_n_register', $data, TRUE);
         }
+        $data['no_contact_form'] = TRUE;
         $data['faqs'] = $this->system_model->get_faqs();
         $data['content'] = $this->load->view('content/faqs', $data, TRUE);
         $data['footer'] = $this->load->view('footer/footer', $data, TRUE);

@@ -71,6 +71,7 @@ class Blog extends MS_Controller
         } else {
             $data['blogs'] = $this->blog_model->get_blogs($config['per_page'], $config['per_page'] * $page);
         }
+        $data['no_contact_form'] = TRUE;
         $data['Popular_posts'] = $this->blog_model->get_all_popular_posts($data['blogs'][0]->blog_id);
         $data['content'] = $this->load->view('content/blog_page', $data, TRUE);
         $data['footer'] = $this->load->view('footer/footer', $data, TRUE);
@@ -127,6 +128,7 @@ class Blog extends MS_Controller
          $data['count'] = ($getPageNo == 0 ? 1 : (($getPageNo - 1) * $config["per_page"] + 1));
 
         $str_links = $this->pagination->create_links();
+        $data['no_contact_form'] = TRUE;
 
         // print_r($str_links); die;
         $data["links"] = explode('&nbsp;',$str_links );
@@ -152,6 +154,7 @@ class Blog extends MS_Controller
         $data['post_comments'] = $this->blog_model->get_post_comments($data['post']->blog_id);
 
         $data['Popular_posts'] = $this->blog_model->get_all_popular_posts($data['post']->blog_id);
+        $data['no_contact_form'] = TRUE;
 
 
         $data['content'] = $this->load->view('content/blog_post_single', $data, TRUE);

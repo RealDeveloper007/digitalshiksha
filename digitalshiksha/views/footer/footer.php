@@ -80,6 +80,10 @@
         }, '50');
     });
     window.onload = function() {
+
+        /// remove ck editor notification..
+        $('.cke_notification').remove();
+
         let frameElement = document.getElementById("myiFrame");
         let doc = frameElement.contentDocument;
         doc.body.innerHTML = doc.body.innerHTML + '<style>.bar {width:45%;}</style>';
@@ -100,6 +104,10 @@
     }
 
     $(document).ready(function() {
+
+        /// remove ck editor notification..
+        $('.cke_notification').remove();
+        
         // Initialize the plugin
         $('.my-popup').popup({
             transition: 'all 0.3s'
