@@ -267,7 +267,14 @@
 <script type="text/javascript">
     $(document).ready(function() {
         // Set Time
+        $.LoadingOverlay('show');
+//
 
+        setTimeout(function() {
+            $('.cke_notification').remove();
+            $.LoadingOverlay('hide');
+
+        }, 3000);
         var count = <?= ($duration) ?>;
         var h, m, s, newTime;
 
