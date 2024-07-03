@@ -274,7 +274,7 @@
             $('.cke_notification').remove();
             $.LoadingOverlay('hide');
 
-        }, 3000);
+        }, 5000);
         var count = <?= ($duration) ?>;
         var h, m, s, newTime;
 

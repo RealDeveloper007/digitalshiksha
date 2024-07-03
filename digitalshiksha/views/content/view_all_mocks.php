@@ -87,8 +87,11 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-success btn-sm" href = "<?= base_url('mock_detail/' . $mock->title_id); ?>"><span class="invisible-on-md">  View Questions</span></a>
-                                            <a class="btn btn-info btn-sm" href = "<?= base_url('admin_control/edit_mock_detail/' . $mock->title_id); ?>"><span class="invisible-on-md">  View Detail</span></a>
+                                            <a class="btn btn-success btn-sm" href = "<?= base_url('mock_detail/' . $mock->title_id); ?>"><span class="invisible-on-md"> <i class="fa fa-eye"></i>  View Questions</span></a>
+
+                                            <a class="btn btn-warning btn-sm" href = "<?= base_url('admin_control/export_exam_questions/' . $mock->title_id); ?>"><span class="invisible-on-md"> <i class="fa fa-download"></i> Download Questions</span></a>
+
+                                            <a class="btn btn-info btn-sm" href = "<?= base_url('admin_control/edit_mock_detail/' . $mock->title_id); ?>"><span class="invisible-on-md"> <i class="fa fa-eye"></i>  View Detail</span></a>
                                             <?php
                                             if($this->session->userdata('user_role_id')==1 || $this->session->userdata('user_role_id')==3) {
                                             ?>

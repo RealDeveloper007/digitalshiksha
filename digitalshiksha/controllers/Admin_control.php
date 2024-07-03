@@ -3,6 +3,9 @@ if (!defined('BASEPATH'))  exit('No direct script access allowed');
 require APPPATH . '/core/MS_Controller.php';
 
 require 'vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 class Admin_control extends MS_Controller {
 
@@ -160,6 +163,85 @@ class Admin_control extends MS_Controller {
         }
         $data['footer'] = $this->load->view('footer/admin_footer', '', TRUE);
         $this->load->view('dashboard', $data);
+    }
+
+    public function export_exam_questions($id)
+    {
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Set table header
+        $sheet->setCellValue('A1', '#');
+        $sheet->setCellValue('B1', 'Title');
+        $sheet->setCellValue('C1', 'Image');
+
+        // Add more headers as per your table structure
+
+        $this->db->select('questions.*')
+        ->from('questions')
+        ->where('exam_id',$id);
+        $data = $this->db->get()->result_array();
+
+        $ExamDetails = $this->exam_model->get_mock_by_id($id);
+        // print_r($data); die;
+
+        // Populate data in the sheet
+        $row = 2; // Starting row for data
+        foreach ($data as $data_row) {
+            $sheet->setCellValue('A' . $row,  $row - 1);
+            $sheet->setCellValue('B' . $row, strip_tags($data_row['question']));
+            // $sheet->setCellValue('C' . $row, strip_tags($data_row['question']));
+
+            if($data_row['media_link'] != '')
+            {
+                $imagePath = FCPATH.'question-media/'.$data_row['media_link'];
+
+                // echo file_exists($imagePath); die;
+                // echo $imagePath; die;
+                if (file_exists($imagePath)) {
+
+                    // Add image to the cell
+                    $drawing = new Drawing();
+                    $drawing->setName('Image');
+                    $drawing->setDescription('Image');
+                    $drawing->setPath($imagePath); // Path to your image file
+                    $drawing->setHeight(50); // Set the height of the image
+                    $drawing->setCoordinates('C' . $row); // Set the cell where the image should go
+                    $drawing->setWorksheet($sheet); 
+                } else {
+                    $sheet->setCellValue('C' . $row, 'Image not found');
+                }
+            } else {
+                $sheet->setCellValue('C' . $row, '');
+            }
+
+            // Add more cells as per your table structure
+
+            // Set row height/width
+            $sheet->getRowDimension($row)->setRowHeight(100);
+
+
+            $row++;
+        }
+
+         // Auto-size columns width
+         foreach (range('A', $sheet->getHighestColumn()) as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        // print_r($spreadsheet); die;
+
+        $writer = new Xlsx($spreadsheet);
+
+        // Clean the output buffer to prevent any extra output
+        ob_end_clean();
+
+        // Output the file to the browser
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="'.strip_tags($ExamDetails->title_name).'.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
     }
 
     public function view_live_tests($exam_type='',$message = '')
