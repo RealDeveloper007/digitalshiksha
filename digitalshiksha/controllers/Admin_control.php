@@ -6,6 +6,8 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Style\Color;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 class Admin_control extends MS_Controller {
 
@@ -172,8 +174,10 @@ class Admin_control extends MS_Controller {
 
         // Set table header
         $sheet->setCellValue('A1', '#');
+        $sheet->mergeCells('B1:E1');
         $sheet->setCellValue('B1', 'Title');
-        $sheet->setCellValue('C1', 'Image');
+        $sheet->mergeCells('F1:G1');
+        $sheet->setCellValue('F1', 'Image');
 
         // Add more headers as per your table structure
 
@@ -187,41 +191,105 @@ class Admin_control extends MS_Controller {
 
         // Populate data in the sheet
         $row = 2; // Starting row for data
+        $count = 1;
         foreach ($data as $data_row) {
-            $sheet->setCellValue('A' . $row,  $row - 1);
-            $sheet->setCellValue('B' . $row, strip_tags($data_row['question']));
-            // $sheet->setCellValue('C' . $row, strip_tags($data_row['question']));
+            $sheet->setCellValue('A' . $row,  $count);
+            // $sheet->setCellValue('B' . $row, strip_tags($data_row['question']));
 
-            if($data_row['media_link'] != '')
+            $mergeStartRow = $row;
+            $mergeEndRow = $row + 3; // Merge 4 cells
+
+            $sheet->mergeCells('B' . $mergeStartRow . ':E' . $mergeStartRow);
+            $sheet->setCellValue('B' . $mergeStartRow, strip_tags($data_row['question']));  
+             if($data_row['media_link'] != '')
             {
                 $imagePath = FCPATH.'question-media/'.$data_row['media_link'];
 
                 // echo file_exists($imagePath); die;
                 // echo $imagePath; die;
-                if (file_exists($imagePath)) {
+                if (file_exists($imagePath)) 
+                {
+                    $imageStartRow = $row;
+                    $imageEndRow   = $row + 1; // Merge 4 cells
 
+                    $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
+                    
                     // Add image to the cell
                     $drawing = new Drawing();
                     $drawing->setName('Image');
                     $drawing->setDescription('Image');
                     $drawing->setPath($imagePath); // Path to your image file
                     $drawing->setHeight(50); // Set the height of the image
-                    $drawing->setCoordinates('C' . $row); // Set the cell where the image should go
+                    $drawing->setCoordinates('F' . $imageStartRow); // Set the cell where the image should go
                     $drawing->setWorksheet($sheet); 
                 } else {
-                    $sheet->setCellValue('C' . $row, 'Image not found');
+                    $imageStartRow = $row;
+                    $imageEndRow   = $row + 1; // Merge 4 cells
+
+                    $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
+                    
+
+                    $sheet->setCellValue('F' . $imageStartRow, 'Image not found');
                 }
             } else {
-                $sheet->setCellValue('C' . $row, '');
+                $imageStartRow = $row;
+                $imageEndRow   = $row + 1; // Merge 4 cells
+
+                $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
+
+                $sheet->setCellValue('F' . $imageStartRow, '');
             }
+
+            $this->db->select('answers.*')
+            ->from('answers')
+            ->where('ques_id',$data_row['ques_id']);
+            $answers = $this->db->get()->result_array();
+
+            $answerRow = $row + 1;
+
+            $sheet->setCellValue('B' . $answerRow, strip_tags($answers[0]['answer']));  
+            $sheet->setCellValue('C' . $answerRow, strip_tags($answers[1]['answer']));  
+            $sheet->setCellValue('D' . $answerRow, strip_tags($answers[2]['answer']));  
+            $sheet->setCellValue('E' . $answerRow, strip_tags($answers[3]['answer']));  
+
+            if($answers[0]['right_ans'] == 1)
+            {
+                $styleCell = 'B'.$answerRow;
+
+            } else if($answers[1]['right_ans'] == 1) {
+
+                $styleCell = 'C'.$answerRow;
+
+            } else if($answers[2]['right_ans'] == 1) {
+
+                $styleCell = 'D'.$answerRow;
+
+
+            } else if($answers[3]['right_ans'] == 1) {
+
+                $styleCell = 'E'.$answerRow;
+            
+            }
+                $sheet->getStyle($styleCell)->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['argb' => Color::COLOR_WHITE],
+                    ],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['argb' => 'FFFF0000'], // Background color in ARGB format (red)
+                    ],
+                ]);
+
 
             // Add more cells as per your table structure
 
             // Set row height/width
             $sheet->getRowDimension($row)->setRowHeight(100);
 
+            $row += 2;
 
-            $row++;
+            $count++;
         }
 
          // Auto-size columns width
