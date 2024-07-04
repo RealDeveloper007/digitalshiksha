@@ -82,7 +82,7 @@
     window.onload = function() {
 
         /// remove ck editor notification..
-        $('.cke_notification').remove();
+        // $('.cke_notification').remove();
 
         let frameElement = document.getElementById("myiFrame");
         let doc = frameElement.contentDocument;
@@ -106,7 +106,7 @@
     $(document).ready(function() {
 
         /// remove ck editor notification..
-        $('.cke_notification').remove();
+        // $('.cke_notification').remove();
         
         // Initialize the plugin
         $('.my-popup').popup({

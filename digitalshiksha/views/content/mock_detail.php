@@ -128,6 +128,7 @@ form.importform {
       CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.13.1/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
 
       CKEDITOR.replace('editor<?=$mock->ques_id;?>', {
+        versionCheck : false,
         extraPlugins: 'ckeditor_wiris',
         // For now, MathType is incompatible with CKEditor file upload plugins.
         removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
@@ -218,6 +219,7 @@ form.importform {
                                             CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.13.1/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
 
                                             CKEDITOR.replace('answer<?=$ans->ans_id;?>', {
+                                                versionCheck : false,
                                                 extraPlugins: 'ckeditor_wiris',
                                                 // For now, MathType is incompatible with CKEditor file upload plugins.
                                                 removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',

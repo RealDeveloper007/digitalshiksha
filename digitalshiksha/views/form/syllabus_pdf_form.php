@@ -54,6 +54,7 @@ if ($message) {
                             <?= $this->load->view('plugin_scripts/bootstrap-wysihtml5'); ?>
                             <script>
                                 CKEDITOR.replace('url', {
+                                    versionCheck : false,
                                     filebrowserBrowseUrl: '<?= base_url('assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files') ?>',
                                     filebrowserUploadUrl: '<?= base_url('assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=files') ?>',
                                     filebrowserImageBrowseUrl: '<?= base_url('assets/js/ckeditor/kcfinder/browse.php?opener=ckeditor&type=images') ?>',

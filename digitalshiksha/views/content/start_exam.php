@@ -108,6 +108,7 @@
       CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.13.1/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
 
       CKEDITOR.replace('editor<?= $ques->ques_id ?>', {
+        versionCheck : false,
         extraPlugins: 'ckeditor_wiris',
         // For now, MathType is incompatible with CKEditor file upload plugins.
         removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
@@ -222,6 +223,7 @@
                                                             CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.13.1/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
 
                                                             CKEDITOR.replace('answer<?=$ans->ans_id;?>', {
+                                                                versionCheck : false,
                                                                 extraPlugins: 'ckeditor_wiris',
                                                                 // For now, MathType is incompatible with CKEditor file upload plugins.
                                                                 removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
@@ -267,14 +269,14 @@
 <script type="text/javascript">
     $(document).ready(function() {
         // Set Time
-        $.LoadingOverlay('show');
+        // $.LoadingOverlay('show');
 //
 
-        setTimeout(function() {
-            $('.cke_notification').remove();
-            $.LoadingOverlay('hide');
+        // setTimeout(function() {
+        //     $('.cke_notification').remove();
+        //     $.LoadingOverlay('hide');
 
-        }, 5000);
+        // }, 5000);
         var count = <?= ($duration) ?>;
         var h, m, s, newTime;
 

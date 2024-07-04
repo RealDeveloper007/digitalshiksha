@@ -342,6 +342,7 @@ function add_media_field(val) {
       CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.13.1/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
 
       CKEDITOR.replace('question', {
+        versionCheck : false,
         extraPlugins: 'ckeditor_wiris',
         // For now, MathType is incompatible with CKEditor file upload plugins.
         removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
@@ -401,6 +402,7 @@ for(i=1;i<=4;i++)
       CKEDITOR.plugins.addExternal('ckeditor_wiris', 'https://ckeditor.com/docs/ckeditor4/4.13.1/examples/assets/plugins/ckeditor_wiris/', 'plugin.js');
 
         CKEDITOR.replace('options['+i+']', {
+        versionCheck : false,
         extraPlugins: 'ckeditor_wiris',
         // For now, MathType is incompatible with CKEditor file upload plugins.
         removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',

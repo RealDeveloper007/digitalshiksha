@@ -107,14 +107,14 @@ javascript:window.history.forward(1);
 <script type="text/javascript">
     $(document).ready(function() {
         // Set Time
-        $.LoadingOverlay('show');
+//         $.LoadingOverlay('show');
 
-//
-        setTimeout(function() {
-            $('.cke_notification').remove();
-            $.LoadingOverlay('hide');
+// //
+//         setTimeout(function() {
+//             $('.cke_notification').remove();
+//             $.LoadingOverlay('hide');
 
-        }, 5000);
+//         }, 5000);
 
         var count = <?= ($duration) ?>;
         var h, m, s, newTime;
