@@ -583,8 +583,8 @@ class Login_control extends MS_Controller
 
             if ($response['success']) 
             {
-                
-                if (isset($row[0])) {
+                if (isset($row[0])) 
+                {
                     $info['register_otp_id']    = $row[0]->id;
                 }
 
@@ -622,7 +622,12 @@ class Login_control extends MS_Controller
                     $this->email->to($to);
                     $this->email->subject($subject);
                     $this->email->message($message_body);
-                    $this->email->send();
+                   
+                    if ($this->email->send()) {
+                        // Additional success handling
+                    } else {
+                        // Handle email sending failure
+                    }
 
                     if($checkLogin) 
                     {
