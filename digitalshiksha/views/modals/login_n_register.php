@@ -37,7 +37,7 @@
                       <?= form_radio('user_type', 'student', null, 'required="required" class="login-item signinform" checked') ?>
                         <b>Student</b>
                         </div>
-                      <div class="option signinform" data-loader="" data-radio="take_away">
+                      <div class="option signinform" data-loader="" data-radio="teacher">
                           <?= form_radio('user_type', 'teacher', null, 'class="login-item signinform" required="required"') ?>
                           <b>Teacher</b>
                       </div>

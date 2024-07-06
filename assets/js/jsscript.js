@@ -105,7 +105,7 @@ jQuery(function($) {
 });
 
 
-<!------------- Delete Confirmation ---------------> 
+// <!------------- Delete Confirmation ---------------> 
 
     function delete_confirmation() {
         return confirm('Do you really want to delete the data?');
@@ -115,6 +115,12 @@ jQuery(function($) {
 $('#user_phone').bind("keyup blur",function(){
       $(this).val( $(this).val().replace(/[^\d]/g,'') )  
 
+    });
+
+    $('.option.signinform').on('click',function(){
+        var registerVal = $(this).data('radio');
+        $('input[name="user_type"][value="' + registerVal + '"]').prop('checked', true);
+    
     });
 
 
