@@ -173,11 +173,15 @@ class Admin_control extends MS_Controller {
         $sheet = $spreadsheet->getActiveSheet();
 
         // Set table header
-        $sheet->setCellValue('A1', '#');
-        $sheet->mergeCells('B1:E1');
-        $sheet->setCellValue('B1', 'Title');
-        $sheet->mergeCells('F1:G1');
-        $sheet->setCellValue('F1', 'Image');
+        $sheet->setCellValue('A1', 'sr_no');
+        $sheet->setCellValue('B1', 'question_title');
+        $sheet->setCellValue('C1', 'question_hindi');
+        $sheet->setCellValue('D1', 'image');
+        $sheet->setCellValue('E1', 'Option_1');
+        $sheet->setCellValue('F1', 'Option_2');
+        $sheet->setCellValue('G1', 'Option_3');
+        $sheet->setCellValue('H1', 'Option_4');
+        $sheet->setCellValue('I1', 'answer');
 
         // Add more headers as per your table structure
 
@@ -187,21 +191,16 @@ class Admin_control extends MS_Controller {
         $data = $this->db->get()->result_array();
 
         $ExamDetails = $this->exam_model->get_mock_by_id($id);
-        // print_r($data); die;
 
         // Populate data in the sheet
         $row = 2; // Starting row for data
         $count = 1;
         foreach ($data as $data_row) {
             $sheet->setCellValue('A' . $row,  $count);
-            // $sheet->setCellValue('B' . $row, strip_tags($data_row['question']));
+            $sheet->setCellValue('B' . $row, strip_tags($data_row['question']));  
+            $sheet->setCellValue('C' . $row, strip_tags($data_row['question']));  
 
-            $mergeStartRow = $row;
-            $mergeEndRow = $row + 3; // Merge 4 cells
-
-            $sheet->mergeCells('B' . $mergeStartRow . ':E' . $mergeStartRow);
-            $sheet->setCellValue('B' . $mergeStartRow, strip_tags($data_row['question']));  
-             if($data_row['media_link'] != '')
+            if($data_row['media_link'] != '')
             {
                 $imagePath = FCPATH.'question-media/'.$data_row['media_link'];
 
@@ -209,85 +208,61 @@ class Admin_control extends MS_Controller {
                 // echo $imagePath; die;
                 if (file_exists($imagePath)) 
                 {
-                    $imageStartRow = $row;
-                    $imageEndRow   = $row + 1; // Merge 4 cells
-
-                    $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
-                    
+                   
                     // Add image to the cell
                     $drawing = new Drawing();
                     $drawing->setName('Image');
                     $drawing->setDescription('Image');
                     $drawing->setPath($imagePath); // Path to your image file
                     $drawing->setHeight(50); // Set the height of the image
-                    $drawing->setCoordinates('F' . $imageStartRow); // Set the cell where the image should go
+                    $drawing->setCoordinates('D' . $row); // Set the cell where the image should go
                     $drawing->setWorksheet($sheet); 
+
                 } else {
-                    $imageStartRow = $row;
-                    $imageEndRow   = $row + 1; // Merge 4 cells
 
-                    $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
-                    
-
-                    $sheet->setCellValue('F' . $imageStartRow, 'Image not found');
+                    $sheet->setCellValue('D' . $row, 'Image not found');
                 }
+
             } else {
-                $imageStartRow = $row;
-                $imageEndRow   = $row + 1; // Merge 4 cells
 
-                $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
-
-                $sheet->setCellValue('F' . $imageStartRow, '');
+                $sheet->setCellValue('D' . $row, '');
             }
+
 
             $this->db->select('answers.*')
             ->from('answers')
             ->where('ques_id',$data_row['ques_id']);
             $answers = $this->db->get()->result_array();
 
-            $answerRow = $row + 1;
-
-            $sheet->setCellValue('B' . $answerRow, strip_tags($answers[0]['answer']));  
-            $sheet->setCellValue('C' . $answerRow, strip_tags($answers[1]['answer']));  
-            $sheet->setCellValue('D' . $answerRow, strip_tags($answers[2]['answer']));  
-            $sheet->setCellValue('E' . $answerRow, strip_tags($answers[3]['answer']));  
-
             if($answers[0]['right_ans'] == 1)
             {
-                $styleCell = 'B'.$answerRow;
+                $rightAnswer = 1;
 
             } else if($answers[1]['right_ans'] == 1) {
 
-                $styleCell = 'C'.$answerRow;
+                $rightAnswer = 2;
 
             } else if($answers[2]['right_ans'] == 1) {
 
-                $styleCell = 'D'.$answerRow;
-
+                $rightAnswer = 3;
 
             } else if($answers[3]['right_ans'] == 1) {
 
-                $styleCell = 'E'.$answerRow;
+                $rightAnswer = 4;
             
             }
-                $sheet->getStyle($styleCell)->applyFromArray([
-                    'font' => [
-                        'bold' => true,
-                        'color' => ['argb' => Color::COLOR_WHITE],
-                    ],
-                    'fill' => [
-                        'fillType' => Fill::FILL_SOLID,
-                        'startColor' => ['argb' => 'FFFF0000'], // Background color in ARGB format (red)
-                    ],
-                ]);
 
+            $sheet->setCellValue('E' . $row, strip_tags($answers[0]['answer']));  
+            $sheet->setCellValue('F' . $row, strip_tags($answers[1]['answer']));  
+            $sheet->setCellValue('G' . $row, strip_tags($answers[2]['answer']));  
+            $sheet->setCellValue('H' . $row, strip_tags($answers[3]['answer']));  
+            $sheet->setCellValue('I' . $row, $rightAnswer);  
 
-            // Add more cells as per your table structure
-
+    
             // Set row height/width
             $sheet->getRowDimension($row)->setRowHeight(100);
 
-            $row += 2;
+            $row++;
 
             $count++;
         }
@@ -311,6 +286,152 @@ class Admin_control extends MS_Controller {
 
         $writer->save('php://output');
     }
+
+
+    // public function export_exam_questions($id)
+    // {
+    //     $spreadsheet = new Spreadsheet();
+    //     $sheet = $spreadsheet->getActiveSheet();
+
+    //     // Set table header
+    //     $sheet->setCellValue('A1', '#');
+    //     $sheet->mergeCells('B1:E1');
+    //     $sheet->setCellValue('B1', 'Title');
+    //     $sheet->mergeCells('F1:G1');
+    //     $sheet->setCellValue('F1', 'Image');
+
+    //     // Add more headers as per your table structure
+
+    //     $this->db->select('questions.*')
+    //     ->from('questions')
+    //     ->where('exam_id',$id);
+    //     $data = $this->db->get()->result_array();
+
+    //     $ExamDetails = $this->exam_model->get_mock_by_id($id);
+    //     // print_r($data); die;
+
+    //     // Populate data in the sheet
+    //     $row = 2; // Starting row for data
+    //     $count = 1;
+    //     foreach ($data as $data_row) {
+    //         $sheet->setCellValue('A' . $row,  $count);
+    //         // $sheet->setCellValue('B' . $row, strip_tags($data_row['question']));
+
+    //         $mergeStartRow = $row;
+    //         $mergeEndRow = $row + 3; // Merge 4 cells
+
+    //         $sheet->mergeCells('B' . $mergeStartRow . ':E' . $mergeStartRow);
+    //         $sheet->setCellValue('B' . $mergeStartRow, strip_tags($data_row['question']));  
+    //          if($data_row['media_link'] != '')
+    //         {
+    //             $imagePath = FCPATH.'question-media/'.$data_row['media_link'];
+
+    //             // echo file_exists($imagePath); die;
+    //             // echo $imagePath; die;
+    //             if (file_exists($imagePath)) 
+    //             {
+    //                 $imageStartRow = $row;
+    //                 $imageEndRow   = $row + 1; // Merge 4 cells
+
+    //                 $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
+                    
+    //                 // Add image to the cell
+    //                 $drawing = new Drawing();
+    //                 $drawing->setName('Image');
+    //                 $drawing->setDescription('Image');
+    //                 $drawing->setPath($imagePath); // Path to your image file
+    //                 $drawing->setHeight(50); // Set the height of the image
+    //                 $drawing->setCoordinates('F' . $imageStartRow); // Set the cell where the image should go
+    //                 $drawing->setWorksheet($sheet); 
+    //             } else {
+    //                 $imageStartRow = $row;
+    //                 $imageEndRow   = $row + 1; // Merge 4 cells
+
+    //                 $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
+                    
+
+    //                 $sheet->setCellValue('F' . $imageStartRow, 'Image not found');
+    //             }
+    //         } else {
+    //             $imageStartRow = $row;
+    //             $imageEndRow   = $row + 1; // Merge 4 cells
+
+    //             $sheet->mergeCells('F' . $imageStartRow . ':G' . $imageEndRow);
+
+    //             $sheet->setCellValue('F' . $imageStartRow, '');
+    //         }
+
+    //         $this->db->select('answers.*')
+    //         ->from('answers')
+    //         ->where('ques_id',$data_row['ques_id']);
+    //         $answers = $this->db->get()->result_array();
+
+    //         $answerRow = $row + 1;
+
+    //         $sheet->setCellValue('B' . $answerRow, strip_tags($answers[0]['answer']));  
+    //         $sheet->setCellValue('C' . $answerRow, strip_tags($answers[1]['answer']));  
+    //         $sheet->setCellValue('D' . $answerRow, strip_tags($answers[2]['answer']));  
+    //         $sheet->setCellValue('E' . $answerRow, strip_tags($answers[3]['answer']));  
+
+    //         if($answers[0]['right_ans'] == 1)
+    //         {
+    //             $styleCell = 'B'.$answerRow;
+
+    //         } else if($answers[1]['right_ans'] == 1) {
+
+    //             $styleCell = 'C'.$answerRow;
+
+    //         } else if($answers[2]['right_ans'] == 1) {
+
+    //             $styleCell = 'D'.$answerRow;
+
+
+    //         } else if($answers[3]['right_ans'] == 1) {
+
+    //             $styleCell = 'E'.$answerRow;
+            
+    //         }
+    //             $sheet->getStyle($styleCell)->applyFromArray([
+    //                 'font' => [
+    //                     'bold' => true,
+    //                     'color' => ['argb' => Color::COLOR_WHITE],
+    //                 ],
+    //                 'fill' => [
+    //                     'fillType' => Fill::FILL_SOLID,
+    //                     'startColor' => ['argb' => 'FFFF0000'], // Background color in ARGB format (red)
+    //                 ],
+    //             ]);
+
+
+    //         // Add more cells as per your table structure
+
+    //         // Set row height/width
+    //         $sheet->getRowDimension($row)->setRowHeight(100);
+
+    //         $row += 2;
+
+    //         $count++;
+    //     }
+
+    //      // Auto-size columns width
+    //      foreach (range('A', $sheet->getHighestColumn()) as $col) {
+    //         $sheet->getColumnDimension($col)->setAutoSize(true);
+    //     }
+
+    //     // print_r($spreadsheet); die;
+
+    //     $writer = new Xlsx($spreadsheet);
+
+    //     // Clean the output buffer to prevent any extra output
+    //     ob_end_clean();
+
+    //     // Output the file to the browser
+    //     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    //     header('Content-Disposition: attachment;filename="'.strip_tags($ExamDetails->title_name).'.xlsx"');
+    //     header('Cache-Control: max-age=0');
+
+    //     $writer->save('php://output');
+    // }
 
     public function view_live_tests($exam_type='',$message = '')
     {
