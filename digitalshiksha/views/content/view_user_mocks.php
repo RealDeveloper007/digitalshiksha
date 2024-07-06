@@ -78,7 +78,7 @@ $str .= "]";
                                         <div class="btn-group">
                                              <?php if($exam_type=='live_mock_test') { ?>
 
-                                                  <a class="btn btn-default btn-sm" href = "<?= base_url('exam_control/student_results/' . $mock->title_id); ?>"><i class="glyphicon glyphicon-eye-open"></i><span class="invisible-on-md">  View Result</span></a>
+                                                  <a class="btn btn-default btn-sm" href = "<?= base_url('exam_control/download_student_results/' . $mock->title_id); ?>" target="_blank"><i class="glyphicon glyphicon-eye-open"></i><span class="invisible-on-md">  View Result</span></a>
 
                                              <?php } ?>
                                             <a class="btn btn-default btn-sm" href = "<?= base_url('mock_detail/' . $mock->title_id); ?>"><i class="glyphicon glyphicon-eye-open"></i><span class="invisible-on-md">  View</span></a>

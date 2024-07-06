@@ -127,6 +127,57 @@ class Exam_control extends MS_Controller
         $this->load->view('home', $data);
     }
 
+    public function download_student_results($id)
+    {
+        // if (!$this->session->userdata('log')) {
+        //     $this->session->set_userdata('back_url', current_url());
+        //     redirect(base_url('login_control'));
+        // }
+        $userId                   = $this->session->userdata('user_id');
+        $data                     = array();
+        $data['class']            = 26; // class control value left digit for main manu rigt digit for submenu
+        // $data['header']           = $this->load->view('header/admin_head', '', TRUE);
+        // $data['top_navi']         = $this->load->view('header/admin_top_navigation', '', TRUE);
+        // $data['sidebar']          = $this->load->view('sidebar/admin_sidebar', $data, TRUE);
+        $data['mock_details']     = $this->exam_model->get_single_mock_details($id);
+        $examDate                 = date('Y-m-d', strtotime($data['mock_details']->exam_created));
+        $data['student_results']  = $this->exam_model->get_students_results($id);
+
+        $data['questions']        = count($this->exam_model->get_mock_detail($id));
+
+        $data['all_questions']    = $this->exam_model->get_mock_detail($id);
+
+        // print_r($data['all_questions']); die;
+        $data['details']          = $this->user_model->get_user_info();
+
+        $html = $this->load->view('content/student_results_pdf', $data, TRUE);
+        // print_r($html); die;
+
+           // Load pdf library
+           $this->load->library('pdf');
+
+           // Load HTML content
+           $this->dompdf->loadHtml($html);
+   
+           // (Optional) Setup the paper size and orientation
+           $this->dompdf->setPaper('A4', 'potrait');
+   
+           // Render the HTML as PDF
+           $this->dompdf->render();
+   
+           // Output the generated PDF (1 = download and 0 = preview)
+           // 		$this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+           $pdfname = time() . ".pdf";
+           $this->dompdf->stream("Result_report.pdf", array("Attachment" => 0));
+           // $pdf = $this->dompdf->output();
+        //    $file_location = FCPATH . "uploads/aforms/" . $pdfname;
+        //    file_put_contents($file_location, $pdf);
+
+        // $data['footer'] = $this->load->view('footer/admin_footer', '', TRUE);
+        // $this->load->view('dashboard', $data);
+    }
+
+
     public function student_results($id)
     {
         // if (!$this->session->userdata('log')) {
@@ -150,8 +201,29 @@ class Exam_control extends MS_Controller
         // print_r($data['all_questions']); die;
         $data['details']          = $this->user_model->get_user_info();
 
-        // print_r($data); die;
         $data['content'] = $this->load->view('content/student_results', $data, TRUE);
+        // print_r($html); die;
+
+           // Load pdf library
+        //    $this->load->library('pdf');
+
+        //    // Load HTML content
+        //    $this->dompdf->loadHtml($html);
+   
+        //    // (Optional) Setup the paper size and orientation
+        //    $this->dompdf->setPaper('A4', 'potrait');
+   
+        //    // Render the HTML as PDF
+        //    $this->dompdf->render();
+   
+        //    // Output the generated PDF (1 = download and 0 = preview)
+        //    // 		$this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+        //    $pdfname = time() . ".pdf";
+        //    $this->dompdf->stream("Result_report.pdf", array("Attachment" => 0));
+           // $pdf = $this->dompdf->output();
+        //    $file_location = FCPATH . "uploads/aforms/" . $pdfname;
+        //    file_put_contents($file_location, $pdf);
+
         $data['footer'] = $this->load->view('footer/admin_footer', '', TRUE);
         $this->load->view('dashboard', $data);
     }
