@@ -153,7 +153,7 @@ javascript:window.history.forward(1);
         }
 
         // Coltrol Buttons    
-        var submit_btn = '<button type="submit" class="btn btn-lg btn-success col-xs-6 col-xs-offset-3" > <i class="fa fa-check-square-o"></i> Submit <span class="hidden-xxs">your answers </span></a>';
+        var submit_btn = '<button type="button" class="btn btn-lg btn-success col-xs-6 col-xs-offset-3" > <i class="fa fa-check-square-o"></i> Submit <span class="hidden-xxs">your answers </span></a>';
         var slide_count = 1;
         var num_of_ques = "<?php echo $num_of_ques; ?>";
         $('.me-next').click(function() {

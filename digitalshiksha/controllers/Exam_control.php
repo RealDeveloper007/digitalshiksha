@@ -46,6 +46,80 @@ class Exam_control extends MS_Controller
         }
     }
 
+    public function submit_answers()
+    {
+        if ($this->input->post('token') == $this->session->userdata('token')) {
+           echo json_encode(['status'=>false,'message'=>`Can\'t re-submit the form`,'url'=>'']);
+           exit();
+        }
+        if (!$this->session->userdata('log')) 
+        {
+            $this->session->set_userdata('back_url', current_url());
+            // redirect(base_url('login_control'));
+
+            echo json_encode(['status'=>false,'message'=>`You are not authorized to access this url`,'url'=>base_url('login_control')]);
+
+            exit();
+        }
+        
+        date_default_timezone_set('Asia/Kolkata');
+
+        $result_id = $this->exam_model->evaluate_result();
+        if ($result_id) 
+        {
+            $this->session->set_userdata('token', $this->input->post('token'));
+            // $this->view_result_detail($result_id);
+
+            $ExamResultDetails = $this->exam_model->view_result_detail($result_id);
+
+            $heading        = '';
+            $result_message = '';
+            $celebration    = true;
+
+            if($ExamResultDetails->result_percent >= $ExamResultDetails->pass_mark) 
+            {
+                    if($result->result_percent == 100)
+                    {
+                            $heading        = 'Marvellous! ';
+                            $result_message = 'You are now competent for this exam. Best Wishes for nex.'; 
+                            $celebration    = false;
+
+                    } else if($result->result_percent >= 95)
+                    {
+                            $heading        = 'Congrats !';
+                            $result_message = 'You qualified this exam. Best Wishes.'; 
+                            $celebration    = false;
+
+                    } else {
+                                                        
+                        $heading        = 'Excellent !';
+                        $result_message = 'You have done good Job!'; 
+                        $celebration    = true;
+                  
+                    }
+                                                    
+            } else { 
+                                                    
+                        $heading        = 'Ohh !';
+                        $celebration    = false;
+                        $result_message = 'You have not qualified this time. Watch solution carefully and try again.'; 
+                                                    
+            }
+
+            echo json_encode(['status'=>true,'data'=>['heading'=>$heading,'celebration'=>$celebration,'result_message'=>$result_message],'url'=>base_url('exam_control/view_result_detail/'.$result_id)]);
+            exit();
+        } else {
+
+            $message = '<div class="alert alert-danger alert-dismissable">'
+                . '<button type="button" class="close" data-dismiss="alert" aria-hidden="TRUE">&times;</button>'
+                . 'An ERROR occurred! Please contact to admin.</div>';
+
+                echo json_encode(['status'=>false,'message'=>`An ERROR occurred! Please contact to admin.`,'url'=>base_url('exam_control/view_all_mocks')]);
+                exit();
+            // $this->view_all_mocks('', $message);
+        }
+    }
+
     public function view_all_mocks($count = '', $message = '')
     {
         if (!$this->session->userdata('log')) {

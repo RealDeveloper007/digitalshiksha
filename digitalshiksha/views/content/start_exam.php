@@ -13,6 +13,58 @@
     .radio {
         font-size: 15px !important;
     }
+    .ctm_radio_btn {
+    counter-reset: radioCounter;
+}
+
+.ctm_radio_btn .radio label:before {
+    counter-increment: radioCounter;
+    content: counter(radioCounter, upper-alpha);
+    margin-right: 8px;
+    margin-left: -20px;
+}
+
+.ctm_radio_btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.ctm_radio_btn .radio {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.ctm_radio_btn .radio label {
+    display: block;
+    padding: 16px;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: #90EE90;
+    cursor: pointer;
+    height: 100%;
+    padding-left: 35px !important;
+}
+
+.ctm_radio_btn .radio input[type="radio"] {
+    width: 0;
+}
+
+.ctm_radio_btn .radio input[type="radio"]:checked+label {
+    background-color: #05a105;
+    color: #fff;
+}
+@media (max-width:600px) {
+    .ctm_radio_btn {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .ctm_radio_btn .radio label {
+        padding: 10px;
+        font-size: 16px;
+    }
+}
 </style>
 
 <?php
@@ -156,7 +208,7 @@
                                                                 echo $link;
                                                                 break;
                                                             case 'image':
-                                                                echo '<div class="imgfits"><img src="'.base_url("question-media/".$ques->media_link).'" alt="image" height="auto" width="100%"></div>';
+                                                                echo '<div class="imgfits"><img src="'.base_url("question-media/".$ques->media_link).'" alt="image" height="180px" width="100%" style="object-fit: contain;"></div>';
                                                                 break;                                    
                                                             default:
                                                                 break;
@@ -164,14 +216,18 @@
                                                         echo "";
                                                     }
                                                     ?>
+                                                    <div class="ctm_radio_btn">
+                                                      
                                                     <?php
                                                     foreach ($answers[$ques->ques_id][0] as $ans) { ?>
                                                         <div class="<?= $type ?>">
-                                                            <label><input type="<?= $type ?>" name="ans[<?= $ques->ques_id; ?>]<?= ($type == 'checkbox') ? '[]' : '' ?>" value="<?=$ans->ans_id; ?>"> 
+                                                            <input type="<?= $type ?>" id="for_<?=$ans->ans_id; ?>" name="ans[<?= $ques->ques_id; ?>]<?= ($type == 'checkbox') ? '[]' : '' ?>" value="<?=$ans->ans_id; ?>"> 
+                                                            <label for="for_<?=$ans->ans_id; ?>" >
                                                             <?php if($ans->new==2){ ?>
                                                             <textarea cols="10" id="answer<?=$ans->ans_id;?>" name="answer<?=$ans->ans_id;?>" rows="5" disabled> <?=$ans->answer; ?></textarea>
                                                             <?php } else { echo $ans->answer; } ?>
                                                             </label>
+
 
                                                             <script>
                                                             (function() {
@@ -234,8 +290,15 @@
                                                             }());
                                                         </script>
                                                         </div>
+
                                                     <?php 
                                                     } ?>
+
+                                                 
+
+                                                                                                            
+                                                  
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -314,7 +377,7 @@
         }
 
         // Coltrol Buttons    
-        var submit_btn = '<button type="submit" class="btn btn-lg btn-success" > <i class="fa fa-check-square-o"></i> Submit <span class="hidden-xxs">your answers </span></a>';
+        var submit_btn = '<button type="button" class="btn btn-lg btn-success" > <i class="fa fa-check-square-o"></i> Submit <span class="hidden-xxs">your answers </span></a>';
         var slide_count = 1;
         var num_of_ques = "<?php echo $num_of_ques; ?>";
         $('.me-next').click(function() {
@@ -343,5 +406,60 @@
         }, timeout);
 
     });
+
+    $("body").on('click','#submit_button button',function(){
+
+        var thisButton = $(this);
+        thisButton.attr('disabled',true);
+
+        $.ajax({
+            data: $('#anserForm').serialize(),
+            url: '<?= base_url('exam_control/submit_answers')?>',
+            method: 'post',
+            success: function(response) {
+
+                thisButton.attr('disabled',false);
+
+                var Response = JSON.parse(response);
+
+                if (Response.status) 
+                {
+                    $('.result_popup').append(`<h2>`+Response.data.heading+`</h2>
+                        <p>`+Response.data.result_message+`</p>`);
+
+                    if(Response.data.celebration == true)
+                    {
+                        $('.result_popup').show();
+
+                    } else {
+
+                        $('.result_popup').show();
+                    }
+
+                    setTimeout(function() {
+                                window.location.href = Response.url;
+                        }, 5000);
+
+                } else {
+
+
+                    if(Response.url != '')
+                    {
+                        setTimeout(function() {
+                                window.location.href = Response.url;
+                        }, 5000);
+                    }
+
+                }
+                $.LoadingOverlay('hide');
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $.LoadingOverlay('hide');
+                thisButton.attr('disabled',false);
+            }
+        });
+
+    })
 
 </script>

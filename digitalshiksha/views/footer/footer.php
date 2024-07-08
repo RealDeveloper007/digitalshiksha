@@ -30,13 +30,15 @@
                 </div>
             </div>
         </footer>
-        
+
     <?php  } ?>
     
 <?php } ?>
 
-
-
+<div class="result_popup">
+        
+</div>
+        
 <!-- Modal Start -->
 <?php if (isset($modal)) echo $modal; ?>
 
