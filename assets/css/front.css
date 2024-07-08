@@ -2370,5 +2370,46 @@ a.yTubeplay {
 
 .panel-title {color:#000!important;font-weight:500;}
 h4.panel-title a { color: #000!important;font-weight:500;}
-.fixImg.youtube-video { position:relative;width:100%;padding:0 0 56.2%;}
+.fixImg.youtube-video { position:relative;width:100%;padding:0 0 56.2%; z-index: 999;}
 .fixImg.youtube-video iframe {position:absolute;top:0;left:0;height:100%;width:100%;}
+
+.result_popup {
+  max-width: 500px;
+  max-height: 80vh;
+  height: 240px;
+  text-align: center;
+  background-color: #f1b900;
+  padding: 40px 20px;
+  display: none;
+  border-radius: 10px;
+  width: 100%;
+  position: fixed;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  justify-content: center;
+}
+
+.result_popup:before {
+  content: "";
+  display: inline-block;
+  background-image: url(https://usagif.com/wp-content/uploads/gif/confetti-52.gif);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.2;
+}
+.result_popup h2 {
+  font-size: 40px;
+  margin: 0;
+  font-weight: bold;
+}
+.result_popup p {
+  margin: 18px 0 0 0;
+  font-size: 20px;
+}

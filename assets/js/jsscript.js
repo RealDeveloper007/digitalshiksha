@@ -117,6 +117,7 @@ $('#user_phone').bind("keyup blur",function(){
 
     });
 
+    // update Radio button through clicking 
     $('.option.signinform').on('click',function(){
         var registerVal = $(this).data('radio');
         $('input[name="user_type"][value="' + registerVal + '"]').prop('checked', true);
