@@ -545,6 +545,9 @@ class Login_control extends MS_Controller
             exit();
         } else {
 
+            $this->session->set_userdata('welcome_mail_send', false);
+
+
             $row = $this->db->where(['MD5(id)' => $this->input->post('token_data')])->get('register_otp')->result();
 
             if($this->input->post('user_type') == 'student')
@@ -600,35 +603,7 @@ class Login_control extends MS_Controller
                         $checkLogin = false;
                     }
 
-                    $from = $this->session->userdata['support_email'];
-                    $to = $info['user_email'];
-                    $subject = 'Welcome mail by ' . $this->session->userdata['brand_name'];
-                    // $message_body = 'Initial Login info:</br> User Name: ' . $info['user_email'] 
-                    //         . '</br>Password: ' . $this->input->post('user_pass') . '</br></br>'
-                    //         . 'Use this link to login: ' . base_url('login_control') . '</br></br>'
-                    //         . 'Note: Change you password after login.';
-
-                    $sendData = ['user_name'=>$info['user_name'],'email'=>$info['user_email'],'phone'=>$info['user_phone'],'password'=>$this->input->post('user_pass')];
-                    $message_body = $this->load->view('emails/welcome.php', $sendData,TRUE);
-                    $config = Array(
-                        'mailtype' => 'html',
-                        'charset' => 'utf-8',
-                        'wordwrap' => TRUE
-                    );
-
-                    $this->load->library('email', $config);
-                    $this->email->set_newline("\r\n");
-                    $this->email->from($from);
-                    $this->email->to($to);
-                    $this->email->subject($subject);
-                    $this->email->message($message_body);
                    
-                    if ($this->email->send()) {
-                        // Additional success handling
-                    } else {
-                        // Handle email sending failure
-                    }
-
                     if($checkLogin) 
                     {
                         $this->load->model('system_model');
@@ -641,8 +616,36 @@ class Login_control extends MS_Controller
                             . 'You loged in successfully!'
                             . '</div>';
 
+                            $from = $this->session->userdata['support_email'];
+                            $to = $info['user_email'];
+                            $subject = 'Welcome mail by ' . $this->session->userdata['brand_name'];
+                           
+                            $sendData = ['user_name'=>$info['user_name'],'email'=>$info['user_email'],'phone'=>$info['user_phone'],'password'=>$this->input->post('user_pass'),'logo'=>base_url('logo.png') ];
+                            $message_body = $this->load->view('emails/welcome.php', $sendData,TRUE);
+                            $config = Array(
+                                'mailtype' => 'html',
+                                'charset' => 'utf-8',
+                                'wordwrap' => TRUE
+                            );
+        
+                            $this->load->library('email', $config);
+                            $this->email->set_newline("\r\n");
+                            $this->email->from($from);
+                            $this->email->to($to);
+                            $this->email->subject($subject);
+                            $this->email->message($message_body);
+                           
+                            if ($this->email->send()) {
+                                // Additional success handling
+                            } else {
+                                // Handle email sending failure
+                            }
+        
+
                         if($userType == 5)
                         {
+                            $this->session->set_userdata('welcome_mail_send', true);
+
                             echo json_encode(array('status' => true, 'message' => '<div class="alert alert-success alert-dismissable">Your details has been registered Successully! Now you will be able to login</div>', 'login_url' => 'dashboard/' . $this->session->userdata('user_id')));
                             exit();
 

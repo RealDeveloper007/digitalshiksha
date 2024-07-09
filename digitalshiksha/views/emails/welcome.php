@@ -45,10 +45,10 @@
             <h1>Digital Shiksha Darpan</h1>
         </div>
         <div class="content">
-            <p>Dear <?= ucfirst($user_name) ?>,</p>
-            <p> Welcome to the  Digital Shiksha Darpan. Thank you for becoming part of digital shiksha.It is an e-learning platform having many features for digital learning.</p>
-            <p>Your login id:- (<?= $email.' OR '.$phone ?>) </p>
-            <p>Your password:-  <?= $password ?></p>
+            <p>Dear <?php echo $user_name; ?>,</p>
+            <p>Welcome to the Digital Shiksha Darpan. Thank you for becoming part of digital shiksha. It is an e-learning platform having many features for digital learning.</p>
+            <p>Your login id: <?php echo $email; ?> or <?php echo $phone; ?></p>
+            <p>Your password: <?php echo $password; ?></p>
             <p>For learning all features of digital shiksha darpan website/app you may click by below link. After this video you will be able to access all features of this web application/app.</p>
             <p><a href="https://youtu.be/r-fTnaZK9_w?si=bI55Zhb1x8WqCGPL" target="_blank">Click here to watch the video</a></p>
             <hr>
@@ -61,7 +61,7 @@
             <p>Digital Shiksha Team</p>
         </div>
         <div class="footer">
-            <p><img style='width: 230px;margin-top: -20px;' src='<?= base_url('logo.png') ?>'></p>
+            <p><img style='width: 230px; margin-top: -20px;' src='<?php echo $logo ?>' alt="Digital Shiksha Darpan"></p>
         </div>
     </div>
 </body>
