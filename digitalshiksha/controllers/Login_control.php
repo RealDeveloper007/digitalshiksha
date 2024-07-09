@@ -629,6 +629,7 @@ class Login_control extends MS_Controller
                             );
         
                             $this->load->library('email', $config);
+                            $this->email->set_header('Content-Type', 'text/html');
                             $this->email->set_newline("\r\n");
                             $this->email->from($from);
                             $this->email->to($to);
