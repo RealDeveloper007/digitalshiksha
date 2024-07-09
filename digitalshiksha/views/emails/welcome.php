@@ -61,7 +61,7 @@
             <p>Digital Shiksha Team</p>
         </div>
         <div class="footer">
-            <p><img style='width: 230px; margin-top: -20px;' src='<?php echo $logo ?>' alt="Digital Shiksha Darpan"></p>
+            <p><img style='width: 230px; margin-top: -20px;' src='https://digitalshikshadarpan.com/logo.png' alt="Digital Shiksha Darpan"></p>
         </div>
     </div>
 </body>
