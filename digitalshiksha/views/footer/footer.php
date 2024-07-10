@@ -83,6 +83,19 @@
     });
     window.onload = function() {
 
+        console.log(localStorage.getItem('play_store_modal'));
+        if(localStorage.getItem('play_store_modal') === null)
+        {
+            $('#andriodAppModal').modal({backdrop: 'static', keyboard: false});
+            $('#andriodAppModal').modal('show');
+        }
+
+            // $('#app_info_modal').css('display', 'block');
+            // $('body').addClass('app-popup');
+            $('.not_now').click(function() {
+                localStorage.setItem('play_store_modal', false);
+            });
+
         /// remove ck editor notification..
         // $('.cke_notification').remove();
 
@@ -423,4 +436,9 @@
             $('#sub_sub_category').html(subcategories);
         });
     });
+
+    $(document).ready(function() {
+
+       
+        });
 </script>

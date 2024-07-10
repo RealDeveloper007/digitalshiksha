@@ -424,14 +424,20 @@
 
                 if (Response.status) 
                 {
-                    $('.result_popup').append(`<h2>`+Response.data.heading+`</h2>
-                        <p>`+Response.data.result_message+`</p>`);
+                    $('.result_popup').addClass(Response.data.class);
 
                     if(Response.data.celebration == true)
                     {
+                        $('.result_popup').append(`<h2>`+Response.data.heading+`</h2><img src="<?= base_url('assets/images/medal.png') ?>" alt="result image" class="">
+                        <p>`+Response.data.result_message+`</p>`);
+
                         $('.result_popup').show();
 
                     } else {
+
+                        $('.result_popup').append(`<h2>`+Response.data.heading+`</h2><img src="<?= base_url('assets/images/dis_qualified.jpg') ?>" alt="result image" class="">
+                        <p>`+Response.data.result_message+`</p>`);
+
 
                         $('.result_popup').show();
                     }

@@ -81,18 +81,21 @@ class Exam_control extends MS_Controller
                     if($result->result_percent == 100)
                     {
                             $heading        = 'Marvellous! ';
+                            $class          = "marvellous";
                             $result_message = 'You are now competent for this exam. Best Wishes for nex.'; 
-                            $celebration    = false;
+                            $celebration    = true;
 
                     } else if($result->result_percent >= 95)
                     {
                             $heading        = 'Congrats !';
+                            $class          = "excellent";
                             $result_message = 'You qualified this exam. Best Wishes.'; 
-                            $celebration    = false;
+                            $celebration    = true;
 
                     } else {
                                                         
                         $heading        = 'Excellent !';
+                        $class          = "qualified";
                         $result_message = 'You have done good Job!'; 
                         $celebration    = true;
                   
@@ -101,12 +104,13 @@ class Exam_control extends MS_Controller
             } else { 
                                                     
                         $heading        = 'Ohh !';
+                        $class          = "not_qualified";
                         $celebration    = false;
                         $result_message = 'You have not qualified this time. Watch solution carefully and try again.'; 
                                                     
             }
 
-            echo json_encode(['status'=>true,'data'=>['heading'=>$heading,'celebration'=>$celebration,'result_message'=>$result_message],'url'=>base_url('exam_control/view_result_detail/'.$result_id)]);
+            echo json_encode(['status'=>true,'data'=>['heading'=>$heading,'class'=>$class,'celebration'=>$celebration,'result_message'=>$result_message],'url'=>base_url('exam_control/view_result_detail/'.$result_id)]);
             exit();
         } else {
 

@@ -145,3 +145,35 @@
         </div><!--/.box-->
     </div><!--/.container-->
 </section><!--/#services-->
+
+
+
+
+ <!-- <div class="app_info_modal">
+
+        <img src="https://www.techspot.com/images2/downloads/topdownload/2022/08/2022-08-11-ts3_thumbs-68b.png" alt="play store icon">
+
+        <h2>Install Digital Shiksha Darpan from the Play Store Now!</h2>
+        <a href="https://play.google.com/store/apps/details?id=com.shikshaapp" class="install_now_btn">Install Now</a>
+        <a href="javascript:void(0)" class="not_now">Not Now</a>
+
+    </div> -->
+
+
+<div class="modal" id="andriodAppModal"  tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content app_info_modal">
+      
+      <div class="modal-body">
+      <img src="<?= base_url('assets/images/play_store.webp') ?>" alt="play store icon">
+        <h2>Install Digital Shiksha Darpan from the Play Store Now!</h2>
+        <a href="https://play.google.com/store/apps/details?id=com.shikshaapp" class="install_now_btn">Install Now</a>
+        <a href="javascript:void(0)" class="not_now" data-dismiss="modal">Not Now</a>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
