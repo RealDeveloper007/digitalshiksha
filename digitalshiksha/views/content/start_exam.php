@@ -27,8 +27,8 @@
 .ctm_radio_btn {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin: 30px 0;
+    gap: 12px;
+    margin: 20px 0;
 }
 
 .ctm_radio_btn .radio {
@@ -39,9 +39,9 @@
 
 .ctm_radio_btn .radio label {
     display: block;
-    padding: 16px;
+    padding: 10px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 17px;
     background-color: #90EE90;
     cursor: pointer;
     height: 100%;
@@ -61,7 +61,7 @@
         grid-template-columns: repeat(1, 1fr);
     }
     .ctm_radio_btn .radio label {
-        padding: 10px;
+        padding: 8px;
         font-size: 16px;
     }
 }
@@ -208,7 +208,7 @@
                                                                 echo $link;
                                                                 break;
                                                             case 'image':
-                                                                echo '<div class="imgfits"><img src="'.base_url("question-media/".$ques->media_link).'" alt="image" height="180px" width="100%" style="object-fit: contain;"></div>';
+                                                                echo '<div class="imgfits"><img src="'.base_url("question-media/".$ques->media_link).'" alt="image" height="120px" width="100%" style="object-fit: contain;"></div>';
                                                                 break;                                    
                                                             default:
                                                                 break;
@@ -428,14 +428,14 @@
 
                     if(Response.data.celebration == true)
                     {
-                        $('.result_popup').append(`<h2>`+Response.data.heading+`</h2><img src="<?= base_url('assets/images/medal.png') ?>" alt="result image" class="">
+                        $('.result_popup').append(`<img src="<?= base_url('assets/images/medal.png') ?>" alt="result image" class=""><h2>`+Response.data.heading+`</h2>
                         <p>`+Response.data.result_message+`</p>`);
 
                         $('.result_popup').show();
 
                     } else {
 
-                        $('.result_popup').append(`<h2>`+Response.data.heading+`</h2><img src="<?= base_url('assets/images/dis_qualified.jpg') ?>" alt="result image" class="">
+                        $('.result_popup').append(`<img src="<?= base_url('assets/images/dis_qualified.jpg') ?>" alt="result image" class=""><h2>`+Response.data.heading+`</h2>
                         <p>`+Response.data.result_message+`</p>`);
 
 

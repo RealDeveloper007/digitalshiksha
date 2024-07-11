@@ -246,6 +246,7 @@ p.lead {
 	      width:350px;
         max-width: 90%;
         padding: 30px 20px;
+	margin-top:0px !important;
         border-radius: 12px;
         position: fixed;
         background-color: #ffffff;
@@ -264,7 +265,7 @@ p.lead {
 	font-weight:500;
     }
     .app_info_modal img {
-        box-shadow: 0px 0px 12px 0px #f1f1f1;
+        box-shadow: 0px 0px 10px 0px #e1e1e1;
         border-radius: 100%;
     }
     .install_now_btn {
@@ -272,7 +273,7 @@ p.lead {
         display: block;
         padding: 10px;
         text-decoration: none;
-        color: #fff;
+        color: #fff !important;
         font-size: 16px;
         border-radius: 8px;
         margin: 20px;
@@ -286,6 +287,17 @@ p.lead {
     overflow: hidden;
 position: relative;
 }
+div#andriodAppModal {
+	overflow-y: auto !important;
+}
+div#andriodAppModal     .modal-dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+	width: 100% !important;
+    	margin: 0 !important;
+    }
 body.app-popup:before {
     content: "";
     background-color: #000;
@@ -1547,7 +1559,7 @@ textarea#message {
     height: 3px;
     background-color: #F1B900;
     width: 100px;
-    margin-bottom: 15px;
+    margin-bottom: 15px !important;
 }
 
 .text-uppercase
@@ -1585,7 +1597,7 @@ textarea#message {
 
 .secPad 
 {
-    padding: 60px 0;
+    padding: 30px 0;
 }
 
 .contactNew h3
@@ -2280,10 +2292,10 @@ textarea#message {
 }
 
 .me-control-btn .btn {
-    padding: 10px 15px;
+    padding: 10px 8px;
     background-color: #f1ba2e;
     border-color: #f1ba2e;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 500;
     color: #000;
     margin-bottom: 15px;
@@ -2425,14 +2437,17 @@ a.yTubeplay {
 .list-unstyled li{
 	width:100% !important
 }
-
+.modal-content.app_info_modal .modal-body {
+    padding: 0;
+}
 .panel-title {color:#000!important;font-weight:500;}
 h4.panel-title a { color: #000!important;font-weight:500;}
 .fixImg.youtube-video { position:relative;width:100%;padding:0 0 56.2%; z-index: 999;}
 .fixImg.youtube-video iframe {position:absolute;top:0;left:0;height:100%;width:100%;}
 
 .result_popup {
-  max-width: 500px;
+  width: 500px !important;
+  max-width:90%;
   max-height: 80vh;
   height: auto;
   text-align: center;
@@ -2471,6 +2486,19 @@ h4.panel-title a { color: #000!important;font-weight:500;}
   margin: 18px 0 0 0;
   font-size: 20px;
 }
+.result_popup.not_qualified:before {
+    display: none;
+}
+.result_popup img {
+    max-width: 80%;
+    height: 130px;
+    width: 130px;
+    object-fit: contain;
+    background-color: #fff;
+    border-radius: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
 .result_popup.marvellous p {
     color: #fff;
 }
@@ -2480,4 +2508,14 @@ h4.panel-title a { color: #000!important;font-weight:500;}
 }
 .result_popup.marvellous {
     background-color: #222289;
+}
+
+
+
+
+@media (max-width:600px) {
+.me-control-btn .btn {
+    padding: 10px 8px;
+    font-size: 14px;
+}
 }

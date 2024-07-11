@@ -1295,6 +1295,39 @@ border-top: 1px solid #e5e5e5;
         word-break: break-word;
 }
 
+
+
+ul.list-group li.list-group-item input {
+    width: 0;
+    margin: 0;
+}
+
+ul.list-group li.list-group-item span {
+    margin: 0 !important;
+}
+
+ul.list-group li.list-group-item.wrong_answer {
+    background-color: #ff8989 !important;
+}
+ul.list-group li.list-group-item.correct_answer {
+    background-color: #5bd35b;
+}
+
+ul.list-group  li.list-group-item span {
+    font-size: 16px;
+}
+
+ul.list-group li.list-group-item span.badge {
+    font-size: 12px;
+}
+.block-content ul {
+ 	padding:0;
+}
+.block-content ul > li {
+    font-size: 14px;
+}
+
+
 @media screen and (max-width: 991px)
 {
     .table-responsive

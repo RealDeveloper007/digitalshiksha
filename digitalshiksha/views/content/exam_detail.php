@@ -139,7 +139,7 @@
                         <?php $answers = $this->db->where('ques_id', $key)->get('answers')->result();
                         $temp_ans = explode(',', $value);
                         foreach ($answers as $val) { ?>
-                           <li class="list-group-item">
+                           <li class="list-group-item <?= $val->right_ans == 1 ? 'correct_answer' : 'wrong_answer' ?> ">
                               <input type="<?= $question->option_type; ?>" disabled="disabled" <?= (in_array($val->ans_id, $temp_ans)) ? 'checked' : '' ?> />
                               <span style="margin-left: 10px;">
                                  <?php if ($val->new == 2) { ?>
