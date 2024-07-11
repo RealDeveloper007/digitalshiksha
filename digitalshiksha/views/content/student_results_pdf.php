@@ -57,13 +57,21 @@ table th,
 			border: 0;
 		}
 
-
+        header {
+                position: fixed;
+                top: -40px;
+                height: 150px;
+                background-color: white;
+                color: #F1B900;
+                text-align: center;
+                line-height: 35px;
+            }
     </style>
 
 </head>
 
 <body>
-
+<header>
 <table cellspacing="0" border="0" cellpadding="5">
 		<tr>
 			<th align="left" class="no-border"><img src="<?= base_url('logo.png') ?>" alt="Logo" class="logo"></th>
@@ -74,12 +82,13 @@ table th,
 			</th>
 		</tr>
 </table>
+        </header>
 <br>
 <br>
-
+<br><br><br><br><br><br><br><br>
 <table cellpadding="0" cellspacing="0">
    <thead style="width: 100%;
-   max-width: 100%;">
+   max-width: 100%;top:150px">
    <tr>
        <th align="center">Exam Title</th>
        <th align="center">Batch Code</th>
