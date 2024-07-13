@@ -168,11 +168,12 @@
         // For now, MathType is incompatible with CKEditor file upload plugins.
         removePlugins: 'uploadimage,uploadwidget,uploadfile,filetools,filebrowser',
         height: 80,
-        // fontSize_defaultLabel: '16px',
-    
-        contentsCss: isMobileDevice() ? 'body {font-size: 1rem;}' : 'body {font-size: 1rem;}',
+        fontSize_defaultLabel: '16px',
+            contentsCss: [
+                'body { font-size: 16px; }'
+            ],
             // Optional: to include '16px' as a selectable font size in the font size dropdown
-        // fontSize_sizes: '16/16px',
+        fontSize_sizes: '16/16px',
         // Update the ACF configuration with MathML syntax.
         extraAllowedContent: mathElements.join(' ') + '(*)[*]{*};img[data-mathml,data-custom-editor,role](Wirisformula)'
       });
