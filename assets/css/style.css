@@ -1309,6 +1309,11 @@ ul.list-group li.list-group-item span {
 ul.list-group li.list-group-item.wrong_answer {
     background-color: #ff8989 !important;
 }
+
+ul.list-group li.list-group-item.normal_answer {
+  background-color: #fffdd0 !important;
+}
+
 ul.list-group li.list-group-item.correct_answer {
     background-color: #5bd35b;
 }
