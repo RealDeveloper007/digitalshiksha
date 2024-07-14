@@ -34,7 +34,7 @@ class Guest extends MS_Controller
             $config = Array(
                 'protocol' => 'smtp',
                 'smtp_host' => 'mail.digitalshikshadarpan.com',
-                'smtp_port' => 465,
+                'smtp_port' => 587,
                 'smtp_user' => 'info@digitalshikshadarpan.com',
                 'smtp_pass' => 'K}]LSI-KRief',
                 'mailtype' => 'html',
