@@ -157,7 +157,7 @@ table th,
                                 <th align="center" style="height:50px;">Attempted Questions</th>
                                 <th align="center" style="height:50px;">Right Answers</th>
                                 <th class="hidden-xxs" align="center" style="height:50px;">Score</th>
-                                <th class="hidden-xxs" align="center" style="height:50px;">Total</th>
+                                <!-- <th class="hidden-xxs" align="center" style="height:50px;">Total</th> -->
                                 <th class="hidden-xs" align="center" style="height:50px;">Result</th>
                                 <th class="text-center" align="center" style="height:50px;">Signature</th>
                             </tr>
@@ -209,7 +209,7 @@ table th,
                                         <td style="height:50px;width:10%" align="center"><?= count($GetAttempted) ?></td>
                                         <td style="height:50px;width:7%" align="center"><?= count($GetRightAnswers) ?></td>
                                         <td style="height:50px;width:10%" align="center"><?= $result->result_percent; ?>%</td>
-                                        <td style="height:50px;width:7%" align="center"><?= round($ScoreCount,2)?></td>
+                                        <!-- <td style="height:50px;width:7%" align="center"><?php // round($ScoreCount,2)?></td> -->
                                         <td class="hidden-xxs" style="height:50px;width:10%" align="center"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">Qualified</span>' : '<span class="label label-warning">Not Qualified</span>' ?></td>
                                         <td style="height:50px;width:25%" align="center"></td>
                                         
