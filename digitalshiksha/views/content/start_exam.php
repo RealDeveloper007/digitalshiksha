@@ -1,4 +1,5 @@
 <script src="https://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
     body
@@ -170,7 +171,7 @@
         height: 80,
         fontSize_defaultLabel: '16px',
             contentsCss: [
-                'body { font-size: 16px; }'
+                'body { font-family: "Roboto", sans-serif; font-size: 16px; }'
             ],
             // Optional: to include '16px' as a selectable font size in the font size dropdown
         fontSize_sizes: '16/16px',

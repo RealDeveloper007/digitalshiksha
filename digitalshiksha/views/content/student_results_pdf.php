@@ -5,6 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Student Results</title>
 	<style>
+         /* @page {
+            margin: 100px 25px;
+        } */
 		body {
 			position: relative;
 			font-family: 'Helvetica';
@@ -14,6 +17,7 @@
 		table {
 			border-collapse: collapse;
 			width: 100%;
+            page-break-before:auto;
 		}
 
     a.btn.btn-default.btn-xs {
@@ -45,6 +49,9 @@ tr td.ans {
     font-size: 17px;
     font-weight: 700;
 }
+table th {
+    color : #191970;
+}
 table th,
 		table td {
 			border-top: 1px solid black;
@@ -58,14 +65,40 @@ table th,
 		}
 
         header {
-                position: fixed;
-                top: -40px;
-                height: 150px;
+                /* position: fixed;
+                top: -70px;
+                height: 60px;
                 background-color: white;
-                color: #F1B900;
                 text-align: center;
-                line-height: 35px;
+                /* overflow: hidden; 
+                left: 0;
+                right: 0; */
+                bottom : 20px;
+                color: #F1B900;
+                line-height: 30px;
+                /* clear: both; */
             }
+
+        .content {
+            /* page-break-before: always; */
+            margin-top: 20px; /* Ensure this matches the @page margin-top to avoid overlap */
+        }
+        tr{page-break-inside: avoid;  
+            page-break-after: auto;} 
+
+            .watermark {
+			position: absolute;
+			top: 10.6%;
+			width: 100%;
+			height: 880px;
+			opacity: .13;
+			object-fit: cover;
+			z-index: -1;
+		}
+        .footer
+        {
+            font-size:12px;
+        }
     </style>
 
 </head>
@@ -76,26 +109,26 @@ table th,
 		<tr>
 			<th align="left" class="no-border"><img src="<?= base_url('logo.png') ?>" alt="Logo" class="logo"></th>
 			<th colspan="7" class="no-border" align="center">
-				<span style="font-size: 16px;"> <?= $details->school_name?> (<?= $details->district ?>)</span>
-				<span style="font-size: 16px;"> Exam Portal : www.digitalshikshadarpan.com</span>
+				<span style="font-size: 16px;"> <?= $details->school_name?> (<?= $details->district ?>)</span><br>
+				<span style="font-size: 16px;"> Exam Portal : www.digitalshikshadarpan.com</span> 
 				<span style="font-size: 16px;"><?= $setting->heading ?></span>
 			</th>
 		</tr>
+
 </table>
         </header>
-<br>
-<br>
-<br><br><br><br><br><br><br><br>
+        <div class="content">
+
 <table cellpadding="0" cellspacing="0">
    <thead style="width: 100%;
-   max-width: 100%;top:150px">
+   max-width: 100%;top:0px">
    <tr>
-       <th align="center">Exam Title</th>
-       <th align="center">Batch Code</th>
-	   <th align="center">Total No. of Questions</th>
-       <th align="center">Class</th>	    
-       <th align="center">Date</th>
-       <th align="center">Prepared By</th>
+       <th align="center" style="font-size: 14px;">Exam Title</th>
+       <th align="center" style="font-size: 14px;">Batch Code</th>
+	   <th align="center" style="font-size: 14px;">Total No. of Questions</th>
+       <th align="center" style="font-size: 14px;">Class</th>	    
+       <th align="center" style="font-size: 14px;">Date</th>
+       <th align="center" style="font-size: 14px;">Prepared By</th>
    </tr>
    </thead>
    <tbody style="width: 100%;
@@ -118,18 +151,19 @@ table th,
                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" id="example">
                         <thead>
                             <tr>
-                                <th align="center">#</th>
-                                <th align="center">Student's Name</th>
-                                <th align="center">Student's Phone</th>
-                                <th align="center">Attempted Questions</th>
-                                <th align="center">Right Answers</th>
-                                <th class="hidden-xxs" align="center">Score</th>
-                                <th class="hidden-xxs" align="center">Total</th>
-                                <th class="hidden-xs" align="center">Result</th>
-                                <th class="text-center" style=" width: 10%;" align="center">Signature</th>
+                                <th align="center"  style="height:50px;">#</th>
+                                <th align="center" style="height:50px;">Student's Name</th>
+                                <th align="center" style="height:50px;">Student's Phone</th>
+                                <th align="center" style="height:50px;">Attempted Questions</th>
+                                <th align="center" style="height:50px;">Right Answers</th>
+                                <th class="hidden-xxs" align="center" style="height:50px;">Score</th>
+                                <th class="hidden-xxs" align="center" style="height:50px;">Total</th>
+                                <th class="hidden-xs" align="center" style="height:50px;">Result</th>
+                                <th class="text-center" align="center" style="height:50px;">Signature</th>
                             </tr>
                         </thead>
                         <tbody>
+
                             <?php
                             $i = 1;
                             $ResultArray = array();
@@ -169,20 +203,23 @@ table th,
 
                              ?>
                                     <tr class="<?= ($i & 1) ? 'even' : 'odd'; ?>">
-                                        <td style="height:63px;" align="center"><?= $i ?></td>
-                                        <td style="height:63px;" align="center"><?= $result->user_name; ?></td>
-                                        <td style="height:63px;" align="center"><?= $result->user_phone; ?></td>
-                                        <td style="height:63px;" align="center"><?= count($GetAttempted) ?></td>
-                                        <td style="height:63px;" align="center"><?= count($GetRightAnswers) ?></td>
-                                        <td style="height:63px;" align="center"><?= $result->result_percent; ?>%</td>
-                                        <td style="height:63px;" align="center"><?= $ScoreCount?></td>
-                                        <td class="hidden-xxs" style="height:63px;" align="center"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">Qualified</span>' : '<span class="label label-warning">Not Qualified</span>' ?></td>
-                                        <td style="height:63px;" align="center"></td>
+                                        <td style="height:50px;width:5%" align="center"><?= $i ?></td>
+                                        <td style="height:50px;width:11%" align="center"><?= $result->user_name; ?></td>
+                                        <td style="height:50px;width:10%" align="center"><?= $result->user_phone; ?></td>
+                                        <td style="height:50px;width:10%" align="center"><?= count($GetAttempted) ?></td>
+                                        <td style="height:50px;width:7%" align="center"><?= count($GetRightAnswers) ?></td>
+                                        <td style="height:50px;width:10%" align="center"><?= $result->result_percent; ?>%</td>
+                                        <td style="height:50px;width:7%" align="center"><?= round($ScoreCount,2)?></td>
+                                        <td class="hidden-xxs" style="height:50px;width:10%" align="center"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">Qualified</span>' : '<span class="label label-warning">Not Qualified</span>' ?></td>
+                                        <td style="height:50px;width:25%" align="center"></td>
                                         
                                     </tr>
+                                    
                                     <?php
-                                    $i++;}
-                                        } else {
+                                    $i++;
+                                }
+                                    
+                                } else {
 
                                             echo "<tr><td colspan='9' style='height:30px;' align='center'>No Result found</td></tr>";
                              } ?>
@@ -201,7 +238,7 @@ table th,
                 ?>
 
                 
-<table cellspacing="0" border="0" cellpadding="5">
+<table cellspacing="0" border="0" cellpadding="5" class="footer">
 		
         <tr>
 			<td colspan="8" class="no-border">&nbsp;</td>
@@ -231,16 +268,6 @@ table th,
 		</tr>
 
 </table>
-            <!-- <div class="col-md-12 result_calculation">
-                <div class="col-md-2">Total % Qualified Students <br> <span><?= number_format((float)$PassPercentage, 2, '.', '');?></span></div>
-                <div class="col-md-2">Qualified Students <br> <span><?= $Passed ?></span></div>
-                <div class="col-md-2">Not Qualified Students <br> <span><?= $Failed; ?></span></div>
-                <div class="col-md-3">Sign of Class Teacher</div>
-                <div class="col-md-3">Sign of Principal</div>
-
+           
             </div>
-        </div>
-    </div>
-</div>
-            </div> -->
 </html>
