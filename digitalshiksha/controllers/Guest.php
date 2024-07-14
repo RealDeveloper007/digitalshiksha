@@ -51,8 +51,12 @@ class Guest extends MS_Controller
             $this->email->message($message_body);
         
             if ($this->email->send()) {
+                echo "mail send"; die;
                 // Additional success handling
             } else {
+
+                print_r($this->email->print_debugger()); 
+                die;
                 // Handle email sending failure
             }
         }
