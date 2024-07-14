@@ -21,6 +21,42 @@ class Guest extends MS_Controller
 
     public function index($message = '')
     {
+
+        if($_GET['mail'])
+        {
+            // echo "ssd"; die;
+            $from = $this->session->userdata['support_email'];
+            $to = $info['user_email'];
+            $subject = 'Welcome mail by ' . $this->session->userdata['brand_name'];
+        
+            $sendData = ['user_name'=>'test','email'=>'diwakarsharma603@gmail.com','phone'=>'82829832323','password'=>'822823','logo'=>base_url('logo.png') ];
+            $message_body = $this->load->view('emails/welcome.php', $sendData,TRUE);
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'mail.digitalshikshadarpan.com',
+                'smtp_port' => 465,
+                'smtp_user' => 'info@digitalshikshadarpan.com',
+                'smtp_pass' => 'K}]LSI-KRief',
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'wordwrap' => TRUE
+            );
+
+            $this->load->library('email', $config);
+            $this->email->set_header('Content-Type', 'text/html');
+            $this->email->set_newline("\r\n");
+            $this->email->from($from);
+            $this->email->to($to);
+            $this->email->subject($subject);
+            $this->email->message($message_body);
+        
+            if ($this->email->send()) {
+                // Additional success handling
+            } else {
+                // Handle email sending failure
+            }
+        }
+
         $this->system_model->set_system_info_to_session();
         $data = array();
 
