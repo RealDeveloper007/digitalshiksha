@@ -82,21 +82,22 @@ class Exam_control extends MS_Controller
                     {
                             $heading        = 'Marvellous! ';
                             $class          = "marvellous";
-                            $result_message = 'You are now competent for this exam. Best Wishes for nex.'; 
+                            $result_message = 'You are now competent for this exam. Best Wishes for next.'; 
                             $celebration    = true;
 
-                    } else if($ExamResultDetails->result_percent >= 95)
+                    } else if($ExamResultDetails->result_percent >= 90 && $ExamResultDetails->result_percent < 100)
                     {
-                            $heading        = 'Congrats !';
-                            $class          = "excellent";
-                            $result_message = 'You qualified this exam. Best Wishes.'; 
-                            $celebration    = true;
-
-                    } else {
-                                                        
                         $heading        = 'Excellent !';
                         $class          = "qualified";
                         $result_message = 'You have done good Job!'; 
+                        $celebration    = true;
+                
+
+                    } else {
+                                                         
+                        $heading        = 'Congrats !';
+                        $class          = "excellent";
+                        $result_message = 'You qualified this exam. Best Wishes.'; 
                         $celebration    = true;
                   
                     }
