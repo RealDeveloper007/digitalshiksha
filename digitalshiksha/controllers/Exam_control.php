@@ -78,14 +78,14 @@ class Exam_control extends MS_Controller
 
             if($ExamResultDetails->result_percent >= $ExamResultDetails->pass_mark) 
             {
-                    if($result->result_percent == 100)
+                    if($ExamResultDetails->result_percent == 100)
                     {
                             $heading        = 'Marvellous! ';
                             $class          = "marvellous";
                             $result_message = 'You are now competent for this exam. Best Wishes for nex.'; 
                             $celebration    = true;
 
-                    } else if($result->result_percent >= 95)
+                    } else if($ExamResultDetails->result_percent >= 95)
                     {
                             $heading        = 'Congrats !';
                             $class          = "excellent";
@@ -242,7 +242,15 @@ class Exam_control extends MS_Controller
    
            // Render the HTML as PDF
            $this->dompdf->render();
-   
+
+           // Ajouter un pied de page à chaque page
+            $canvas = $this->dompdf->getCanvas();
+            $canvas->page_script(function ($pageNumber, $pageCount, $canvas, $fontMetrics) {
+                $font = $fontMetrics->get_font('helvetica');
+                $pageText = 'Page ' . $pageNumber . ' sur ' . $pageCount;
+                $canvas->text(520, 15, $pageText, $font, 12);
+            });
+            
            // Output the generated PDF (1 = download and 0 = preview)
            // 		$this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
            $pdfname = time() . ".pdf";
