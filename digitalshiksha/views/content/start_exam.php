@@ -438,8 +438,17 @@
 
                     if(Response.data.celebration == true)
                     {
-                        $('.result_popup').append(`<img src="<?= base_url('assets/images/medal.png') ?>" alt="result image" class=""><h2>`+Response.data.heading+`</h2>
-                        <p>`+Response.data.result_message+`</p>`);
+                        if(Response.data.class == 'marvellous')
+                        {
+                            $('.result_popup').append(`<img src="<?= base_url('assets/images/trophy.jpeg') ?>" alt="result image" class=""><h2>`+Response.data.heading+`</h2>
+                            <p>`+Response.data.result_message+`</p>`);
+
+                        } else {
+
+                            $('.result_popup').append(`<img src="<?= base_url('assets/images/medal.png') ?>" alt="result image" class=""><h2>`+Response.data.heading+`</h2>
+                            <p>`+Response.data.result_message+`</p>`);
+                            
+                        }
 
                         $('.result_popup').show();
 
