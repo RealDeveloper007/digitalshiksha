@@ -135,7 +135,9 @@ form.importform {
         height: 80,
         fontSize_defaultLabel: '16px',
             contentsCss: [
-                'body { font-family: "Roboto", sans-serif; font-size: 16px; }'
+                'body { font-family: "Roboto", sans-serif; font-size: 16px; }',
+                '@media (max-width: 767px) { body { font-size: 16px; } }', // Font size for mobile devices
+                '@media (min-width: 768px) { body { font-size: 18px; } }' // Font size for desktop devices
             ],
             // Optional: to include '16px' as a selectable font size in the font size dropdown
         fontSize_sizes: '16/16px',
