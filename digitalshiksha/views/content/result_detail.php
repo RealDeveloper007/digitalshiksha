@@ -125,19 +125,26 @@
                     
                     <?php if($results->result_percent >= $results->pass_mark) 
                          {
-                            if($results->result_percent >= 95)
+                            if($results->result_percent == 100)
                             {
-                                echo '<span class="label label-success">Excellent</span>';
+                                echo '<span class="label label-success" style="background: #e11d80;color:white">Competent</span>';
+                                
+                            } else if($results->result_percent >= 90)
+                            {
+                                echo '<span class="label label-success" style="background: rgb(240,173,78);
+background: linear-gradient(90deg, rgba(240,173,78,1) 0%, rgba(240,173,78,1) 100%);">Excellent</span>';
                                 
                             } else {
                                 
-                                echo '<span class="label label-primary">Qualified</span>';
+                                echo '<span class="label label-primary" style="background: rgb(240,173,78);
+background: linear-gradient(90deg, rgba(240,173,78,1) 0%, rgba(240,173,78,1) 100%);">Qualified</span>';
                                 
                             }
                             
                         } else { 
                             
-                           echo  '<span class="label label-warning">Not Qualified</span>';
+                           echo  '<span class="label label-warning" style="background: rgb(240,173,78);
+background: linear-gradient(90deg, rgba(240,173,78,1) 0%, rgba(240,173,78,1) 100%);">Not Qualified</span>';
                             
                         }
                     ?>
@@ -232,16 +239,34 @@
 }
 .reh3 {
     background-color: #191970;
-    margin: 0 auto 0px !important
+    margin: 0 auto 0px !important;
     text-align: center;
-    display: flex;
+    display: inline-block;
     justify-content: center;
     width: fit-content;
-    padding: 8px 17px !important
+    padding: 8px 17px !important;
     border-radius: 4px;
     color: #fff;
 }
 a#printNew {
     padding: 7px 10px;
+}
+
+
+@media print {
+  .assessment span {
+    color:#fff !important;
+    background-color: #f89406 !important;
+    border-color:##f89406 !important;
+    outline:none !important;
+    box-shadow:none !important;
+  }
+  .reh3 {
+      background-color: #191970 !important;
+      padding: 8px 17px !important;
+      border-radius: 4px;
+      color: #fff !important;
+  }
+
 }
 </style>

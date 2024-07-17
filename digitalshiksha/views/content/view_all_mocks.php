@@ -50,14 +50,32 @@
                             ?>
                                 <tr class="<?= ($i & 1) ? 'even' : 'odd'; ?>">
                                     <td>
-                                        <p class="lead"><?= $mock->title_name; ?></p>
+                                        <p class="lead"><?= $mock->title_name; ?> 
+                                        </p>
                                         <?php if ($mock->course_id) { ?>
                                             <span class="text-muted">Associated Course: </span><?= $mock->course_id; ?>&nbsp;
                                         <?php } ?>
                                         <span class="text-muted">Public: </span><?= ($mock->public == 1) ? 'Yes' : 'No'; ?>&nbsp;
                                         <span class="text-muted">Passing Score(%): </span><?= $mock->pass_mark; ?>&nbsp;
-                                        <span class="text-muted">Category: </span><?=$mock->category_name.' / '.$mock->sub_cat_name; ?>&nbsp;
+                                        <span class="text-muted">Category: </span><?=$mock->category_name.' / '.$mock->sub_cat_name; ?>&nbsp;<br>
+                                        <span style="font-weight:bold"> Exam Code : 
+                                            <?php 
+                                                if(strlen($mock->title_id) == 1)
+                                                {
+                                                    echo 'MT00'.$mock->title_id;
+
+                                                } else if(strlen($mock->title_id) == 2)
+                                                {
+                                                    echo 'MT0'.$mock->title_id;
+
+                                                } else if(strlen($mock->title_id) == 3) {
+
+                                                    echo 'MT'.$mock->title_id;
+                                                }
+                                            ?>
+                                            </span>
                                         <br/>
+
                                           <?php if($exam_type=='live_mock_test') { ?>
                                          <span class="text-muted">Batch Name: </span>
                                         <a href="#" data-name="cat_id" data-type="select" data-url="<?php echo base_url('admin_control/update_mock_title'); ?>" data-source="<?= $str; ?>" data-value="<?= $mock->category_id; ?>" data-pk="<?= $mock->title_id; ?>" class="data-modify-<?= $mock->title_id; ?> no-style"><?= $mock->batch_name; ?></a>
@@ -70,6 +88,8 @@
                                          <span class="text-muted">From/To Date: </span>
                                         <a href="#" data-name="cat_id" data-type="select" data-url="<?php echo base_url('admin_control/update_mock_title'); ?>" data-source="<?= $str; ?>" data-value="<?= $mock->category_id; ?>" data-pk="<?= $mock->title_id; ?>" class="data-modify-<?= $mock->title_id; ?> no-style"><?= date('d M,Y',strtotime($mock->batch_start_date)).' - '.date('d M,Y',strtotime($mock->batch_end_date)); ?></a>
                                         &nbsp;
+
+                                      
 
                                     <?php } ?>
                                         <span class="text-muted">Syllabus: </span><?= $mock->syllabus . '.'; ?>&nbsp;

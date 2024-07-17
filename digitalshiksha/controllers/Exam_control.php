@@ -136,7 +136,8 @@ class Exam_control extends MS_Controller
 
         if ($_GET['main_category'] && $_GET['sub_category'] && $_GET['sub_sub_category']) {
             $data['mocks'] = $this->exam_model->get_mocks_by_category($_GET['main_category'], $_GET['sub_category'], $_GET['sub_sub_category']);
-        } else {
+
+        }  else {
 
             $data['mocks'] = $this->exam_model->get_all_mocks('mock_test');
         }
@@ -188,6 +189,20 @@ class Exam_control extends MS_Controller
         if ($_GET['main_category'] && $_GET['sub_category'] && $_GET['sub_sub_category']) {
             $data['mocks'] = $this->exam_model->get_mocks_by_category($_GET['main_category'], $_GET['sub_category'], $_GET['sub_sub_category'], $config["per_page"], $page * $config["per_page"]);
             $data['category_name'] = $this->db->get_where('sub_categories', array('id' => $_GET['sub_category']))->row()->sub_cat_name;
+
+        } else if ($_GET['exam_code']) {
+
+            $examCode = str_replace('MT0','',$_GET['exam_code']);
+
+            if($examCode == $_GET['exam_code'])
+            {
+                 $examCode = str_replace('MT','',$_GET['exam_code']);
+            }
+
+            // echo $examCode; die;
+
+            $data['mocks'] = $this->exam_model->get_mocks_by_exam_id($examCode,$config["per_page"], $page * $config["per_page"]);
+
         } else {
 
 
@@ -1193,9 +1208,11 @@ class Exam_control extends MS_Controller
 
         if ($_GET['main_category'] && $_GET['sub_category'] && $_GET['sub_sub_category']) {
             $data['mocks'] = $this->exam_model->get_mocks_by_category($_GET['main_category'], $_GET['sub_category'], $_GET['sub_sub_category']);
-        } else {
+
+        }  else {
 
             $data['mocks'] = $this->exam_model->get_all_mocks('mock_test');
+
         }
 
         if ($this->uri->segment(3)) {

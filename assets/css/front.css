@@ -2496,7 +2496,7 @@ h4.panel-title a { color: #000!important;font-weight:500;}
     object-fit: contain;
     background-color: #fff;
     border-radius: 100%;
-    padding: 10px;
+    padding: 10px 0px;
     margin-bottom: 20px;
 }
 .result_popup.marvellous p {
@@ -2510,12 +2510,31 @@ h4.panel-title a { color: #000!important;font-weight:500;}
     background-color: #222289;
 }
 
-
-
+.myBox p span {
+    padding: 8px 0 !important;
+}
+#submit_button {
+    margin: 0 !important;
+}
 
 @media (max-width:600px) {
 .me-control-btn .btn {
     padding: 10px 8px;
     font-size: 14px;
 }
+.ctm_radio_btn {
+    margin: 10px 0 !important;
+    gap: 6px !important;
+}
+.secPad {
+    padding: 20px 0 !important;
+}
+.decpara h3 {
+        margin: 5px 0 !important;
+        font-size: 15px;
+        background-color: #191970;
+        padding: 8px;
+        border-radius: 50px;
+        color: #fff;
+    }
 }

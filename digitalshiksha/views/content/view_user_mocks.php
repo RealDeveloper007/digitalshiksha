@@ -41,7 +41,7 @@ $str .= "]";
                                 <tr class="<?= ($i & 1) ? 'even' : 'odd'; ?>">
                                     <td>
                                         <p class="lead">
-                                            <a href="#" data-name="exam_title" data-type="textarea" data-rows="2" data-url="<?php echo base_url('admin_control/update_mock_title'); ?>" data-pk="<?= $mock->title_id; ?>" class="data-modify-<?= $mock->title_id; ?> no-style"><?= $mock->title_name; ?></a>
+                                            <a href="#" data-name="exam_title" data-type="textarea" data-rows="2" data-url="<?php echo base_url('admin_control/update_mock_title'); ?>" data-pk="<?= $mock->title_id; ?>" class="data-modify-<?= $mock->title_id; ?> no-style"><?= $mock->title_name; ?> </a>
                                         </p>
 
                                         <span class="text-muted">Syllabus: </span>
@@ -52,7 +52,23 @@ $str .= "]";
                                         &nbsp;
                                         <span class="text-muted">Category: </span>
                                         <a href="#" data-name="cat_id" data-type="select" data-url="<?php echo base_url('admin_control/update_mock_title'); ?>" data-source="<?= $str; ?>" data-value="<?= $mock->category_id; ?>" data-pk="<?= $mock->title_id; ?>" class="data-modify-<?= $mock->title_id; ?> no-style"><?= $mock->category_name; ?></a>
-                                        &nbsp;
+                                        &nbsp;<br>
+                                        <span style="font-weight:bold"> Exam Code : 
+                                            <?php 
+                                                if(strlen($mock->title_id) == 1)
+                                                {
+                                                    echo 'MT00'.$mock->title_id;
+
+                                                } else if(strlen($mock->title_id) == 2)
+                                                {
+                                                    echo 'MT0'.$mock->title_id;
+
+                                                } else if(strlen($mock->title_id) == 3) {
+
+                                                    echo 'MT'.$mock->title_id;
+                                                }
+                                            ?>
+                                            </span>
 
                                          <?php if($exam_type=='live_mock_test') { ?>
                                          <span class="text-muted">Batch Name: </span>
@@ -66,6 +82,8 @@ $str .= "]";
                                          <span class="text-muted">From/To Date: </span>
                                         <a href="#" data-name="cat_id" data-type="select" data-url="<?php echo base_url('admin_control/update_mock_title'); ?>" data-source="<?= $str; ?>" data-value="<?= $mock->category_id; ?>" data-pk="<?= $mock->title_id; ?>" class="data-modify-<?= $mock->title_id; ?> no-style"><?= date('d M,Y',strtotime($mock->batch_start_date)).' - '.date('d M,Y',strtotime($mock->batch_end_date)); ?></a>
                                         &nbsp;
+
+                                        
 
                                     <?php } ?>
                                       

@@ -221,6 +221,21 @@ class Exam_model extends CI_Model
         return $result;
     }
 
+    public function get_mocks_by_exam_id($exam_id,$limit = null, $start = null)
+    {
+        $result = $this->db->select('*')
+            ->select("exam_title.active AS exam_active")
+            ->from('exam_title')
+            ->where(['exam_title.title_id' => $exam_id])
+            ->join('sub_categories', 'sub_categories.id = exam_title.sub_category_id', 'left')
+            ->join('categories', 'sub_categories.cat_id = categories.category_id', 'left')
+            ->join('users', 'users.user_id = exam_title.user_id')
+             ->where('exam_title.batch_id', 0)
+            ->limit($limit, $start)
+            ->get()->result();
+        return $result;
+    }
+
     public function get_syllabus_by_category($cat_id, $sub_cat_id, $sub_sub_cat_id)
     {
         $result = $this->db->select('*')

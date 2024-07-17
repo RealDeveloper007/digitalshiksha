@@ -103,7 +103,7 @@ table th,
 
 </head>
 
-<body>
+<body style="border:3px solid #F1B900; padding: 20px;">
 <header>
 <table cellspacing="0" border="0" cellpadding="5">
 		<tr>
@@ -151,15 +151,15 @@ table th,
                     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" id="example">
                         <thead>
                             <tr>
-                                <th align="center"  style="height:50px;">#</th>
-                                <th align="center" style="height:50px;">Student's Name</th>
-                                <th align="center" style="height:50px;">Student's Phone</th>
-                                <th align="center" style="height:50px;">Attempted Questions</th>
-                                <th align="center" style="height:50px;">Right Answers</th>
-                                <th class="hidden-xxs" align="center" style="height:50px;">Score</th>
+                                <th align="center"  style="padding:8px 5px;">#</th>
+                                <th align="center" style="padding:8px 5px;">Student's Name</th>
+                                <th align="center" style="padding:8px 5px;">Student's Phone</th>
+                                <th align="center" style="padding:8px 5px;">Attempted Questions</th>
+                                <th align="center" style="padding:8px 5px;">Right Answers</th>
+                                <th class="hidden-xxs" align="center" style="padding:8px 5px;">Score</th>
                                 <!-- <th class="hidden-xxs" align="center" style="height:50px;">Total</th> -->
-                                <th class="hidden-xs" align="center" style="height:50px;">Result</th>
-                                <th class="text-center" align="center" style="height:50px;">Signature</th>
+                                <th class="hidden-xs" align="center" style="padding:8px 5px;">Result</th>
+                                <th class="text-center" align="center" style="padding:8px 5px;">Signature</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -203,15 +203,15 @@ table th,
 
                              ?>
                                     <tr class="<?= ($i & 1) ? 'even' : 'odd'; ?>">
-                                        <td style="height:50px;width:5%" align="center"><?= $i ?></td>
-                                        <td style="height:50px;width:11%" align="center"><?= $result->user_name; ?></td>
-                                        <td style="height:50px;width:10%" align="center"><?= $result->user_phone; ?></td>
-                                        <td style="height:50px;width:10%" align="center"><?= count($GetAttempted) ?></td>
-                                        <td style="height:50px;width:7%" align="center"><?= count($GetRightAnswers) ?></td>
-                                        <td style="height:50px;width:10%" align="center"><?= $result->result_percent; ?>%</td>
+                                        <td style="padding:6px 5px; width:5%" align="center"><?= $i ?></td>
+                                        <td style="padding:6px 5px; width:11%" align="center"><?= $result->user_name; ?></td>
+                                        <td style="padding:6px 5px; width:10%" align="center"><?= $result->user_phone; ?></td>
+                                        <td style="padding:6px 5px; width:10%" align="center"><?= count($GetAttempted) ?></td>
+                                        <td style="padding:6px 5px; width:7%" align="center"><?= count($GetRightAnswers) ?></td>
+                                        <td style="padding:6px 5px; width:10%" align="center"><?= $result->result_percent; ?>%</td>
                                         <!-- <td style="height:50px;width:7%" align="center"><?php // round($ScoreCount,2)?></td> -->
-                                        <td class="hidden-xxs" style="height:50px;width:10%" align="center"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">Qualified</span>' : '<span class="label label-warning">Not Qualified</span>' ?></td>
-                                        <td style="height:50px;width:25%" align="center"></td>
+                                        <td class="hidden-xxs" style="padding:6px 5px; width:10%" align="center"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="label label-primary">Qualified</span>' : '<span class="label label-warning">Not Qualified</span>' ?></td>
+                                        <td style="padding:6px 5px; width:25%" align="center"></td>
                                         
                                     </tr>
                                     

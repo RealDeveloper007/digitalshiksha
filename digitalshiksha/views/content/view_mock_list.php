@@ -23,6 +23,17 @@
                <?= (isset($message)) ? $message : ''; ?>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <form method="get" id="Search-by-exam-code-form" action="<?= base_url('mock-test') ?>">
+
+                  <div class="form-group rental_details col-sm-12">
+                           <label for="exam_code" class="control-label required">Exam Code</label>
+                           <div>
+                              <input name="exam_code" class="form-control" id="exam_code" placeholder="Press Enter key after type Exam Code" value="<?php if (isset($_GET['exam_code'])) { echo $_GET['exam_code']; }?>" required>
+                           </div>
+                        </div> 
+            </form>
+               </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                <div class="row">
                   <form method="get" id="Search-form" action="<?= base_url('mock-test/' . $count) ?>">
@@ -69,6 +80,7 @@
                            </select>
                         </div>
                      </div>
+
                      <div class="col-sm-3 ">
                         <div class="filBtn">
                            <button type="submit" class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
@@ -77,6 +89,7 @@
                      </div>
                   </form>
                </div>
+
                <?php if ($commercial) { ?>
                   <div class="btn-group pull-right">
                      <a href="<?= base_url('exam_control/view_all_mocks') ?>" class="btn btn-sm btn-default">All</a>
@@ -131,13 +144,14 @@
                      }
                      ?>
                      <div id="pagination">
-
+                        <?php if (!isset($_GET['exam_code'])) { ?>
                         <ul class="tsc_pagination">
                            <!-- Show pagination links -->
                            <?php foreach ($links as $link) {
                               echo "<li>" . $link . "</li>";
                            } ?>
                         </ul>
+                        <?php } ?>
                      </div>
                   <?php
                   } else {

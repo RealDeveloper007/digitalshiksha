@@ -1277,13 +1277,13 @@ border-top: 1px solid #e5e5e5;
 }
 
 .reh3 {
-    background-color: #191970;
+    background:#191970 !important;
     margin: 0 auto 10px;
     text-align: center;
-    display: flex;
+    display: flex !important;
     justify-content: center;
     width: fit-content;
-    padding: 12px 30px;
+    padding: 10px 20px;
     border-radius: 4px;
     color: #fff;
 }
@@ -1298,8 +1298,8 @@ border-top: 1px solid #e5e5e5;
 
 
 ul.list-group li.list-group-item input {
-    width: 0;
-    margin: 0;
+/*    width: 0;*/
+    margin: 0 5px 0 0;
 }
 
 ul.list-group li.list-group-item span {
@@ -1311,7 +1311,7 @@ ul.list-group li.list-group-item.wrong_answer {
 }
 
 ul.list-group li.list-group-item.normal_answer {
-  background-color: #fffdd0 !important;
+/*  background-color: #fffdd0 !important;*/
 }
 
 ul.list-group li.list-group-item.correct_answer {
