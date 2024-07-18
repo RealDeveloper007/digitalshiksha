@@ -8,6 +8,16 @@
    {
     height: 49px;
    }
+   span.pull-right.exam_code_data {
+      background: blue;
+      color: white;
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1.5;
+   }
+   span.pull-right.exam_code_data:hover {
+    background: #F1B900;
+}
    </style>
 <section id="exams" class="secPad myBox useList">
    <div class="container">
@@ -23,15 +33,17 @@
                <?= (isset($message)) ? $message : ''; ?>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
             <form method="get" id="Search-by-exam-code-form" action="<?= base_url('mock-test') ?>">
 
                   <div class="form-group rental_details col-sm-12">
                            <label for="exam_code" class="control-label required">Exam Code</label>
                            <div>
-                              <input name="exam_code" class="form-control" id="exam_code" placeholder="Press Enter key after type Exam Code" value="<?php if (isset($_GET['exam_code'])) { echo $_GET['exam_code']; }?>" required>
+                              <input name="exam_code" class="form-control" id="exam_code" placeholder="Press Enter key after type Exam Code" value="<?php if (isset($_GET['exam_code'])) { echo $_GET['exam_code']; }?>" autocomplete="off">
                            </div>
                         </div> 
             </form>
+            </div>
                </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
@@ -125,6 +137,25 @@
                                     </div>
                                     <div class="startBtn">
                                        <a href="<?= base_url('mock-test-details/' . $mock->slug); ?>"><button class="btn btn-sm btn-primary">Start</button> </a>
+
+                                       <span class="pull-right exam_code_data" title="Exam Code">
+                                          <?php 
+
+                                                if(strlen($mock->title_id) == 1)
+                                                {
+                                                   echo 'MT00'.$mock->title_id;
+
+                                                } else if(strlen($mock->title_id) == 2)
+                                                {
+                                                   echo 'MT0'.$mock->title_id;
+
+                                                } else if(strlen($mock->title_id) == 3) {
+
+                                                   echo 'MT'.$mock->title_id;
+                                                }
+                                       
+                                          ?>
+                                       </span>
                                     </div>
                                     <?php if($this->session->userdata('type') != 'andriod') { ?>
                                     <div class="socialimg">
