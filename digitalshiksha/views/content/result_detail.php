@@ -49,6 +49,20 @@
 							<dd><?=$results->user_email?></dd>
 							<dt>Phone: </dt>
 							<dd><?=$results->user_phone?></dd>
+                            <dt>Exam Code: </dt>
+							<dd><?php if(strlen($results->title_id) == 1)
+                                                {
+                                                   echo 'MT00'.$results->title_id;
+
+                                                } else if(strlen($results->title_id) == 2)
+                                                {
+                                                   echo 'MT0'.$results->title_id;
+
+                                                } else if(strlen($results->title_id) == 3) {
+
+                                                   echo 'MT'.$results->title_id;
+                                                }
+                            ?> </dd>
 						</dl>
 					</div>					
                 </div>
