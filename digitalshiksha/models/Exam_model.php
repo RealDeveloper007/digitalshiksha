@@ -14,7 +14,7 @@ class Exam_model extends CI_Model
         $sort_by = $this->input->get('sort_by') ? $this->input->get('sort_by') : 'most_attempted';
         
         // Build base query
-        $this->db->select('exam_title.*, sub_categories.*, categories.*, users.*, exam_title.active AS exam_active, COUNT(result.result_id) as attempt_count')
+        $this->db->select('exam_title.*, sub_categories.*, categories.*, users.*, exam_title.active AS exam_active, COUNT(result.result_id) as attempt_count, (SELECT COUNT(*) FROM questions WHERE questions.exam_id = exam_title.title_id) AS question_count')
             ->from('exam_title')
             ->join('sub_categories', 'sub_categories.id = exam_title.sub_category_id')
             ->join('categories', 'categories.category_id = exam_title.category_id')

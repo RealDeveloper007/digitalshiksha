@@ -685,6 +685,13 @@
                                         
                                         <div class="mock-info-item">
                                             <div>
+                                                <span class="info-label">No. of Questions</span>
+                                                <span class="info-value"><?= (int) $mock->question_count; ?></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mock-info-item">
+                                            <div>
                                                 <span class="info-label">Author</span>
                                                 <span class="info-value"><?= htmlspecialchars($mock->user_name); ?></span>
                                             </div>

@@ -134,6 +134,7 @@ class Admin_model extends CI_Model
         if($examId == 'mock_test') {
             $this->db->select('*')
                 ->select("exam_title.active AS exam_active")
+                ->select("(SELECT COUNT(*) FROM questions WHERE questions.exam_id = exam_title.title_id) AS question_count")
                 ->from('exam_title')
                 ->where('user_id', $id)
                 ->where('batch_id',0)
@@ -142,6 +143,7 @@ class Admin_model extends CI_Model
         } else {
             $this->db->select('*')
                 ->select("exam_title.active AS exam_active")
+                ->select("(SELECT COUNT(*) FROM questions WHERE questions.exam_id = exam_title.title_id) AS question_count")
                 ->from('exam_title')
                 ->where('user_id', $id)
                 ->where('batch_id !=',0)

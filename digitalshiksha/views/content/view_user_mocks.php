@@ -615,6 +615,13 @@ a.no-style:hover {
                                             </div>
                                         </div>
                                         
+                                        <div class="mock-info-item">
+                                            <div>
+                                                <span class="info-label">No. of Questions</span>
+                                                <span class="info-value"><?= (int) $mock->question_count; ?></span>
+                                            </div>
+                                        </div>
+                                        
                                         <?php if($exam_type=='live_mock_test') { ?>
                                         <div class="mock-info-item">
                                             <div>
