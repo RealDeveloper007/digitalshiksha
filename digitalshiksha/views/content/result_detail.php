@@ -5,6 +5,10 @@
     }    
     ?>
 </div>
+<?php
+$result_pdf_url = base_url('exam_control/download_result_pdf/' . $results->result_id) . '?autoprint=1';
+$result_webview_print_url = base_url('exam_control/download_result_pdf/' . $results->result_id) . '?webview=1&autoprint=1';
+?>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <!-- Action Buttons Header -->
 <div class="hidden-print result-actions-header">
@@ -15,7 +19,7 @@
              <a href="<?=base_url('exam_control/view_exam_detail/'.$results->result_id);?>" class="btn btn-solution-action">
                     <i class="fa fa-book"></i> <span class="solution-text">View Solution</span>
                 </a>
-                <a href="<?=base_url('exam_control/download_result_pdf/'.$results->result_id);?>" target="_blank" id="printNew" class="btn btn-print-action">
+                <a href="<?= $result_webview_print_url ?>" id="printNew" class="btn btn-print-action">
                     <i class="fa fa-print"></i> <span class="print-text">Print Result</span>
                 </a>
                 <!-- Android specific actions if needed -->
@@ -23,7 +27,7 @@
                 <a href="<?=base_url('exam_control/view_exam_detail/'.$results->result_id);?>" class="btn btn-solution-action">
                     <i class="fa fa-book"></i> <span class="solution-text">View Solution</span>
                 </a>
-                <a href="<?=base_url('exam_control/download_result_pdf/'.$results->result_id);?>" target="_blank" id="printNew" class="btn btn-print-action">
+                <a href="<?= $result_pdf_url ?>" id="printNew" class="btn btn-print-action">
                     <i class="fa fa-print"></i> <span class="print-text">Print Result</span>
                 </a>
             <?php } ?>
@@ -1600,7 +1604,8 @@
     font-size: 18px !important;
 }
 
-a#printNew {
+.btn-print-action {
     padding: 7px 10px;
 }
+
 </style>

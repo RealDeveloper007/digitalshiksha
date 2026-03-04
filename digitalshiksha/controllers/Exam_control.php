@@ -1056,6 +1056,24 @@ class Exam_control extends MS_Controller
         $data['exam_title_image'] = $this->build_exam_title_image($result->title_name);
 
         $html = $this->load->view('content/result_detail_pdf', $data, TRUE);
+        $webview_mode = ((int)$this->input->get('webview') === 1);
+        $auto_print = ((int)$this->input->get('autoprint') === 1);
+
+        // Android WebView fallback: serve HTML version (same design source) instead of PDF stream.
+        if ($webview_mode) {
+            if ($auto_print) {
+                $print_script = '<script>window.addEventListener("load", function(){setTimeout(function(){window.print();}, 300);});</script>';
+                if (stripos($html, '</body>') !== false) {
+                    $html = preg_replace('/<\/body>/i', $print_script . '</body>', $html, 1);
+                } else {
+                    $html .= $print_script;
+                }
+            }
+
+            $this->output->set_content_type('text/html', 'UTF-8');
+            $this->output->set_output($html);
+            return;
+        }
 
         $this->load->library('pdf');
         $this->dompdf->loadHtml($html);
@@ -1073,7 +1091,20 @@ class Exam_control extends MS_Controller
         }
 
         $filename = $student_name_slug . '_' . $exam_name_slug . '.pdf';
-        $this->dompdf->stream($filename, array("Attachment" => 1));
+        $force_download = ((int)$this->input->get('download') === 1) ? 1 : 0;
+
+        if ($auto_print && $force_download === 0) {
+            // Ask PDF viewers (that support PDF JavaScript) to open print dialog.
+            $this->dompdf->getCanvas()->javascript('this.print(true);');
+        }
+
+        // Ensure no extra output corrupts the PDF stream.
+        if (ob_get_length()) {
+            ob_end_clean();
+        }
+
+        // Open inline for preview/print by default; allow forced download via ?download=1.
+        $this->dompdf->stream($filename, array("Attachment" => $force_download));
     }
 
     private function build_exam_title_image($title = '')
