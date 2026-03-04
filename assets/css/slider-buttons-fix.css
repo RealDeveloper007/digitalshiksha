@@ -1,0 +1,59 @@
+/* ============================================
+   SLIDER BUTTONS FIX - Position & Layout Shift
+   ============================================ */
+
+/* Fix layout shift and position buttons higher */
+.newBanner,
+.text-center.newBanner {
+    position: absolute !important;
+    bottom: 120px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    z-index: 6 !important;
+    display: flex !important;
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    padding: 0 20px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Prevent layout shift - ensure buttons don't shift on load */
+.newBanner .btn-home-slider {
+    flex-shrink: 0 !important;
+    min-width: 180px !important;
+    box-sizing: border-box !important;
+}
+
+/* Mobile view - buttons higher and centered */
+@media (max-width: 768px) {
+    .newBanner,
+    .text-center.newBanner {
+        bottom: 100px !important;
+        flex-direction: column !important;
+        width: 90% !important;
+        gap: 15px !important;
+        padding: 0 15px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        flex-shrink: 0 !important;
+        margin: 0 !important;
+    }
+}
+
+/* Override responsivenew.css margin rule */
+@media screen and (max-width: 767px) {
+    .text-center.newBanner {
+        margin: 0 !important;
+    }
+}
+

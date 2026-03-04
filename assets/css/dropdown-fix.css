@@ -1,0 +1,118 @@
+/* ============================================
+   DROPDOWN MENU FIX - FORCE VISIBILITY
+   Highest Priority - Loads Last to Override Everything
+   ============================================ */
+
+/* Show dropdown when parent has .open class - HIGHEST PRIORITY - OVERRIDE EVERYTHING */
+.navbar-nav .dropdown.open .dropdown-menu,
+.navbar-nav .dropdown.open > .dropdown-menu,
+.navbar-nav > li.dropdown.open > .dropdown-menu,
+.navbar-nav > li.dropdown.open .dropdown-menu,
+.navbar-nav li.dropdown.open > ul.dropdown-menu,
+.navbar-nav li.dropdown.open ul.dropdown-menu,
+ul.navbar-nav li.dropdown.open ul.dropdown-menu,
+.navbar-nav > li.dropdown.open > ul.dropdown-menu[role="menu"],
+.navbar-nav li.dropdown.open ul.dropdown-menu[role="menu"] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+    max-height: none !important;
+}
+
+/* Desktop: Show on hover - HIGHEST PRIORITY */
+@media (min-width: 992px) {
+    .navbar-nav .dropdown:hover > .dropdown-menu,
+    .navbar-nav .dropdown:hover .dropdown-menu,
+    .navbar-nav > li.dropdown:hover > .dropdown-menu,
+    .navbar-nav > li.dropdown:hover .dropdown-menu,
+    .navbar-nav li.dropdown:hover > ul.dropdown-menu,
+    .navbar-nav li.dropdown:hover ul.dropdown-menu,
+    .navbar-nav > li.dropdown:hover > ul.dropdown-menu[role="menu"] {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+    }
+    
+    /* Keep visible when hovering over menu */
+    .navbar-nav .dropdown.open .dropdown-menu:hover,
+    .navbar-nav .dropdown:hover .dropdown-menu:hover {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+    }
+}
+
+/* Mobile: Show when open - HIGHEST PRIORITY */
+@media (max-width: 991px) {
+    .navbar-nav .dropdown.open .dropdown-menu,
+    .navbar-nav .dropdown.open > .dropdown-menu,
+    .navbar-nav > li.dropdown.open > .dropdown-menu,
+    .navbar-nav > li.dropdown.open .dropdown-menu,
+    .navbar-nav li.dropdown.open > ul.dropdown-menu,
+    .navbar-nav li.dropdown.open ul.dropdown-menu,
+    .navbar-nav > li.dropdown.open > ul.dropdown-menu[role="menu"] {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateY(0) !important;
+        max-height: 500px !important;
+    }
+}
+
+/* ============================================
+   FORCE ALL DROPDOWN MENU ITEMS TO BE VISIBLE
+   HIGHEST PRIORITY - OVERRIDE EVERYTHING
+   ============================================ */
+
+/* Force all list items to be visible when dropdown is open */
+.navbar-nav .dropdown.open .dropdown-menu > li,
+.navbar-nav .dropdown.open > .dropdown-menu > li,
+.navbar-nav > li.dropdown.open > .dropdown-menu > li,
+.navbar-nav li.dropdown.open > ul.dropdown-menu > li,
+.navbar-nav li.dropdown.open ul.dropdown-menu > li,
+.navbar-nav .dropdown:hover .dropdown-menu > li,
+.navbar-nav .dropdown:hover > .dropdown-menu > li {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Force all links to be visible */
+.navbar-nav .dropdown.open .dropdown-menu > li > a,
+.navbar-nav .dropdown.open > .dropdown-menu > li > a,
+.navbar-nav > li.dropdown.open > .dropdown-menu > li > a,
+.navbar-nav li.dropdown.open > ul.dropdown-menu > li > a,
+.navbar-nav li.dropdown.open ul.dropdown-menu > li > a,
+.navbar-nav .dropdown:hover .dropdown-menu > li > a,
+.navbar-nav .dropdown:hover > .dropdown-menu > li > a {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #1f2937 !important;
+}
+
+/* User dropdown menu items */
+.navbar-nav .user-menu-dropdown.open .user-dropdown-menu > li,
+.navbar-nav > li.user-menu-dropdown.open > .user-dropdown-menu > li,
+.user-menu-dropdown.open .user-dropdown-menu > li {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+}
+
+.navbar-nav .user-menu-dropdown.open .user-dropdown-menu > li > a,
+.navbar-nav > li.user-menu-dropdown.open > .user-dropdown-menu > li > a,
+.user-menu-dropdown.open .user-dropdown-menu > li > a {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}

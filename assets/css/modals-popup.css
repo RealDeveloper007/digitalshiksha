@@ -1,0 +1,907 @@
+/* ============================================
+   MODERN MODAL/POPUP STYLES
+   Professional Login & Register Forms
+   Yellow/Gold Color Scheme
+   ============================================ */
+
+/* Hide popup by default on page load - only when html doesn't have popup_visible class */
+html:not(.popup_visible) .popup_wrapper,
+html:not(.popup_visible) #login_wrapper,
+html:not(.popup_visible) #register_wrapper {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Show popup when html has popup_visible class (plugin adds this on user click) */
+html.popup_visible .popup_wrapper,
+html.popup_visible #login_wrapper,
+html.popup_visible #register_wrapper {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Modal Overlay */
+.black_overlay,
+#fade {
+    background: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+/* Hide overlay by default, show when popup is visible */
+html:not(.popup_visible) .black_overlay,
+html:not(.popup_visible) #fade {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+html.popup_visible .black_overlay,
+html.popup_visible #fade {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Popup Container - Match #F1B900 Color Scheme */
+.my-popup {
+    background: #ffffff !important;
+    border: 3px solid #F1B900 !important;
+    border-radius: 20px !important;
+    box-shadow: 0 25px 50px -12px rgba(241, 185, 0, 0.3) !important;
+    padding: 0 !important;
+    overflow: hidden;
+    max-width: 480px !important;
+    animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Register Popup Specific */
+#register.my-popup {
+    max-width: 540px !important;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Modal Header - Match Register Button Colors */
+.my-popup h4 {
+    background: linear-gradient(135deg, #F1B900 0%, #ff8c00 100%) !important;
+    color: #000000 !important;
+    padding: 20px 30px !important;
+    margin: 0 !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Popup Close Icon in Header - Match Register Button Colors */
+.popup-close-icon {
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: 2px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 50% !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: #000000 !important;
+    font-size: 16px !important;
+    z-index: 10 !important;
+}
+
+.popup-close-icon:hover {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-50%) scale(1.1) !important;
+    color: #000000 !important;
+}
+
+.popup-close-icon i {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1 !important;
+}
+
+.popup-close-icon:focus {
+    outline: 2px solid #F1B900 !important;
+    outline-offset: 2px !important;
+}
+
+.my-popup h4:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 2px;
+    opacity: 0.8;
+}
+
+/* Form Container - Match #F1B900 Color Scheme */
+.popup-form {
+    background: #ffffff;
+    padding: 35px 30px !important;
+    border-top: 2px solid rgba(241, 185, 0, 0.1);
+}
+
+/* Register Form Specific */
+#register .popup-form {
+    padding: 25px 30px !important;
+    overflow: visible !important;
+    max-height: none !important;
+}
+
+/* Form Inputs - Match #F1B900 Color Scheme */
+.my-popup .form-control {
+    border: 2px solid #e5e7eb !important;
+    border-radius: 10px !important;
+    padding: 12px 18px 12px 50px !important;
+    font-size: 14px !important;
+    margin-bottom: 16px !important;
+    transition: all 0.3s ease !important;
+    background: #f9fafb;
+    width: 100%;
+    color: #1f2937;
+}
+
+.my-popup .form-control:focus {
+    border-color: #F1B900 !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(241, 185, 0, 0.15) !important;
+    outline: none !important;
+    transform: translateY(-1px);
+}
+
+.my-popup .form-control:hover {
+    border-color: rgba(241, 185, 0, 0.5) !important;
+}
+
+.my-popup .form-control::placeholder {
+    color: #6b7280;
+    opacity: 0.7;
+}
+
+/* Input Icons */
+.my-popup [style*="position: relative"] {
+    position: relative;
+    margin-bottom: 18px;
+}
+
+.my-popup [style*="position: relative"] i {
+    position: absolute !important;
+    left: 18px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #F1B900 !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+    font-size: 16px !important;
+    display: inline-block !important;
+    width: auto !important;
+    height: auto !important;
+    line-height: 1 !important;
+}
+
+/* Buttons */
+.my-popup .btn {
+    border-radius: 10px !important;
+    padding: 14px 30px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.my-popup .btn-primary,
+.my-popup .btn-warning {
+    background: linear-gradient(135deg, #F1B900 0%, #ff8c00 100%) !important;
+    color: #000000 !important;
+    box-shadow: 0 4px 15px rgba(241, 185, 0, 0.3) !important;
+    border: 2px solid #F1B900 !important;
+}
+
+.my-popup .btn-primary:hover,
+.my-popup .btn-warning:hover {
+    background: linear-gradient(135deg, #ff8c00 0%, #F1B900 100%) !important;
+    color: #000000 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(241, 185, 0, 0.4) !important;
+    border-color: #F1B900 !important;
+}
+
+.my-popup .btn-block {
+    width: 100% !important;
+    margin-top: 10px;
+}
+
+/* Popup Footer - Match #F1B900 Color Scheme */
+.popup-bottom {
+    background: #f9fafb;
+    padding: 18px 30px !important;
+    border-top: 2px solid rgba(241, 185, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-bottom .btn {
+    background: #ffffff !important;
+    color: #F1B900 !important;
+    border: 2px solid #F1B900 !important;
+    padding: 8px 20px !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+.popup-bottom .btn:hover {
+    background: linear-gradient(135deg, #F1B900 0%, #ff8c00 100%) !important;
+    color: #000000 !important;
+    border-color: #F1B900 !important;
+    box-shadow: 0 4px 12px rgba(241, 185, 0, 0.3) !important;
+}
+
+/* Links */
+.my-popup a {
+    color: #F1B900 !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.my-popup a:hover {
+    color: #ff8c00 !important;
+    text-decoration: underline !important;
+}
+
+/* Login Popup - Forgot Password Link */
+#login .popup-form a[href*="forgot-password"] {
+    color: #F1B900 !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: all 0.3s ease !important;
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+}
+
+#login .popup-form a[href*="forgot-password"]:hover {
+    color: #ff8c00 !important;
+    background: rgba(241, 185, 0, 0.1) !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+#login .popup-form a[href*="forgot-password"] i {
+    font-size: 14px !important;
+}
+
+/* Message Area */
+.message_area {
+    padding: 15px 20px;
+    margin: 0 0 25px 0;
+    border-radius: 12px;
+    background: rgba(241, 185, 0, 0.1);
+    border: 2px solid #F1B900;
+    font-size: 14px;
+    color: #000000;
+}
+
+.message_area:empty {
+    display: none;
+}
+
+/* OTP Div Styling */
+.otp_div {
+    margin: 20px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #fffef7 0%, #fffbf0 100%);
+    border: 2px dashed #F1B900;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.otp_div .form-control {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    padding: 16px 20px !important;
+}
+
+/* User Type Selection & OTP Selection */
+.user-type-selection,
+.otp-type-selection {
+    margin-bottom: 22px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f3f4f6;
+}
+
+.user-type-selection:last-of-type,
+.otp-type-selection:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.selection-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 12px;
+    text-align: left;
+    letter-spacing: 0.2px;
+}
+
+/* User Type Tabs */
+.user-type-tabs {
+    display: flex;
+    gap: 0;
+    border: 2px solid #e5e7eb;
+    background: #f9fafb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    padding: 2px;
+}
+
+.user-tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    text-align: center;
+}
+
+.user-tab:not(:last-child) {
+    border-right: 1px solid #e5e7eb;
+}
+
+.user-tab.active:not(:last-child),
+.user-tab:has(input[type="radio"]:checked):not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-tab input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.tab-icon {
+    font-size: 24px;
+    color: #6b7280;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    min-width: 28px;
+    margin-bottom: 4px;
+}
+
+.tab-icon i {
+    display: inline-block !important;
+    font-size: inherit;
+    color: inherit;
+    width: auto;
+    height: auto;
+}
+
+.tab-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5568;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-tab:hover {
+    background: linear-gradient(135deg, rgba(241, 185, 0, 0.08) 0%, rgba(255, 140, 0, 0.08) 100%);
+}
+
+.user-tab:hover .tab-icon {
+    color: #F1B900;
+    transform: scale(1.15);
+}
+
+.user-tab:hover .tab-text {
+    color: #F1B900;
+}
+
+.user-tab.active,
+.user-tab:has(input[type="radio"]:checked) {
+    background: linear-gradient(135deg, #F1B900 0%, #ff8c00 100%) !important;
+    box-shadow: 0 4px 15px rgba(241, 185, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.user-tab.active:first-child,
+.user-tab:has(input[type="radio"]:checked):first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.user-tab.active:last-child,
+.user-tab:has(input[type="radio"]:checked):last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.user-tab.active:only-child,
+.user-tab:has(input[type="radio"]:checked):only-child {
+    border-radius: 10px;
+}
+
+.user-tab.active::before,
+.user-tab:has(input[type="radio"]:checked)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.user-tab.active .tab-icon,
+.user-tab:has(input[type="radio"]:checked) .tab-icon {
+    color: #ffffff !important;
+    transform: scale(1.3);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.user-tab.active .tab-icon i,
+.user-tab:has(input[type="radio"]:checked) .tab-icon i {
+    display: inline-block !important;
+    animation: iconPulse 2s ease-in-out infinite;
+    font-size: 26px;
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.user-tab.active .tab-text,
+.user-tab:has(input[type="radio"]:checked) .tab-text {
+    color: #ffffff !important;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    letter-spacing: 0.3px;
+}
+
+.selection-options {
+    display: flex;
+    gap: 15px;
+    justify-content: stretch;
+}
+
+.selection-option {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selection-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.option-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.option-icon i {
+    font-size: 13px;
+    color: #6b7280;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block !important;
+    line-height: 1;
+}
+
+.option-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: #4a5568;
+    transition: all 0.3s ease;
+}
+
+/* Hover State */
+.selection-option:hover {
+    border-color: #F1B900;
+    background: linear-gradient(135deg, rgba(241, 185, 0, 0.03) 0%, rgba(255, 140, 0, 0.03) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(241, 185, 0, 0.15);
+}
+
+.selection-option:hover .option-icon {
+    background: linear-gradient(135deg, rgba(241, 185, 0, 0.1) 0%, rgba(255, 140, 0, 0.1) 100%);
+    border-color: #F1B900;
+    transform: scale(1.05);
+}
+
+.selection-option:hover .option-icon i {
+    color: #F1B900;
+    transform: scale(1.15);
+}
+
+.selection-option:hover .option-text {
+    color: #F1B900;
+}
+
+/* Active/Checked State */
+.selection-option.active,
+.selection-option:has(input[type="radio"]:checked) {
+    border-color: #F1B900;
+    border-width: 2px;
+    background: linear-gradient(135deg, rgba(241, 185, 0, 0.08) 0%, rgba(255, 140, 0, 0.08) 100%);
+    box-shadow: 0 4px 15px rgba(241, 185, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.selection-option.active .option-icon,
+.selection-option:has(input[type="radio"]:checked) .option-icon {
+    background: linear-gradient(135deg, #F1B900 0%, #ff8c00 100%);
+    border-color: #F1B900;
+    box-shadow: 0 4px 12px rgba(241, 185, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+}
+
+.selection-option.active .option-icon i,
+.selection-option:has(input[type="radio"]:checked) .option-icon i {
+    color: #ffffff !important;
+    transform: scale(1.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    display: inline-block !important;
+    font-size: 13px !important;
+}
+
+.selection-option.active .option-text,
+.selection-option:has(input[type="radio"]:checked) .option-text {
+    color: #F1B900;
+    font-weight: 700;
+}
+
+/* Legacy Support - Keep old classes working */
+.order-container {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.order-options {
+    display: flex;
+    gap: 15px;
+    justify-content: stretch;
+}
+
+.option {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 2px solid #e5e7eb !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.option b {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.option:hover {
+    border-color: #F1B900 !important;
+    background: #fffef7 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(241, 185, 0, 0.15) !important;
+}
+
+.option:has(input[type="radio"]:checked) {
+    border-color: #F1B900 !important;
+    background: linear-gradient(135deg, rgba(241, 185, 0, 0.05) 0%, rgba(255, 140, 0, 0.05) 100%) !important;
+    box-shadow: 0 4px 15px rgba(241, 185, 0, 0.2) !important;
+}
+
+/* Text Muted */
+.my-popup .text-muted {
+    color: #6b7280 !important;
+}
+
+.my-popup .text-muted i {
+    color: #F1B900;
+}
+
+/* Other Fields Section */
+.other_fields {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #f3f4f6;
+}
+
+.other_fields > div[style*="position: relative"] {
+    margin-bottom: 20px;
+}
+
+.other_fields > div[style*="position: relative"]:last-of-type {
+    margin-bottom: 20px;
+}
+
+/* reCAPTCHA Styling */
+.g-recaptcha {
+    margin: 18px 0 !important;
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Send OTP Button */
+#send_otp {
+    margin-top: 16px;
+    margin-bottom: 5px;
+    padding: 12px 30px !important;
+    font-size: 14px !important;
+}
+
+/* Final Submit Button Container */
+.mb15.other_fields {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 2px solid #f3f4f6;
+}
+
+#register_button {
+    padding: 13px 30px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Form Field Spacing for Register */
+#register .popup-form > div[style*="position: relative"] {
+    margin-bottom: 20px;
+}
+
+#register .popup-form > div[style*="position: relative"]:first-of-type {
+    margin-top: 0;
+}
+
+/* Register Form Field Spacing */
+#register .popup-form > div[style*="position: relative"] {
+    margin-bottom: 16px;
+}
+
+#register .popup-form > div[style*="position: relative"]:last-of-type {
+    margin-bottom: 16px;
+}
+
+/* Info Text Styling */
+#register .text-muted {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 10px 16px;
+    margin: 16px 0 0 0;
+    font-size: 12px;
+    color: #0369a1 !important;
+}
+
+#register .text-muted i {
+    color: #0284c7;
+    margin-right: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .my-popup {
+        max-width: 95% !important;
+        margin: 20px auto;
+        border-radius: 18px !important;
+    }
+    
+    #register.my-popup {
+        max-width: 95% !important;
+    }
+    
+    .popup-form {
+        padding: 25px 20px !important;
+    }
+    
+    #register .popup-form {
+        padding: 25px 20px !important;
+    }
+    
+    .my-popup h4 {
+        padding: 22px 50px 22px 20px !important;
+        font-size: 22px !important;
+    }
+    
+    .popup-close-icon {
+        right: 15px !important;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 14px !important;
+    }
+    
+    .user-type-tabs {
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .user-tab {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+    
+    .tab-icon {
+        font-size: 20px;
+        min-width: 24px;
+    }
+    
+    .user-tab.active .tab-icon i,
+    .user-tab:has(input[type="radio"]:checked) .tab-icon i {
+        font-size: 22px;
+    }
+    
+    .tab-text {
+        font-size: 13px;
+    }
+    
+    .selection-options {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .selection-option {
+        width: 100%;
+        min-height: 100px;
+    }
+    
+    .option-content {
+        padding: 18px 15px;
+        gap: 10px;
+    }
+    
+    .option-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .option-icon i {
+        font-size: 13px;
+    }
+    
+    .option-text {
+        font-size: 13px;
+    }
+    
+    /* Register form fields on mobile */
+    #register .popup-form > div[style*="position: relative"] {
+        margin-bottom: 18px;
+    }
+    
+    /* Legacy support */
+    .order-options {
+        flex-direction: column;
+    }
+    
+    .option {
+        width: 100%;
+    }
+}

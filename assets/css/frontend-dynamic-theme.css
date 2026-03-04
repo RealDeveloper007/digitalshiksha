@@ -1,0 +1,265 @@
+/* 
+ * Frontend Dynamic Theme CSS
+ * This file applies dynamic colors to all frontend pages using CSS variables
+ * Colors are defined in :root and can be changed from admin panel
+ */
+
+/* ============================================
+   GLOBAL OVERRIDES - High Specificity
+   ============================================ */
+
+/* Override common header patterns */
+.panel-heading,
+.card-header,
+.page-header,
+.section-header {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%) !important;
+    border-bottom-color: var(--theme-accent) !important;
+}
+
+/* Override common card/panel patterns */
+.quiz-card,
+.mock-card,
+.batch-card,
+.student-card {
+    background-color: var(--theme-primary) !important;
+}
+
+.quiz-card-body,
+.mock-card-body,
+.batch-card-body {
+    background-color: var(--theme-primary) !important;
+}
+
+/* Border left patterns */
+.card[style*="border-left"],
+.panel[style*="border-left"],
+.quiz-card[style*="border-left"],
+.mock-card[style*="border-left"] {
+    border-left-color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   COMMON ELEMENTS - Headers, Cards, Buttons
+   ============================================ */
+
+/* Headers with gradient backgrounds - using data attributes for better targeting */
+[data-theme-gradient="primary"] {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%) !important;
+}
+
+/* Headers with border-bottom gold */
+[style*="border-bottom: 3px solid #FFD700"],
+[style*="border-bottom:3px solid #FFD700"],
+[style*="border-bottom: 2px solid #FFD700"],
+[style*="border-bottom:2px solid #FFD700"] {
+    border-bottom-color: var(--theme-accent) !important;
+}
+
+/* Icons with gold color */
+[style*="color: #FFD700"],
+[style*="color:#FFD700"],
+[style*="color: #F1B900"],
+[style*="color:#F1B900"] {
+    color: var(--theme-accent) !important;
+}
+
+/* Borders with gold */
+[style*="border-color: #FFD700"],
+[style*="border-color:#FFD700"],
+[style*="border:.*#FFD700"],
+[style*="border-left:.*#FFD700"],
+[style*="border-left-color: #FFD700"] {
+    border-color: var(--theme-accent) !important;
+}
+
+/* Background colors - primary dark */
+[style*="background: #2c3e50"],
+[style*="background:#2c3e50"],
+[style*="background-color: #2c3e50"],
+[style*="background-color:#2c3e50"] {
+    background: var(--theme-primary) !important;
+    background-color: var(--theme-primary) !important;
+}
+
+/* Cards with primary background */
+.quiz-card[style*="background: #2c3e50"],
+.quiz-card[style*="background:#2c3e50"] {
+    background: var(--theme-primary) !important;
+}
+
+.quiz-card-body[style*="background: #2c3e50"],
+.quiz-card-body[style*="background:#2c3e50"] {
+    background: var(--theme-primary) !important;
+}
+
+/* Border left with gold */
+[style*="border-left: 4px solid #FFD700"],
+[style*="border-left:4px solid #FFD700"],
+[style*="border-left: 3px solid #FFD700"],
+[style*="border-left:3px solid #FFD700"] {
+    border-left-color: var(--theme-accent) !important;
+}
+
+/* Buttons with primary/gold colors */
+.btn[style*="background: #2c3e50"],
+.btn[style*="background:#2c3e50"],
+.btn[style*="background-color: #2c3e50"],
+.btn[style*="background-color:#2c3e50"] {
+    background: var(--theme-primary) !important;
+    background-color: var(--theme-primary) !important;
+}
+
+.btn[style*="background: #FFD700"],
+.btn[style*="background:#FFD700"],
+.btn[style*="background-color: #FFD700"],
+.btn[style*="background-color:#FFD700"] {
+    background: var(--theme-accent) !important;
+    background-color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   SPECIFIC CLASS SELECTORS
+   ============================================ */
+
+/* Section titles with gold borders */
+.section-title[style*="border-bottom"],
+h4[style*="border-bottom"] {
+    border-bottom-color: var(--theme-accent) !important;
+}
+
+/* Form controls focus states */
+.form-control:focus {
+    border-color: var(--theme-accent) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25) !important;
+}
+
+/* Input groups with gold borders */
+.input-group:focus-within .input-group-addon {
+    border-color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   NAVIGATION & HEADER
+   ============================================ */
+
+/* Active navigation items */
+.navbar-nav > li.active > a,
+.navbar-nav > li.active > a:hover,
+.navbar-nav > li.active > a:focus {
+    color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   CARDS & PANELS
+   ============================================ */
+
+/* Card headers with gradient */
+.card-header[style*="linear-gradient"],
+.panel-heading[style*="linear-gradient"] {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%) !important;
+}
+
+/* Cards with gold left border */
+.card[style*="border-left"],
+.panel[style*="border-left"] {
+    border-left-color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   BUTTONS & LINKS
+   ============================================ */
+
+/* Primary buttons */
+.btn-primary {
+    background-color: var(--theme-primary) !important;
+    border-color: var(--theme-primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: var(--theme-secondary) !important;
+    border-color: var(--theme-secondary) !important;
+}
+
+/* Warning/Accent buttons */
+.btn-warning,
+.register_open,
+.login_open {
+    background-color: var(--theme-accent) !important;
+    border-color: var(--theme-accent) !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.register_open:hover,
+.login_open:hover {
+    background-color: var(--theme-accent-alt) !important;
+    border-color: var(--theme-accent-alt) !important;
+}
+
+/* Info buttons */
+.btn-info {
+    background-color: var(--theme-primary) !important;
+    border-color: var(--theme-primary) !important;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active {
+    background-color: var(--theme-accent) !important;
+    border-color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   BADGES & LABELS
+   ============================================ */
+
+/* Badges with gold background */
+.badge[style*="background: #FFD700"],
+.badge[style*="background:#FFD700"],
+.badge[style*="background-color: #FFD700"],
+.badge[style*="background-color:#FFD700"] {
+    background: var(--theme-accent) !important;
+    background-color: var(--theme-accent) !important;
+}
+
+/* ============================================
+   TEXT COLORS
+   ============================================ */
+
+/* Text with primary color */
+[style*="color: #2c3e50"],
+[style*="color:#2c3e50"] {
+    color: var(--theme-primary) !important;
+}
+
+/* ============================================
+   GRADIENTS
+   ============================================ */
+
+/* All gradients using primary colors */
+[style*="linear-gradient(135deg, #2c3e50 0%, #34495e 100%"] {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%) !important;
+}
+
+[style*="linear-gradient(135deg, #34495e 0%, #2c3e50 100%"] {
+    background: linear-gradient(135deg, var(--theme-secondary) 0%, var(--theme-primary) 100%) !important;
+}
+
+/* Gold gradients */
+[style*="linear-gradient(135deg, #FFD700"],
+[style*="linear-gradient(135deg, #F1B900"] {
+    background: linear-gradient(135deg, var(--theme-accent) 0%, var(--theme-accent-alt) 100%) !important;
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Mobile-specific overrides if needed */
+}
+

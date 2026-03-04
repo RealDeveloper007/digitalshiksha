@@ -1,0 +1,7 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+
+Sitemap: https://digitalshikshadarpan.com/sitemap.xml
+Sitemap: https://digitalshikshadarpan.com/sitemap1.xml
+Sitemap: https://digitalshikshadarpan.com/sitemap2.xml

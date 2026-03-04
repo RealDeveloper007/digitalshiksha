@@ -1,0 +1,59 @@
+/* Dynamic Theme CSS - Colors loaded from system settings */
+:root {
+    /* Default colors - will be overridden by inline styles */
+    --theme-primary: #2c3e50;
+    --theme-secondary: #34495e;
+    --theme-accent: #FFD700;
+    --theme-accent-alt: #F1B900;
+    --theme-text: #333333;
+    --theme-text-light: #666666;
+    --theme-bg: #ffffff;
+    --theme-bg-dark: #1a1a1a;
+}
+
+/* Apply dynamic colors to common elements */
+.theme-primary { color: var(--theme-primary) !important; }
+.theme-secondary { color: var(--theme-secondary) !important; }
+.theme-accent { color: var(--theme-accent) !important; }
+.theme-accent-alt { color: var(--theme-accent-alt) !important; }
+
+.bg-theme-primary { background-color: var(--theme-primary) !important; }
+.bg-theme-secondary { background-color: var(--theme-secondary) !important; }
+.bg-theme-accent { background-color: var(--theme-accent) !important; }
+.bg-theme-accent-alt { background-color: var(--theme-accent-alt) !important; }
+
+.border-theme-accent { border-color: var(--theme-accent) !important; }
+.border-theme-primary { border-color: var(--theme-primary) !important; }
+
+/* Gradient backgrounds */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-secondary) 100%) !important;
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, var(--theme-accent) 0%, var(--theme-accent-alt) 100%) !important;
+}
+
+/* Buttons */
+.btn-theme-primary {
+    background: var(--theme-primary) !important;
+    border-color: var(--theme-primary) !important;
+    color: #fff !important;
+}
+
+.btn-theme-primary:hover {
+    background: var(--theme-secondary) !important;
+    border-color: var(--theme-secondary) !important;
+}
+
+.btn-theme-accent {
+    background: var(--theme-accent) !important;
+    border-color: var(--theme-accent) !important;
+    color: #000 !important;
+}
+
+.btn-theme-accent:hover {
+    background: var(--theme-accent-alt) !important;
+    border-color: var(--theme-accent-alt) !important;
+}
+

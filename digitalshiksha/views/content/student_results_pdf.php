@@ -1,0 +1,360 @@
+<?php
+$CI =& get_instance();
+$theme_primary = $CI->session->userdata('primary_color') ?: '#2c3e50';
+$theme_secondary = $CI->session->userdata('secondary_color') ?: '#34495e';
+$theme_accent = $CI->session->userdata('accent_color') ?: '#FFD700';
+$theme_accent_alt = $CI->session->userdata('accent_color_alt') ?: '#F1B900';
+$theme_text = $CI->session->userdata('text_color') ?: '#333333';
+$header_brand_name = ($brand_name) ? $brand_name : 'Digital Shiksha';
+
+$school_name = isset($details->school_name) ? trim((string)$details->school_name) : '';
+$district_name = isset($details->district) ? trim((string)$details->district) : '';
+$school_line_1 = $school_name;
+$school_line_2 = $district_name;
+
+if ($school_name !== '' && preg_match('/\bschool\b/i', $school_name, $match, PREG_OFFSET_CAPTURE)) {
+	$match_text = $match[0][0];
+	$match_pos = $match[0][1];
+	$split_pos = $match_pos + strlen($match_text);
+
+	$school_line_1 = trim(substr($school_name, 0, $split_pos));
+	$remaining_school_text = trim(substr($school_name, $split_pos));
+
+	if ($remaining_school_text !== '' && $district_name !== '') {
+		$school_line_2 = $remaining_school_text . ' (' . $district_name . ')';
+	} elseif ($remaining_school_text !== '') {
+		$school_line_2 = $remaining_school_text;
+	} else {
+		$school_line_2 = $district_name;
+	}
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Student Results</title>
+	<style>
+         /* @page {
+            margin: 100px 25px;
+        } */
+		body {
+			position: relative;
+			font-family: 'Helvetica';
+			font-size: 11px;
+			color: <?= $theme_text ?>;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+            page-break-before:auto;
+		}
+
+    a.btn.btn-default.btn-xs {
+    margin: 6px;
+}
+span i {
+    background: <?= $theme_secondary ?>;
+    color: #ffffff;
+    border-radius: 4px;
+}
+tr td.ans {
+    width: 168px
+}
+
+#renderPdf{
+    cursor: pointer;
+}
+
+.PrintClass
+{
+    padding-left: 15px !important;
+    margin-top: -106px !important;
+}
+.result_calculation .col-md-2 {
+    font-size: 17px;
+    font-weight: 700;
+}
+.result_calculation .col-md-3 {
+    font-size: 17px;
+    font-weight: 700;
+}
+table th {
+    color : <?= $theme_primary ?>;
+    background: #f7f9fc;
+}
+table th,
+		table td {
+			border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+            border-right: 1px solid #333;
+			border-left: 1px solid #333;
+		}
+
+        .no-border {
+			border: 0;
+		}
+
+            header {
+                /* position: fixed;
+                top: -70px;
+                height: 60px;
+                background-color: white;
+                text-align: center;
+                /* overflow: hidden; 
+                left: 0;
+                right: 0; */
+                bottom : 20px;
+                color: <?= $theme_accent_alt ?>;
+                line-height: 30px;
+                /* clear: both; */
+            }
+
+        .content {
+            /* page-break-before: always; */
+            margin-top: 20px; /* Ensure this matches the @page margin-top to avoid overlap */
+        }
+        tr{page-break-inside: avoid;  
+            page-break-after: auto;} 
+
+            .watermark {
+			position: absolute;
+			top: 10.6%;
+			width: 100%;
+			height: 880px;
+			opacity: .13;
+			object-fit: cover;
+			z-index: -1;
+		}
+        .footer
+        {
+            font-size:12px;
+        }
+
+		.report-highlight {
+			color: <?= $theme_primary ?>;
+		}
+
+		.report-header {
+			text-align: center;
+			margin-bottom: 12px;
+		}
+
+		.report-brand {
+			white-space: nowrap;
+			margin-bottom: 6px;
+		}
+
+		.report-brand-icon {
+			height: 40px;
+			width: 40px;
+			vertical-align: middle;
+			margin-right: 10px;
+		}
+
+		.report-brand-text {
+			font-size: 22px;
+			font-weight: 900;
+			color: <?= $theme_accent_alt ?>;
+			vertical-align: middle;
+			letter-spacing: -0.4px;
+			line-height: 1.1;
+		}
+
+		.report-meta {
+			font-size: 13px;
+			line-height: 1.35;
+			color: <?= $theme_primary ?>;
+		}
+
+		.result-chip {
+			display: inline-block;
+			padding: 4px 8px;
+			border-radius: 4px;
+			font-size: 10px;
+			font-weight: bold;
+			color: #fff;
+		}
+
+		.result-chip.pass {
+			background: <?= $theme_primary ?>;
+		}
+
+		.result-chip.fail {
+			background: #a94442;
+		}
+    </style>
+
+</head>
+
+<body style="border:3px solid <?= $theme_accent_alt ?>; padding: 20px;">
+<header>
+	<div class="report-header">
+		<div class="report-brand">
+			<img src="<?= base_url('assets/images/favicon.png') ?>" alt="Logo Icon" class="report-brand-icon">
+			<span class="report-brand-text"><?= htmlspecialchars($header_brand_name) ?></span>
+		</div>
+		<div class="report-meta">
+			<div><strong><?= htmlspecialchars($school_line_1) ?></strong></div>
+			<div><strong><?= htmlspecialchars($school_line_2) ?></strong></div>
+			<div>Exam Portal: www.digitalshikshadarpan.com</div>
+			<div><?= $setting->heading ?></div>
+		</div>
+	</div>
+        </header>
+        <div class="content">
+
+<table cellpadding="0" cellspacing="0">
+   <thead style="width: 100%;
+   max-width: 100%;top:0px">
+   <tr>
+       <th align="center" style="font-size: 14px;">Exam Title</th>
+       <th align="center" style="font-size: 14px;">Batch Code</th>
+	   <th align="center" style="font-size: 14px;">Total No. of Questions</th>
+       <th align="center" style="font-size: 14px;">Class</th>	    
+       <th align="center" style="font-size: 14px;">Date</th>
+       <th align="center" style="font-size: 14px;">Prepared By</th>
+   </tr>
+   </thead>
+   <tbody style="width: 100%;
+   max-width: 100%;">
+       <tr class="accordion-group" >
+           <td align="center" style="height:63px;"><?= $mock_details->title_name ?></td>
+           <td align="center" style="height:63px;"><?= $mock_details->batch_name.' - '.$mock_details->batch_code ?></td>
+		   <td align="center" style="height:63px;"><?= count($all_questions) ?></td>
+           <td align="center" style="height:63px;"><?= $mock_details->category_name ?></td>		   
+           <td align="center" style="height:63px;"><?= date('d-M-y',strtotime($mock_details->exam_created)) ?></td>		   
+           <td align="center" style="height:63px;"><?= $mock_details->user_name=='' ? '' : $mock_details->user_name ?></td>
+       </tr>
+   </tbody>
+ </table>
+
+ <br>
+ <br>
+
+                <?php if (isset($student_results) != NULL) { ?>
+                    <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered" id="example">
+                        <thead>
+                            <tr>
+                                <th align="center"  style="padding:8px 5px;">#</th>
+                                <th align="center" style="padding:8px 5px;">Student's Name</th>
+                                <th align="center" style="padding:8px 5px;">Student's Phone</th>
+                                <th align="center" style="padding:8px 5px;">Attempted Questions</th>
+                                <th align="center" style="padding:8px 5px;">Right Answers</th>
+                                <th class="hidden-xxs" align="center" style="padding:8px 5px;">Score</th>
+                                <!-- <th class="hidden-xxs" align="center" style="height:50px;">Total</th> -->
+                                <th class="hidden-xs" align="center" style="padding:8px 5px;">Result</th>
+                                <th class="text-center" align="center" style="padding:8px 5px;">Signature</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            $i = 1;
+                            $ResultArray = array();
+                            if($student_results){
+                            foreach ($student_results as $result) {
+                                if($result->result_percent >= $result->pass_mark)
+                                {
+                                    $ResultArray[] = 'pass';
+                                } else {
+                                    $ResultArray[] = 'fail';
+                                }
+
+                                $ScoreCount = ($result->result_percent * $result->question_answered)/100;
+
+                                $GetAttempted = [];
+                                $GetRightAnswers = [];
+
+                                foreach($all_questions as $SingleQuestion) :
+
+                                $StudentQuestionsResults = json_decode($result->result_json);
+
+                                    $CheckAns =  $this->CI->StudentQuestionAnswer($StudentQuestionsResults,$SingleQuestion->ques_id,$result->exam_id);
+
+                                    if($CheckAns!=='not_attempted')
+                                    {
+                                        $GetAttempted[] = 'attempted';
+
+                                    }
+
+                                     if($CheckAns=='right')
+                                    {
+                                        $GetRightAnswers[] = 'right';
+
+                                    }
+
+                                endforeach;
+
+                             ?>
+                                    <tr class="<?= ($i & 1) ? 'even' : 'odd'; ?>">
+                                        <td style="padding:6px 5px; width:5%" align="center"><?= $i ?></td>
+                                        <td style="padding:6px 5px; width:11%" align="center"><?= $result->user_name; ?></td>
+                                        <td style="padding:6px 5px; width:10%" align="center"><?= $result->user_phone; ?></td>
+                                        <td style="padding:6px 5px; width:10%" align="center"><?= count($GetAttempted) ?></td>
+                                        <td style="padding:6px 5px; width:7%" align="center"><?= count($GetRightAnswers) ?></td>
+                                        <td style="padding:6px 5px; width:10%" align="center"><?= $result->result_percent; ?>%</td>
+                                        <!-- <td style="height:50px;width:7%" align="center"><?php // round($ScoreCount,2)?></td> -->
+                                        <td class="hidden-xxs" style="padding:6px 5px; width:10%" align="center"><?= ($result->result_percent >= $result->pass_mark) ? '<span class="result-chip pass">Qualified</span>' : '<span class="result-chip fail">Not Qualified</span>' ?></td>
+                                        <td style="padding:6px 5px; width:25%" align="center"></td>
+                                        
+                                    </tr>
+                                    
+                                    <?php
+                                    $i++;
+                                }
+                                    
+                                } else {
+
+                                            echo "<tr><td colspan='9' style='height:30px;' align='center'>No Result found</td></tr>";
+                             } ?>
+                        </tbody>
+                    </table>
+                <?php
+                } else {
+                    echo 'No results!';
+                }
+
+                $ResultDeclared = array_count_values($ResultArray);
+                $Passed = isset($ResultDeclared['pass']) ? $ResultDeclared['pass'] : 0;
+                $Failed = isset($ResultDeclared['fail']) ? $ResultDeclared['fail'] : 0;
+                $TotalStudents = (int)$Passed + (int)$Failed; 
+                $PassPercentage = ($TotalStudents > 0) ? ($Passed / $TotalStudents * 100) : 0;
+                ?>
+
+                
+<table cellspacing="0" border="0" cellpadding="5" class="footer">
+		
+        <tr>
+			<td colspan="8" class="no-border">&nbsp;</td>
+		</tr>
+		<tr>
+			<th colspan="2" align="left" class="bottom">Total % Qualified Students:&nbsp;
+                <?php
+                if($PassPercentage != 'NAN')
+                {
+                   echo number_format((float)$PassPercentage, 2, '.', '');
+                } else {
+                    echo "--";
+                }
+                ?>
+            </th>
+			<th colspan="3" align="left" class="bottom">Qualified Students:&nbsp;<?= $Passed ?></th>
+            <th colspan="3" align="left" class="bottom">Not Qualified Students:&nbsp;<?= $Failed ?></th>
+		</tr>
+
+        <tr>
+			<td colspan="8" class="no-border">&nbsp;</td>
+		</tr>
+		<tr>
+			<th colspan="2" class="no-border">&nbsp;</th>
+			<th colspan="3" class="bottom" style="height:63px;" align="center">Sign of Class Teacher</th>
+			<th colspan="3" class="right bottom" style="height:63px;" align="center">Sign of Principal</th>
+		</tr>
+
+</table>
+           
+            </div>
+</html>

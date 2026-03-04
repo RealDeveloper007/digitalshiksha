@@ -1,0 +1,14 @@
+[19-Jul-2025 09:26:10 UTC] PHP Warning:  Undefined array key "script" in /home3/digiajtr/public_html/db/index.php on line 169
+[19-Jul-2025 09:26:10 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home3/digiajtr/public_html/db/index.php on line 169
+[19-Jul-2025 09:26:10 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home3/digiajtr/public_html/db/index.php:20
+Stack trace:
+#0 /home3/digiajtr/public_html/db/index.php(169): remove_slashes(Array, false)
+#1 {main}
+  thrown in /home3/digiajtr/public_html/db/index.php on line 20
+[19-Jul-2025 09:28:49 UTC] PHP Warning:  Undefined array key "script" in /home3/digiajtr/public_html/db/index.php on line 169
+[19-Jul-2025 09:28:49 UTC] PHP Warning:  Undefined array key "HTTP_X_FORWARDED_PREFIX" in /home3/digiajtr/public_html/db/index.php on line 169
+[19-Jul-2025 09:28:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_magic_quotes_gpc() in /home3/digiajtr/public_html/db/index.php:20
+Stack trace:
+#0 /home3/digiajtr/public_html/db/index.php(169): remove_slashes(Array, false)
+#1 {main}
+  thrown in /home3/digiajtr/public_html/db/index.php on line 20

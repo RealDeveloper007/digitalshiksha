@@ -1,0 +1,252 @@
+<style>
+    .category-form-wrapper {
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+    
+    .form-header {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        border-bottom: 3px solid #FFD700;
+        color: white;
+        padding: 12px 15px;
+        margin-bottom: 0;
+    }
+    
+    .form-header h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .form-header h4 i {
+        font-size: 14px;
+        color: #FFD700;
+    }
+    
+    .form-body {
+        padding: 12px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+        display: block;
+        font-size: 12px;
+    }
+    
+    .form-group label .required {
+        color: #dc3545;
+        margin-left: 3px;
+    }
+    
+    .form-control {
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        color: #333;
+        font-size: 13px;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #fff;
+    }
+    
+    .form-control:focus {
+        border-color: #FFD700;
+        border-width: 2px;
+        box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        outline: 0;
+        color: #333;
+    }
+    
+    .form-control::placeholder {
+        color: #999;
+    }
+    
+    .form-actions {
+        padding: 12px 15px;
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .form-actions .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 4px;
+        transition: all 0.3s;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    
+    .form-actions .btn-primary {
+        background: #FFD700;
+        color: #000;
+    }
+    
+    .form-actions .btn-primary:hover {
+        background: #FFC107;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+    
+    .alert {
+        margin-bottom: 20px;
+        border-radius: 4px;
+    }
+    
+    @media (max-width: 767px) {
+        .category-form-wrapper {
+            margin-bottom: 15px;
+        }
+        
+        .form-header {
+            padding: 12px 15px;
+        }
+        
+        .form-header h4 {
+            font-size: 16px;
+        }
+        
+        .form-header h4 i {
+            font-size: 14px;
+        }
+        
+        .form-body {
+            padding: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        
+        .form-control {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+        }
+        
+        .form-actions {
+            padding: 15px !important;
+            margin: 0 !important;
+            display: flex !important;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .form-actions .btn {
+            flex: 1 1 0;
+            min-width: 0;
+            padding: 12px 15px !important;
+            font-size: 16px !important;
+            font-weight: 500 !important;
+            white-space: nowrap;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 4px;
+            border: none !important;
+            transition: all 0.3s;
+            box-sizing: border-box;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        .form-actions .btn-primary {
+            background: #e11d80 !important;
+            color: white !important;
+        }
+        
+        .form-actions .btn i {
+            flex-shrink: 0;
+            font-size: 14px;
+            display: inline-block !important;
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .category-form-wrapper {
+            max-width: 100%;
+        }
+        
+        .form-actions .btn {
+            min-width: 120px;
+        }
+        
+        .form-actions {
+            justify-content: flex-start;
+        }
+        
+        .form-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            max-width: 600px;
+        }
+    }
+</style>
+
+<div class="block category-form-wrapper">
+    <div class="form-header">
+        <h4><i class="fa fa-plus-circle"></i> Create Category</h4>
+    </div>
+    
+    <div class="form-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <?php if ($message) echo $message; ?>
+                        <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+                    </div>
+                </div>
+                
+                <?=form_open(base_url('admin_control/create_category'), 'role="form" class="form-horizontal"'); ?>
+                
+                <div class="form-group">
+                    <label for="cat_name">
+                        <i class="fa fa-folder"></i> Category Name <span class="required">*</span>
+                    </label>
+                    <?php echo form_input('cat_name', '', 'id="cat_name" placeholder="Enter category name" class="form-control" required="required"') ?>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Save
+                    </button>
+                </div>
+                
+                <?=form_close() ?>
+            </div>
+        </div>
+    </div>
+</div>

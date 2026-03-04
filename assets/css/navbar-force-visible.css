@@ -1,0 +1,75 @@
+/* ============================================
+   FORCE NAVBAR MENU VISIBILITY ON DESKTOP
+   Highest Priority - Override Bootstrap Collapse
+   ============================================ */
+
+/* Desktop: Force navbar-collapse to be visible - Override Bootstrap's .collapse */
+@media (min-width: 992px) {
+    /* Override Bootstrap's default .collapse { display: none; } with maximum specificity */
+    #navbar .navbar-collapse,
+    #navbar .navbar-collapse.collapse,
+    #navbar .collapse.navbar-collapse,
+    #navbar .navbar-collapse.collapse:not(.in),
+    #navbar .collapse.navbar-collapse:not(.in),
+    #navbar .navbar-collapse.collapse.in,
+    #navbar .collapse.navbar-collapse.in,
+    #navbar .navbar-collapse.collapse.collapsing,
+    #navbar .collapse.navbar-collapse.collapsing,
+    .navbar-collapse,
+    .navbar-collapse.collapse,
+    .collapse.navbar-collapse,
+    .navbar-collapse.collapse:not(.in),
+    .collapse.navbar-collapse:not(.in),
+    .navbar-collapse.collapse.in,
+    .collapse.navbar-collapse.in,
+    .navbar-collapse.collapse.collapsing,
+    .collapse.navbar-collapse.collapsing {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
+        max-height: none !important;
+    }
+    
+    /* Force navbar-nav to be visible */
+    #navbar .navbar-nav,
+    #navbar .navbar-collapse .navbar-nav,
+    #navbar .collapse.navbar-collapse .navbar-nav,
+    .navbar-nav {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* Force all menu items to be visible */
+    #navbar .navbar-nav > li,
+    #navbar .navbar-collapse .navbar-nav > li,
+    .navbar-nav > li {
+        display: list-item !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    #navbar .navbar-nav > li > a,
+    #navbar .navbar-collapse .navbar-nav > li > a,
+    .navbar-nav > li > a {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Mobile: Allow Bootstrap collapse to work normally */
+@media (max-width: 991px) {
+    /* Let Bootstrap handle collapse on mobile */
+    .navbar-collapse.collapse:not(.in):not(.collapsing) {
+        display: none !important;
+    }
+    
+    .navbar-collapse.collapse.in,
+    .navbar-collapse.collapse.collapsing {
+        display: block !important;
+    }
+}
+
