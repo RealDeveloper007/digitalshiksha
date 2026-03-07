@@ -731,7 +731,7 @@
                                         <i class="fa fa-eye"></i> <span>Details</span>
                                     </a>
                                     <a class="btn" href="<?= base_url('exam_control/view_result_detail/' . $result->result_id); ?>">
-                                        <i class="fa fa-certificate"></i> <span>Certificate</span>
+                                        <i class="fa fa-print"></i> <span>Certificate</span>
                                     </a>
                                      <a class="btn" href="<?= base_url('mock-test-details/instructions/' . $result->slug); ?>">
 <i class="fa fa-refresh"></i> <span>Repeat Quiz</span>                                    </a>
@@ -814,7 +814,7 @@
                                         <i class="fa fa-eye"></i> <span>Details</span>
                                     </a>
                                     <a class="btn" href="<?= base_url('exam_control/view_result_detail/' . $result->result_id); ?>">
-                                        <i class="fa fa-certificate"></i> <span>Certificate</span>
+                                        <i class="fa fa-print"></i> <span>Certificate</span>
                                     </a>
                                    
                                 </div>

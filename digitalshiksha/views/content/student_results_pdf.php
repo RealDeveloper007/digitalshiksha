@@ -119,14 +119,43 @@ table th,
         tr{page-break-inside: avoid;  
             page-break-after: auto;} 
 
-            .watermark {
-			position: absolute;
-			top: 10.6%;
+        .watermark-layer {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 0;
+		}
+
+		.watermark-grid {
 			width: 100%;
-			height: 880px;
-			opacity: .13;
-			object-fit: cover;
-			z-index: -1;
+			height: 100%;
+			border-collapse: collapse;
+		}
+
+		.watermark-grid td {
+			width: 33.33%;
+			height: 33.33%;
+			border: 0;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.watermark-text {
+			display: inline-block;
+			transform: rotate(-30deg);
+			font-size: 36px;
+			font-weight: 700;
+			letter-spacing: 1.5px;
+			color: <?= $theme_primary ?>;
+			opacity: 0.08;
+			white-space: nowrap;
+		}
+
+		.pdf-content {
+			position: relative;
+			z-index: 1;
 		}
         .footer
         {
@@ -190,6 +219,26 @@ table th,
 </head>
 
 <body style="border:3px solid <?= $theme_accent_alt ?>; padding: 20px;">
+<div class="watermark-layer">
+	<table class="watermark-grid">
+		<tr>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+		</tr>
+		<tr>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+		</tr>
+		<tr>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+			<td><span class="watermark-text"><?= strtoupper(htmlspecialchars($header_brand_name)) ?></span></td>
+		</tr>
+	</table>
+</div>
+<div class="pdf-content">
 <header>
 	<div class="report-header">
 		<div class="report-brand">
@@ -357,4 +406,6 @@ table th,
 </table>
            
             </div>
+</div>
+</body>
 </html>

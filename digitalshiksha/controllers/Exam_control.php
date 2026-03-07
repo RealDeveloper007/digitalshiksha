@@ -267,7 +267,8 @@ class Exam_control extends MS_Controller
            // Output the generated PDF (1 = download and 0 = preview)
            // 		$this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
            $pdfname = time() . ".pdf";
-           $this->dompdf->stream("Result_report.pdf", array("Attachment" => 0));
+           $force_download = ((int)$this->input->get('download') === 1) ? 1 : 0;
+           $this->dompdf->stream("Result_report.pdf", array("Attachment" => $force_download));
            // $pdf = $this->dompdf->output();
         //    $file_location = FCPATH . "uploads/aforms/" . $pdfname;
         //    file_put_contents($file_location, $pdf);

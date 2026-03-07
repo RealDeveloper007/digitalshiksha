@@ -669,8 +669,8 @@ a.no-style:hover {
                                         <span class="mock-actions-label"><i class="fa fa-cogs"></i> Actions</span>
                                         <div class="mock-actions-buttons">
                                             <?php if($exam_type=='live_mock_test') { ?>
-                                                <a class="btn btn-default" href="<?= base_url('exam_control/download_student_results/' . $mock->title_id); ?>" target="_blank">
-                                                    <i class="glyphicon glyphicon-eye-open"></i><span class="btn-text"> View Result</span>
+                                                <a class="btn btn-default" href="<?= base_url('exam_control/download_student_results/' . $mock->title_id . '?download=1'); ?>">
+                                                    <i class="fa fa-download"></i><span class="btn-text"> Download Result</span>
                                                 </a>
                                             <?php } ?>
                                             <a class="btn btn-success" href="<?= base_url('mock_detail/' . $mock->title_id); ?>">

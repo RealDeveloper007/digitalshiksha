@@ -15,7 +15,7 @@
              <a href="<?=base_url('exam_control/view_exam_detail/'.$results->result_id);?>" class="btn btn-solution-action">
                     <i class="fa fa-book"></i> <span class="solution-text">View Solution</span>
                 </a>
-                <a href="javascript:void(0);" id="printNew" class="btn btn-print-action" onclick="window.print(); return false;">
+                <a href="<?=base_url('exam_control/download_result_pdf/'.$results->result_id.'?download=1');?>" id="printNew" class="btn btn-print-action">
                     <i class="fa fa-print"></i> <span class="print-text">Print Result</span>
                 </a>
                 <!-- Android specific actions if needed -->
@@ -23,7 +23,7 @@
                 <a href="<?=base_url('exam_control/view_exam_detail/'.$results->result_id);?>" class="btn btn-solution-action">
                     <i class="fa fa-book"></i> <span class="solution-text">View Solution</span>
                 </a>
-                <a href="javascript:void(0);" id="printNew" class="btn btn-print-action" onclick="window.print(); return false;">
+                <a href="<?=base_url('exam_control/download_result_pdf/'.$results->result_id.'?download=1');?>" id="printNew" class="btn btn-print-action">
                     <i class="fa fa-print"></i> <span class="print-text">Print Result</span>
                 </a>
             <?php } ?>
